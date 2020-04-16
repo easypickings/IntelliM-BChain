@@ -1,0 +1,25 @@
+<view>
+    <view>获取合约列表</view>
+    <button bindtap = "bindGetList">查看</button>
+    <view wx:if="{{showList === true}}">
+        <view wx:for="{{list}}">
+            <view class = "contract-list-card">
+                <view>(#{{index}}) [{{item.contractStatus}}] {{item.name}}</view>
+                <view>函数名：{{item.exportedFunctions[0].functionName}} </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view>
+    <view>执行合约</view>
+    <form bindsubmit = "bindExecuteContract">
+        <input type = "text" placeholder = "请输入列表中合约的编号" name = "index"></input>
+        <input type = "text" placeholder = "请输入合约参数" name = "arg"></input>
+        <button form-type="submit">查询</button>
+    </form>
+    <view wx:if="{{showResult == true}}">
+        <view>执行结果</view>
+        <text>{{result}}</text>
+    </view>
+</view>

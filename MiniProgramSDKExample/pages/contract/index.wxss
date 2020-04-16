@@ -1,0 +1,12 @@
+.contract-list-card {
+  border: lightgrey;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 14px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+text {
+    word-break: break-all;
+}

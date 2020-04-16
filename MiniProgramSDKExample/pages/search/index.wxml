@@ -1,0 +1,18 @@
+<!--pages/search/index.wxml-->
+<form bindsubmit="submit">
+  <view>查询</view>
+  <input type="text" placeholder="请输入待查询Hash" id="input_text" name = "hash"></input>
+
+  <!-- 提交按钮 -->
+  <button form-type="submit">查询</button>
+</form>
+
+<view wx:if="{{type === '.jpg'}}">
+  <view class="group-header">图片内容</view>
+  <image src="data:image/jpeg;base64,{{data}}" mode="widthFix"></image>
+</view>
+
+<view wx:if="{{text !== null}}">
+  <view>文本</view>
+  <text>{{text}}</text>
+</view>
