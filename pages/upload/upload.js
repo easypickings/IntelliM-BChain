@@ -24,11 +24,11 @@ Page({
         var dateText = [year, month, day].map(formatNumber).join('-');
 
         this.setData({
-            date: dateText      
+            date: dateText
         });
     },
 
-    formatInfo: function() {
+    formatInfo: function () {
         var str = '';
         str += "hospital=" + this.data.hospital;
         str += "&doctor=" + this.doctor;
@@ -40,11 +40,43 @@ Page({
         return str;
     },
 
-    upload: function(e) {
+    json2Form: function (json) {
+        var str = [];
+        for (var p in json) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
+        }
+        console.log(str.join("&"));
+        return str.join("&");
+    },
+
+    upload: function (e) {
         var dataText = this.formatInfo(); // JSON.stringify(e.data)
         console.log(dataText)
         /*wx.navigateTo({
           url: '../showinfo/showinfo?data=' + dataText,
         })*/
+        that = this;
+        wx.request({
+            url: "api/upload",
+            header: {
+                "content-type": "application/json"
+            },
+            method: "POST",
+            data: json2Form(data),
+            complete: function (res) {
+                if (res == null || res.data == null) {
+                    console.error("网络请求失败");
+                    return;
+                }
+                wx.navigateBack({
+                    delta: 1 //小程序关闭当前页面返回上一页面
+                })
+                console.log(res.data);
+                wx.showToast({
+                    title: res.data.message,
+                    duration: 2000
+                })
+            }
+        });
     }
 });

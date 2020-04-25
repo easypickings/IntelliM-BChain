@@ -68,7 +68,7 @@
             <view class="page__bd">
                 <mp-cells>
                     <mp-cell>
-                        <mp-uploader bindfail="uploadError" bindsuccess="uploadSuccess" select="{{selectFile}}" upload="{{uplaodFile}}" files="{{files}}" max-count="10" title="附件上传" tips="请选择你要上传的文件"></mp-uploader>
+                        <mp-uploader bindfail="uploadError" bindsuccess="uploadSuccess" select="{{selectFile}}" upload="{{uploadFile}}" files="{{files}}" max-count="10" title="附件上传" tips="请选择你要上传的文件"></mp-uploader>
                     </mp-cell>
                 </mp-cells>
             </view>
