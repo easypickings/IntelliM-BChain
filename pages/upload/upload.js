@@ -17,34 +17,49 @@ Page({
 
     onLoad: function () {
         var date = new Date();
-        var year = date.getFullYear()
+        var year = date.getFullYear();
         var month = date.getMonth() + 1;
-        var day = date.getDay();
+        var day = date.getDate();
 
         var dateText = [year, month, day].map(formatNumber).join('-');
-
+        
         this.setData({
             date: dateText      
         });
     },
 
-    formatInfo: function() {
-        var str = '';
-        str += "hospital=" + this.data.hospital;
-        str += "&doctor=" + this.doctor;
-        str += "&date=" + this.date;
-        str += "&situation=" + this.situation;
-        str += "&diagnosis=" + this.diagnosis;
-        str += "&prescription=" + this.prescription;
-        str += "&remark=" + this.remark;
-        return str;
+    upload: function(e) {
+        for (var key in this.data) {
+            console.log(key + ": " + this.data[key]);
+        }
     },
 
-    upload: function(e) {
-        var dataText = this.formatInfo(); // JSON.stringify(e.data)
-        console.log(dataText)
-        /*wx.navigateTo({
-          url: '../showinfo/showinfo?data=' + dataText,
-        })*/
-    }
+    bindHospitalChange: function(e) {
+        this.setData({ hospital: e.detail.value });
+    },
+
+    bindDoctorChange: function(e) {
+        this.setData({ doctor: e.detail.value });
+    },
+
+    bindDateChange: function(e) {
+        this.setData({ date: e.detail.value });
+    },
+
+    bindSituationChange: function(e) {
+        this.setData({ situation: e.detail.value });
+    },
+
+    bindDiagnosisChange: function(e) {
+        this.setData({ diagnosis: e.detail.value });
+    },
+
+    bindPrescriptionChange: function(e) {
+        this.setData({ prescription: e.detail.value });
+    },
+
+    bindRemarkChange: function(e) {
+        this.setData({ remark: e.detail.value });
+    },
+
 });
