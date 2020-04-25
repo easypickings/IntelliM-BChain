@@ -28,18 +28,6 @@ Page({
         });
     },
 
-    formatInfo: function () {
-        var str = '';
-        str += "hospital=" + this.data.hospital;
-        str += "&doctor=" + this.doctor;
-        str += "&date=" + this.date;
-        str += "&situation=" + this.situation;
-        str += "&diagnosis=" + this.diagnosis;
-        str += "&prescription=" + this.prescription;
-        str += "&remark=" + this.remark;
-        return str;
-    },
-
     json2Form: function (json) {
         var str = [];
         for (var p in json) {
@@ -53,11 +41,7 @@ Page({
         for (var key in this.data) {
             console.log(key + ": " + this.data[key]);
         }
-        var dataText = this.formatInfo(); // JSON.stringify(e.data)
-        console.log(dataText)
-        /*wx.navigateTo({
-          url: '../showinfo/showinfo?data=' + dataText,
-        })*/
+
         that = this;
         wx.request({
             url: "api/upload",
