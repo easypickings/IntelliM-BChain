@@ -23,12 +23,7 @@
         "iconPath": "assets/todos.png",
         "selectedIconPath": "assets/todos-active.png"
       },
-      {
-        "pagePath": "pages/upload/upload",
-        "text": "upload",
-        "iconPath": "assets/todos.png",
-        "selectedIconPath": "assets/todos-active.png"
-      },
+      
       {
         "pagePath": "pages/logs/logs",
         "text": "日志",

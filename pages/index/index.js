@@ -32,6 +32,7 @@ Page({
       url: '../upload/upload'
     })
   },
+  
   onLoad: function () {
     this.load()
   },
