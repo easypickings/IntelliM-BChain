@@ -5,5 +5,5 @@
     "mp-cell": "../miniprogram_npm/weui-miniprogram/cell/cell",
     "mp-badge": "../miniprogram_npm/weui-miniprogram/badge/badge"
   },
-  "navigationBarTitleText": "UI组件库"
+  "navigationBarTitleText": "IntelliM"
 }
