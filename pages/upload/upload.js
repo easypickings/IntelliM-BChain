@@ -17,12 +17,12 @@ Page({
 
     onLoad: function () {
         var date = new Date();
-        var year = date.getFullYear()
+        var year = date.getFullYear();
         var month = date.getMonth() + 1;
-        var day = date.getDay();
+        var day = date.getDate();
 
         var dateText = [year, month, day].map(formatNumber).join('-');
-
+        
         this.setData({
             date: dateText
         });
@@ -50,6 +50,9 @@ Page({
     },
 
     upload: function (e) {
+        for (var key in this.data) {
+            console.log(key + ": " + this.data[key]);
+        }
         var dataText = this.formatInfo(); // JSON.stringify(e.data)
         console.log(dataText)
         /*wx.navigateTo({
@@ -78,5 +81,34 @@ Page({
                 })
             }
         });
-    }
+    },
+
+    bindHospitalChange: function(e) {
+        this.setData({ hospital: e.detail.value });
+    },
+
+    bindDoctorChange: function(e) {
+        this.setData({ doctor: e.detail.value });
+    },
+
+    bindDateChange: function(e) {
+        this.setData({ date: e.detail.value });
+    },
+
+    bindSituationChange: function(e) {
+        this.setData({ situation: e.detail.value });
+    },
+
+    bindDiagnosisChange: function(e) {
+        this.setData({ diagnosis: e.detail.value });
+    },
+
+    bindPrescriptionChange: function(e) {
+        this.setData({ prescription: e.detail.value });
+    },
+
+    bindRemarkChange: function(e) {
+        this.setData({ remark: e.detail.value });
+    },
+
 });
