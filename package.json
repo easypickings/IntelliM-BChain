@@ -1,0 +1,24 @@
+{
+  "name": "intellim-bchain",
+  "version": "1.0.0",
+  "description": "v0",
+  "main": "app.js",
+  "dependencies": {
+    "weui-miniprogram": "^1.0.2",
+    "weui-wxss": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easypickings/IntelliM-BChain.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/easypickings/IntelliM-BChain/issues"
+  },
+  "homepage": "https://github.com/easypickings/IntelliM-BChain#readme"
+}

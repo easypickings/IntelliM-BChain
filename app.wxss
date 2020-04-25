@@ -1,5 +1,6 @@
 
-@import "./kbale-weui-wxss-master/weui-wxss/dist/style/weui.wxss";
+@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+
 .container {
   padding: 30rpx;
   border-top: 1rpx solid #e5e5e5;
