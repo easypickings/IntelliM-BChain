@@ -1,106 +1,50 @@
+function formatNumber(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+}
+
 Page({
-  data: {
-      showTopTips: false,
+    data: {
+        hospital: "",
+        doctor: "",
+        date: "2016-09-01",
+        situation: "",
+        diagnosis: "",
+        prescription: "",
+        remark: "",
+        attachments: []
+    },
 
-      radioItems: [
-          {name: 'cell standard', value: '0'},
-          {name: 'cell standard', value: '1', checked: true}
-      ],
-      checkboxItems: [
-          {name: 'standard is dealt for u.', value: '0', checked: true},
-          {name: 'standard is dealicient for u.', value: '1'}
-      ],
+    onLoad: function () {
+        var date = new Date();
+        var year = date.getFullYear()
+        var month = date.getMonth() + 1;
+        var day = date.getDay();
 
-      date: "2016-09-01",
-      time: "12:01",
+        var dateText = [year, month, day].map(formatNumber).join('-');
 
-      countryCodes: ["+86", "+80", "+84", "+87"],
-      countryCodeIndex: 0,
+        this.setData({
+            date: dateText      
+        });
+    },
 
-      countries: ["中国", "美国", "英国"],
-      countryIndex: 0,
+    formatInfo: function() {
+        var str = '';
+        str += "hospital=" + this.data.hospital;
+        str += "&doctor=" + this.doctor;
+        str += "&date=" + this.date;
+        str += "&situation=" + this.situation;
+        str += "&diagnosis=" + this.diagnosis;
+        str += "&prescription=" + this.prescription;
+        str += "&remark=" + this.remark;
+        return str;
+    },
 
-      accounts: ["微信号", "QQ", "Email"],
-      accountIndex: 0,
-
-      isAgree: false
-  },
-  showTopTips: function(){
-      var that = this;
-      this.setData({
-          showTopTips: true
-      });
-      setTimeout(function(){
-          that.setData({
-              showTopTips: false
-          });
-      }, 3000);
-  },
-  radioChange: function (e) {
-      console.log('radio发生change事件，携带value值为：', e.detail.value);
-
-      var radioItems = this.data.radioItems;
-      for (var i = 0, len = radioItems.length; i < len; ++i) {
-          radioItems[i].checked = radioItems[i].value == e.detail.value;
-      }
-
-      this.setData({
-          radioItems: radioItems
-      });
-  },
-  checkboxChange: function (e) {
-      console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-
-      var checkboxItems = this.data.checkboxItems, values = e.detail.value;
-      for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-          checkboxItems[i].checked = false;
-
-          for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-              if(checkboxItems[i].value == values[j]){
-                  checkboxItems[i].checked = true;
-                  break;
-              }
-          }
-      }
-
-      this.setData({
-          checkboxItems: checkboxItems
-      });
-  },
-  bindDateChange: function (e) {
-      this.setData({
-          date: e.detail.value
-      })
-  },
-  bindTimeChange: function (e) {
-      this.setData({
-          time: e.detail.value
-      })
-  },
-  bindCountryCodeChange: function(e){
-      console.log('picker country code 发生选择改变，携带值为', e.detail.value);
-
-      this.setData({
-          countryCodeIndex: e.detail.value
-      })
-  },
-  bindCountryChange: function(e) {
-      console.log('picker country 发生选择改变，携带值为', e.detail.value);
-
-      this.setData({
-          countryIndex: e.detail.value
-      })
-  },
-  bindAccountChange: function(e) {
-      console.log('picker account 发生选择改变，携带值为', e.detail.value);
-
-      this.setData({
-          accountIndex: e.detail.value
-      })
-  },
-  bindAgreeChange: function (e) {
-      this.setData({
-          isAgree: !!e.detail.value.length
-      });
-  }
+    upload: function(e) {
+        var dataText = this.formatInfo(); // JSON.stringify(e.data)
+        console.log(dataText)
+        /*wx.navigateTo({
+          url: '../showinfo/showinfo?data=' + dataText,
+        })*/
+    }
 });
