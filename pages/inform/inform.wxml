@@ -1,5 +1,5 @@
 <!--pages/inform/inform.wxml-->
-<text>病历上传页面</text>
+<text>电子病历上传</text>
 <!---->
 <view class="page">
     <view class="page__bd">
@@ -41,7 +41,6 @@
         </view>
   -->
 
-        <view class="weui-cells__title">基本信息</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
@@ -203,6 +202,17 @@
             </label>
         </checkbox-group>
 -->
+<view class="page">
+    <view class="page__bd">
+        <mp-cells>
+            <mp-cell>
+                <mp-uploader bindfail="uploadError" bindsuccess="uploadSuccess" select="{{selectFile}}" upload="{{uplaodFile}}" files="{{files}}" max-count="5" title="附件上传" tips="请选择你要上传的文件"></mp-uploader>
+            </mp-cell>
+        </mp-cells>
+    </view>
+</view>
+
+
         <view class="weui-btn-area">
             <button class="weui-btn" type="primary" bindtap="showTopTips">上传</button>
         </view>
