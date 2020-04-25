@@ -26,6 +26,12 @@ Page({
     }
   },
 
+
+  tapUpLoad: function(event) {
+    wx.navigateTo({
+      url: '../upload/upload'
+    })
+  },
   onLoad: function () {
     this.load()
   },

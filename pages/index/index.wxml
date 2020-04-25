@@ -4,8 +4,8 @@
     <input class="new-todo" value="{{ input }}" placeholder="Anything here..." auto-focus bindinput="inputChangeHandle" bindconfirm="addTodoHandle"/>
     -->
             <mp-cells title="">
-            <mp-cell link url="../index" value="点击上传电子病历" footer="">
-                <image slot="icon" src="../../assets/plus1.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
+            <mp-cell link url="../index" value="点击上传电子病历" footer="" bindtap="tapUpLoad">
+                <image slot="icon" src="../../assets/plus1.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;" ></image>
             </mp-cell>
         </mp-cells>
   <block wx:if="{{ todos.length }}">

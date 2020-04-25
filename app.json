@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/upload/upload",
+    
     "pages/index/index",
+    "pages/upload/upload",
     "pages/logs/logs"
   ],
   "window": {
@@ -18,13 +19,13 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "todos",
+        "text": "电子病历",
         "iconPath": "assets/todos.png",
         "selectedIconPath": "assets/todos-active.png"
       },
       {
         "pagePath": "pages/logs/logs",
-        "text": "logs",
+        "text": "日志",
         "iconPath": "assets/logs.png",
         "selectedIconPath": "assets/logs-active.png"
       }
