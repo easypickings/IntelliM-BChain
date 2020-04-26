@@ -109,11 +109,24 @@ Page({
         for (var p in json) {
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
         }
-        console.log(str.join("&"));
+        // console.log(str.join("&"));
         return str.join("&");
     },
 
     upload: function (e) {
+        if (!this.data.hospital || !this.data.hospital.trim() ||
+            !this.data.doctor || !this.data.doctor.trim() ||
+            !this.data.situation || !this.data.situation.trim() ||
+            !this.data.diagnosis || !this.data.diagnosis.trim() ||
+            !this.data.prescription || !this.data.prescription.trim()) {
+            wx.showToast({
+                title: '病历信息不完整',
+                icon: 'none',
+                duration: 2000
+            });
+            return;
+        }
+
         for (var key in this.data) {
             console.log(key + ": " + this.data[key]);
         }
@@ -124,9 +137,10 @@ Page({
                 "content-type": "application/json"
             },
             method: "POST",
-            data: json2Form(data),
+            data: this.json2Form(this.data),
             complete: function (res) {
                 if (res == null || res.data == null) {
+                    wx.showToast({title: '网络请求失败', icon: 'none', duration: 2000 });
                     console.error("网络请求失败");
                     return;
                 }
@@ -136,6 +150,7 @@ Page({
                 console.log(res.data);
                 wx.showToast({
                     title: res.data.message,
+                    icon: 'none',
                     duration: 2000
                 })
             }
