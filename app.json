@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/upload/upload",
     "pages/logs/logs",
-    "pages/personal/personal"
+    "pages/profile/profile"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -24,10 +24,10 @@
       },
 
       {
-        "pagePath": "pages/personal/personal",
+        "pagePath": "pages/profile/profile",
         "text": "个人中心",
-        "iconPath": "assets/personal.png",
-        "selectedIconPath": "assets/personal-active.png"
+        "iconPath": "assets/profile.png",
+        "selectedIconPath": "assets/profile-active.png"
       }
     ]
   },
