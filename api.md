@@ -69,7 +69,7 @@ Token: 409859962aff30c415b999fd4eac4cbc17556857ab563977fd47809946cf8505
             "name": "内蒙古大骟人人民医院", //医院名
             "id" : "", //留空备用
         },
-		"date" : "20200421", // 日期：YYYYMMDD
+		"date" : "2020-04-21", // 日期：YYYY-MM-DD
     	"doctor" : 
         {
         	"name": "无人机", // 医生名
@@ -89,7 +89,7 @@ Token: 409859962aff30c415b999fd4eac4cbc17556857ab563977fd47809946cf8505
 	"record":
     {
         "hospital" : {}, //内容可以为空
-        "date" : "20200422",
+        "date" : "2020-04-22",
         "doctor" : {}, 
         "situation" : "精神病", 
         "diagnosis" : "",
@@ -201,7 +201,7 @@ Token的解释同上节。
 	        	    "name": "内蒙古大骟人人民医院", 
 	        	    "id" : "", 
 	        	},
-				"date" : "20200421", 
+				"date" : "2020-04-21", 
 	    		"doctor" : 
 	        	{
 	        		"name": "无人机", 
@@ -219,7 +219,7 @@ Token的解释同上节。
 	        "record":
 	    	{
 	    	    "hospital" : {}, 
-	    	    "date" : "20200422",
+	    	    "date" : "2020-04-22",
 	    	    "doctor" : {}, 
 	    	    "situation" : "精神病", 
 	    	    "diagnosis" : "",
