@@ -1,4 +1,4 @@
-# APIv0.4 文档
+# APIv0.5 文档
 ### 登录
 `POST /api/login`
 
@@ -213,7 +213,7 @@ Token的解释同上节。
 	        	"attachments" : ["/attachments/6e53adf1890cb3be.png", "/attachments/deadbeefdeadbeef.png"],
 	        },
 	        "timestamp": "2020-04-21T17:30:08.000Z", //上链ISO时间戳(UTC时间)，YYYY-MM-DDThh:mm:ss.sssZ
-	        "validity": None, //无签名验证的记录是None
+	        "validity": null, //无签名验证的记录是null
 	    },
 	    {
 	        "record":
@@ -227,9 +227,13 @@ Token的解释同上节。
 	    	    "attachments" : [], 
 	    	},
 	        "timestamp": "2020-04-22T22:22:22.222Z", 
-	        "validity": None, 
+	        "validity": null, 
 	    },
 	],
+    "base":
+    {
+    	//用户基础信息，有啥还没想好，先空着
+    },
 }
 ```
 
