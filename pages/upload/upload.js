@@ -33,7 +33,7 @@ Page({
         for (var p in json) {
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
         }
-        console.log(str.join("&"));
+        // console.log(str.join("&"));
         return str.join("&");
     },
 
@@ -73,6 +73,7 @@ Page({
                 console.log(res.data);
                 wx.showToast({
                     title: res.data.message,
+                    icon: 'none',
                     duration: 2000
                 })
             }
