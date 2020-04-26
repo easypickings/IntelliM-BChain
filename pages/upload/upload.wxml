@@ -8,12 +8,12 @@
 
 		<view class="weui-cells weui-cells_after-title">
 			<view class="weui-cell weui-cell_input">
-				<view class="weui-cell__hd weui-label"> 就诊医院 </view>
+				<view class="weui-cell__hd weui-label">就诊医院</view>
 				<view class="weui-cell__bd">
-					<input class="weui-input" value="{{ hospital }}" bindinput="bindHospitalChange" placeholder="请输入就医医院" />
+					<input class="weui-input" value="{{ hospital }}" bindinput="bindHospitalChange" placeholder="请输入就诊医院" />
 				</view>
 			</view>
-			<view class="weui-cell weui-cell_input weui-cell_vcode">
+			<view class="weui-cell weui-cell_input">
 				<view class="weui-cell__hd weui-label">就诊医生</view>
 				<view class="weui-cell__bd">
 					<input class="weui-input" value="{{ doctor }}" bindinput="bindDoctorChange" placeholder="请输入医生姓名" />
@@ -29,7 +29,7 @@
 			</view>
 		</view>
 
-		<view class="weui-cells__tips"> 底部说明文字底部说明文字 </view>
+		<!-- <view class="weui-cells__tips">病历内容记录</view> -->
 
 		<view class="weui-cells__title">病情</view>
 		<view class="weui-cells weui-cells_after-title">

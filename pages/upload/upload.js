@@ -7,7 +7,7 @@ Page({
     data: {
         hospital: "",
         doctor: "",
-        date: "2016-09-01",
+        date: "",
         situation: "",
         diagnosis: "",
         prescription: "",
@@ -22,7 +22,7 @@ Page({
         var day = date.getDate();
 
         var dateText = [year, month, day].map(formatNumber).join('-');
-        
+
         this.setData({
             date: dateText
         });
@@ -38,18 +38,30 @@ Page({
     },
 
     upload: function (e) {
+        if (!this.data.hospital || !this.data.hospital.trim() ||
+            !this.data.doctor || !this.data.doctor.trim() ||
+            !this.data.situation || !this.data.situation.trim() ||
+            !this.data.diagnosis || !this.data.diagnosis.trim() ||
+            !this.data.prescription || !this.data.prescription.trim()) {
+            wx.showToast({
+                title: '病历信息不完整',
+                icon: 'none',
+                duration: 2000
+            });
+            return;
+        }
+
         for (var key in this.data) {
             console.log(key + ": " + this.data[key]);
         }
 
-        that = this;
         wx.request({
             url: "api/upload",
             header: {
                 "content-type": "application/json"
             },
             method: "POST",
-            data: json2Form(data),
+            data: this.json2Form(this.data),
             complete: function (res) {
                 if (res == null || res.data == null) {
                     console.error("网络请求失败");
@@ -67,32 +79,46 @@ Page({
         });
     },
 
-    bindHospitalChange: function(e) {
-        this.setData({ hospital: e.detail.value });
+    bindHospitalChange: function (e) {
+        this.setData({
+            hospital: e.detail.value
+        });
     },
 
-    bindDoctorChange: function(e) {
-        this.setData({ doctor: e.detail.value });
+    bindDoctorChange: function (e) {
+        this.setData({
+            doctor: e.detail.value
+        });
     },
 
-    bindDateChange: function(e) {
-        this.setData({ date: e.detail.value });
+    bindDateChange: function (e) {
+        this.setData({
+            date: e.detail.value
+        });
     },
 
-    bindSituationChange: function(e) {
-        this.setData({ situation: e.detail.value });
+    bindSituationChange: function (e) {
+        this.setData({
+            situation: e.detail.value
+        });
     },
 
-    bindDiagnosisChange: function(e) {
-        this.setData({ diagnosis: e.detail.value });
+    bindDiagnosisChange: function (e) {
+        this.setData({
+            diagnosis: e.detail.value
+        });
     },
 
-    bindPrescriptionChange: function(e) {
-        this.setData({ prescription: e.detail.value });
+    bindPrescriptionChange: function (e) {
+        this.setData({
+            prescription: e.detail.value
+        });
     },
 
-    bindRemarkChange: function(e) {
-        this.setData({ remark: e.detail.value });
+    bindRemarkChange: function (e) {
+        this.setData({
+            remark: e.detail.value
+        });
     },
 
 });
