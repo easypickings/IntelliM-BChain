@@ -4,6 +4,5 @@
     "mp-cells": "../miniprogram_npm/weui-miniprogram/cells/cells",
     "mp-cell": "../miniprogram_npm/weui-miniprogram/cell/cell",
     "mp-badge": "../miniprogram_npm/weui-miniprogram/badge/badge"
-  },
-  "navigationBarTitleText": "IntelliM"
+  }
 }
