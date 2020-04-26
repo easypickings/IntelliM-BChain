@@ -1,5 +1,13 @@
+var utils = require('./utils/utils.js')
+
 //app.js
 App({
+  globalData: {
+    url: 'unknown',
+    userInfo: null,
+    token: 'null'
+  },
+
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -8,7 +16,35 @@ App({
 
     // 登录
     wx.login({
-      success: res => {
+      success(res) {
+        if (res.code) {
+          wx.request({
+            url: utils.getUrl('/api/login'),
+            header: {
+              "content-type": "application/json"
+            },
+            method: 'POST',
+            data: {
+              "username": "",
+              "password": "",
+              "usercode": res.code,
+            },
+            complete: function (res) {
+              if (res == null || res.data == null) {
+                utils.userShowInfo('网络请求失败');
+                console.log('网络请求失败')
+              } else if (data.state == 'success') {
+                var data = JSON.parse(res.data);
+                console.log(data.token)
+                this.globalData.token = data.token;
+              } else {
+                var data = JSON.parse(res.data);
+                utils.userShowInfo(data.message);
+                console.log(data.reason);
+              }
+            }
+          })
+        }
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         // TODO: POST /api/login
       }
@@ -34,8 +70,5 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null,
-    token: null
-  }
+
 })
