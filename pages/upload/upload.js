@@ -140,7 +140,11 @@ Page({
             data: this.json2Form(this.data),
             complete: function (res) {
                 if (res == null || res.data == null) {
-                    wx.showToast({title: '网络请求失败', icon: 'none', duration: 2000 });
+                    wx.showToast({
+                        title: '网络请求失败',
+                        icon: 'none',
+                        duration: 2000
+                    });
                     console.error("网络请求失败");
                     return;
                 }
