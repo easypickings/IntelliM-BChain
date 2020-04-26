@@ -44,7 +44,7 @@ Page({
 
         that = this;
         wx.request({
-            url: "api/upload",
+            url: "https://www.baidu.com/",
             header: {
                 "content-type": "application/json"
             },
