@@ -2,20 +2,10 @@ const app = getApp()
 
 Page({
   data: {
-    input: '',
-    todos: [],
-    leftCount: 0,
-    allCompleted: false,
     logs: [],
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-
-  tapUpLoad: function (event) {
-    wx.navigateTo({
-      url: '../upload/upload'
-    })
   },
 
   onLoad: function () {
@@ -46,6 +36,7 @@ Page({
       })
     }
   },
+
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -54,6 +45,12 @@ Page({
       hasUserInfo: true
     })
     console.log(this.userInfo)
-  }
+  },
+
+  tapUpLoad: function (event) {
+    wx.navigateTo({
+      url: '../upload/upload'
+    })
+  },
 
 })

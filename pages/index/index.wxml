@@ -29,7 +29,7 @@
 		<block wx:else>
 			<view class="empty">
 				<text class="title">当前暂无病历记录</text>
-				<text class="content">点击按钮</text>
+				<text class="content">点击上方按钮上传</text>
 			</view>
 		</block>
 	</block>
