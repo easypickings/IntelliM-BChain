@@ -1,7 +1,4 @@
-function formatNumber(n) {
-    n = n.toString()
-    return n[1] ? n : '0' + n
-}
+var utils = require('../../utils/utils.js')
 
 Page({
     data: {
@@ -31,7 +28,7 @@ Page({
         var month = date.getMonth() + 1;
         var day = date.getDate();
 
-        var dateText = [year, month, day].map(formatNumber).join('-');
+        var dateText = [year, month, day].map(utils.formatNumber).join('-');
 
         this.setData({
             date: dateText
@@ -98,20 +95,12 @@ Page({
         })
     },
 
+    /** 上传成功返回函数 */
     uploadSuccess(e) {
         console.log('upload success', e.detail)
     },
 
     /* =============== Upload Form =============== */
-
-    json2Form: function (json) {
-        var str = [];
-        for (var p in json) {
-            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
-        }
-        // console.log(str.join("&"));
-        return str.join("&");
-    },
 
     upload: function (e) {
         if (!this.data.hospital || !this.data.hospital.trim() ||
@@ -137,7 +126,7 @@ Page({
                 "content-type": "application/json"
             },
             method: "POST",
-            data: this.json2Form(this.data),
+            data: utils.json2Form(this.data),
             complete: function (res) {
                 if (res == null || res.data == null) {
                     wx.showToast({
