@@ -8,7 +8,13 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
+  /* =============== Initialization =============== */
+
   onLoad: function () {
+    this.getUserInfo();    
+  },
+
+  getUserInfo: function(e) {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -37,15 +43,7 @@ Page({
     }
   },
 
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-    console.log(this.userInfo)
-  },
+  /* =============== Bindings =============== */
 
   tapUpLoad: function (event) {
     wx.navigateTo({
