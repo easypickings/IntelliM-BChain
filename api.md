@@ -1,4 +1,4 @@
-# APIv0.1 文档
+# APIv0.2 文档
 ### 登录
 `POST /api/login`
 
@@ -134,7 +134,7 @@ Token: 409859962aff30c415b999fd4eac4cbc17556857ab563977fd47809946cf8505
 
 ##### 必要的请求头
 ```http
-Content-Type: application/binary
+Content-Type: multipart/form-data
 Token: 409859962aff30c415b999fd4eac4cbc17556857ab563977fd47809946cf8505
 ```
 Token的解释同上节。
