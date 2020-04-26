@@ -1,33 +1,37 @@
 <view class="container">
-    <!--
-    <image class="plus" src="../../assets/plus1.png"/>
-    <input class="new-todo" value="{{ input }}" placeholder="Anything here..." auto-focus bindinput="inputChangeHandle" bindconfirm="addTodoHandle"/>
-    -->
-            <mp-cells title="">
-            <mp-cell link url="../index" value="点击上传电子病历" footer="" bindtap="tapUpLoad">
-                <image slot="icon" src="../../assets/plus1.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;" ></image>
-            </mp-cell>
-        </mp-cells>
-  <block wx:if="{{ todos.length }}">
-    <view class="todos">
-      <!-- List items should get the class `completed` when marked as completed -->
-      <view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
-        <!-- completed: success, todo: circle -->
-        <icon class="checkbox" type="{{ item.completed ? 'success' : 'circle' }}"/>
-        <text class="name">{{ item.name }}</text>
-        <icon class="remove" type="clear" size="16" catchtap="removeTodoHandle" data-index="{{ index }}"/>
-      </view>
-    </view>
-    <view class="footer">
-      <text class="btn" bindtap="toggleAllHandle">Toggle all</text>
-      <text wx:if="{{ leftCount }}">{{ leftCount }} {{ leftCount === 1 ? 'item' : 'items' }} left</text>
-      <text class="btn" wx:if="{{ todos.length > leftCount }}" bindtap="clearCompletedHandle">Clear completed</text>
-    </view>
-  </block>
-  <block wx:else>
-    <view class="empty">
-      <text class="title">当前暂无病历记录</text>
-      <text class="content">点击按钮</text>
-    </view>
-  </block>
+
+	<view class="weui-btn-area" wx:if="{{!hasUserInfo && canIUse}}">
+		<button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">一键登录</button>
+	</view>
+
+	<block wx:else>
+		<mp-cells title="">
+			<mp-cell link url="../index" value="点击上传电子病历" footer="" bindtap="tapUpLoad">
+				<image slot="icon" src="../../assets/plus.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
+			</mp-cell>
+		</mp-cells>
+		<block wx:if="{{ todos.length }}">
+			<view class="todos">
+				<!-- List items should get the class `completed` when marked as completed -->
+				<view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+					<!-- completed: success, todo: circle -->
+					<icon class="checkbox" type="{{ item.completed ? 'success' : 'circle' }}" />
+					<text class="name">{{ item.name }}</text>
+					<icon class="remove" type="clear" size="16" catchtap="removeTodoHandle" data-index="{{ index }}" />
+				</view>
+			</view>
+			<view class="footer">
+				<text class="btn" bindtap="toggleAllHandle">Toggle all</text>
+				<text wx:if="{{ leftCount }}">{{ leftCount }} {{ leftCount === 1 ? 'item' : 'items' }} left</text>
+				<text class="btn" wx:if="{{ todos.length > leftCount }}" bindtap="clearCompletedHandle">Clear completed</text>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="empty">
+				<text class="title">当前暂无病历记录</text>
+				<text class="content">点击按钮</text>
+			</view>
+		</block>
+	</block>
+
 </view>
