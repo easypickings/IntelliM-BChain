@@ -1,4 +1,4 @@
-# APIv0.3 文档
+# APIv0.4 文档
 ### 登录
 `POST /api/login`
 
@@ -212,7 +212,7 @@ Token的解释同上节。
 	    		"prescription" : "1. 雄氏老方 每日3次 每次10片\n2. 丹神定喘 每日40次 每次0.3ml\n3. 蒙药心脑方 每日1次 每次1g", 
 	        	"attachments" : ["/attachments/6e53adf1890cb3be.png", "/attachments/deadbeefdeadbeef.png"],
 	        },
-	        "timestamp": "20200421T173008+08", //上链时间戳，YYYYMMDDThhmmss+08
+	        "timestamp": "2020-04-21T17:30:08.000Z", //上链ISO时间戳(UTC时间)，YYYY-MM-DDThh:mm:ss.sssZ
 	        "validity": None, //无签名验证的记录是None
 	    },
 	    {
@@ -226,7 +226,7 @@ Token的解释同上节。
 	    	    "prescription" : "",
 	    	    "attachments" : [], 
 	    	},
-	        "timestamp": "20200422T222222+08", 
+	        "timestamp": "2020-04-22T22:22:22.222Z", 
 	        "validity": None, 
 	    },
 	],
