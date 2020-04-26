@@ -1,2 +1,6 @@
-<!--pages/personal/profile.wxml-->
-<text>pages/personal/profile.wxml</text>
+<view class="userinfo">
+  <block>
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </block>
+</view>
