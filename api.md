@@ -1,6 +1,6 @@
-# APIv0.5 文档
+# APIv0.6 文档
 ### 登录
-`POST /api/login`
+`POST /login`
 
 ##### 必要的请求头
 ```http
@@ -50,7 +50,7 @@ Token的保质期为5分钟。每以一有效Token收到一条请求，该Token�
 ```
 
 ### 上传病历
-`POST /api/upload`
+`POST /upload`
 
 ##### 必要的请求头
 ```http
@@ -128,7 +128,7 @@ Token: 409859962aff30c415b999fd4eac4cbc17556857ab563977fd47809946cf8505
 }
 ```
 ### 上传附件
-`POST /api/attachments/{name}`
+`POST /attachments/{name}`
 
 上传病历前需先上传附件并获取路径，附件保质期为30分钟。`{name}`是url编码的文件名。
 
@@ -162,7 +162,9 @@ Token的解释同上节。
 ```
 
 ### 查看附件
-`GET /attachments/6e53adf1890cb3be.png`
+`GET /attachments/{name}`
+
+`{name}`是url编码的文件名，该文件名由上传附件或下载病历中的相关响应提供。
 
 ##### 必要的请求头
 ```http
@@ -174,7 +176,7 @@ Token的解释同上节。
 `200 OK`成功，`404 Not Found`附件不存在或已过期，`403 Forbidden`认证信息有误。
 
 ### 下载病历
-`POST /api/download`
+`POST /download`
 
 ##### 必要的请求头
 ```http
