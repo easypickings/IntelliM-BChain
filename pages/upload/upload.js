@@ -1,15 +1,17 @@
-var utils = require('../../utils/utils.js')
+var utils = require('../../utils/utils.js');
+var app = getApp();
 
 Page({
   data: {
-    hospital: "",
-    doctor: "",
+    hospital: "1",
+    doctor: "2",
     date: "",
-    situation: "",
-    diagnosis: "",
-    prescription: "",
+    situation: "3",
+    diagnosis: "4",
+    prescription: "5",
     remark: "",
     files: [],
+    tempFilePaths: [],
     urls: [],
   },
 
@@ -38,91 +40,96 @@ Page({
   /** 绑定图片上传函数 */
   imageBinding: function () {
     this.setData({
-      selectFile: this.selectFile.bind(this),
-      uploadFile: this.uploadFile.bind(this)
+      selectImage: this.selectImage.bind(this),
+      loadImage: this.loadImage.bind(this)
     })
   },
 
-  /* =============== Upload Picture =============== */
+  /* =============== Load Image =============== */
 
   /** 选择图片 */
-  chooseImage: function (e) {
-    var that = this;
-    wx.chooseImage({
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        that.setData({
-          files: that.data.files.concat(res.tempFilePaths)
-        });
-      }
-    })
-  },
-
-  /** 图片预览 */
-  previewImage: function (e) {
-    wx.previewImage({
-      current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.files // 需要预览的图片http链接列表
-    })
-  },
-
-  /** 选择图片 */
-  selectFile(files) {
+  selectImage(files) {
     console.log('files', files)
     // 返回false可以阻止某次文件上传
   },
 
-  /** 
-   * 上传图片：从本地路径、临时路径获取服务器路径。 
-   */
-  uploadFile(files) {
+  /** 上传图片：仅为本地选择，并不上传到服务器。 */
+  loadImage(files) {
     console.log('upload files', files)
-    // 文件上传的函数，返回一个promise。
-    // resolve为成功，指向uploadSuccess；
-    // reject为失败，指向uploadError。
+    // 文件上传的函数，返回一个promise
     return new Promise((resolve, reject) => {
-      var tempFilePaths = files.tempFilePaths;
-      var app = getApp();
-      var that = this;
-      var obj = {};
-      // 上传多个文件时，对每个文件进行操作
-      for (var i = 0; i < tempFilePaths.length; i++) {
-        var path = tempFilePaths[i]; // 临时路径
-        var name = path.slice(path.lastIndexOf('/') + 1); // 临时路径中文件名作为文件名
-        uploadTask = wx.uploadFile({
-          url: utils.getUrl('/api/attachments/' + name),
-          filePath: path,
-          name: name,
-          header: {
-            "Content-Type": "application/binary",
-            "Token": app.globalData.token,
-          },
-          success: function (res) {
-            var data = JSON.parse(res.data);
-            if (data.state == "success") {
-              var realpath = data.path; // 服务器返回的真实路径
-              that.setData({
-                urls: that.data.urls.concat(realpath),
-              })
-              obj['urls'] = that.data.urls;
-              if (i == tempFilePaths.length - 1) { // 是最后一个附件
-                resolve(obj)
-              }
-            } else {
-              console.log(data.reason);
-              reject(res);
-            }
-          },
-          fail: function (err) {
-            console.log(err);
-            reject('网络连接错误');
-          }
-        })
-      }
-      setTimeout(() => {
-        reject('上传超时')
-      }, 10000)
+      resolve({
+        urls: files.tempFilePaths
+      });
     })
+  },
+
+  /** 加载失败返回函数 */
+  loadError(e) {
+    wx.showModal({
+      title: '提示',
+      content: '图片上传失败\n' + e.detail,
+      showCancel: false,
+    })
+  },
+
+  /** 加载成功返回函数 */
+  loadSuccess(e) {
+    this.setData({
+      tempFilePaths: this.data.tempFilePaths.concat(e.detail.urls),
+    });
+    console.log('upload success', e.detail)
+  },
+
+  /* =============== Upload Image =============== */
+
+  uploadPromise: function (){
+    return new Promise(uploadPromiseParam);
+  },
+
+  /** 上传图片：从临时路径获取服务器路径。 */
+  uploadPromiseParam: function(resolve, reject) {
+    var tempFilePaths = this.data.tempFilePaths;
+    var app = getApp();
+    var that = this;
+    var obj = {};
+    // 上传多个文件时，对每个文件进行操作
+    for (var i = 0; i < tempFilePaths.length; i++) {
+      var path = tempFilePaths[i]; // 临时路径
+      var name = path.slice(path.lastIndexOf('/') + 1); // 临时路径中文件名作为文件名
+      uploadTask = wx.uploadFile({
+        url: utils.getUrl('attachments/' + name),
+        filePath: path,
+        name: name,
+        header: {
+          "content-type": "application/binary",
+          "Token": app.globalData.token,
+        },
+        success: function (res) {
+          var data = JSON.parse(res.data);
+          if (data.state == "success") {
+            var realpath = data.path; // 服务器返回的真实路径
+            that.setData({
+              urls: that.data.urls.concat(realpath),
+            })
+            obj['urls'] = that.data.urls;
+            if (i == tempFilePaths.length - 1) { // 是最后一个附件
+              resolve(obj)
+            }
+          } else {
+            console.log(data.reason);
+            reject(res);
+          }
+        },
+        fail: function (err) {
+          console.log(err);
+          reject('网络连接错误');
+        }
+      })
+    }
+    setTimeout(() => {
+      reject('上传超时')
+    }, 10000)
   },
 
   /** 上传失败返回函数 */
@@ -142,9 +149,10 @@ Page({
 
   /* =============== Upload Form =============== */
 
-  /** 上传病例信息 */ 
+  /** 上传病例信息 */
   upload: function (e) {
-    var app = getApp();  // 用于获取token等信息
+    var noerr = true;
+    console.log(this.data.tempFilePaths);
 
     // 检查病历完整性
     if (!this.data.hospital || !this.data.hospital.trim() ||
@@ -155,22 +163,32 @@ Page({
       utils.userShowInfo('病历信息不完整。');
       return;
     }
+    /*
+    new Promise(this.uploadPromiseParam).then(function (res) {
+      console.log('upload success', res)
+    }).catch(function (res) {
+      noerr = false;
+      wx.showModal({
+        title: '提示',
+        content: '图片上传失败\n' + res,
+        showCancel: false,
+      })
+    })
+    if (!noerr) return;*/
 
     // 上传病历信息
-    console.log("try to upload files");
-    for (var key in this.data) {
-      console.log(key + ": " + this.data[key]);
-    }
+    console.log("try to upload form");
 
     wx.request({
-      url: utils.getUrl('/api/upload'),
+      url: utils.getUrl('upload'),
       header: {
-        "Content-Type": "application/json",
-        "Token": app.globalData.token,
+        "content-type": "application/json",
+        "token": app.globalData.token,
       },
       method: "POST",
       data: this.dataToJson(),
       complete: function (res) {
+        console.log(res);
         if (res == null || res.data == null) {
           utils.userShowInfo('网络请求失败');
           console.error("网络请求失败");
@@ -182,7 +200,8 @@ Page({
           console.log(res.data);
           utils.userShowInfo(res.data.message);
         }
-      }
+      },
+      timeout: 10000000,
     });
   },
 
@@ -233,7 +252,7 @@ Page({
   /** 获得上传所需字符串，标准符合api.md */
   dataToJson: function () {
     return JSON.stringify({
-      record: {
+      "record": {
         "hospital": {
           "name": this.data.hospital,
           "id": "",
