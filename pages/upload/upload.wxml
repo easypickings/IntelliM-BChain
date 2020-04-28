@@ -34,7 +34,7 @@
 		<view class="weui-cells__title">病情</view>
 		<view class="weui-cells weui-cells_after-title">
 			<view class="weui-cell weui-cell__bd">
-				<textarea class="weui-textarea" bindinput="bindSituationChange" placeholder="请输入文本" style="height: 3.3em" />
+				<textarea class="weui-textarea" bindinput="bindSituationChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
 				<view class="weui-textarea-counter">{{ situation.length }}/500</view>
             </view>
         </view>
@@ -42,7 +42,7 @@
         <view class="weui-cells__title">诊断</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell__bd">
-                <textarea class="weui-textarea" bindinput="bindDiagnosisChange" placeholder="请输入文本" style="height: 3.3em" />
+                <textarea class="weui-textarea" bindinput="bindDiagnosisChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
                 <view class="weui-textarea-counter">{{ diagnosis.length }}/500</view>
             </view>
         </view>
@@ -50,7 +50,7 @@
         <view class="weui-cells__title">处方</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell__bd">
-                <textarea class="weui-textarea" bindinput="bindPrescriptionChange" placeholder="请输入文本" style="height: 3.3em" />
+                <textarea class="weui-textarea" bindinput="bindPrescriptionChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
                 <view class="weui-textarea-counter">{{ prescription.length }}/500</view>
             </view>
         </view>
@@ -59,7 +59,7 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
-                    <input class="weui-input" bindinput="bindRemarkChange" placeholder="请输入文本" />
+                    <input class="weui-input" bindinput="bindRemarkChange" placeholder="请输入文本" maxlength="100" />
                     <view class="weui-textarea-counter">{{ remark.length }}/100</view>
                 </view>
             </view>
