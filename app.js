@@ -13,36 +13,42 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    var that = this;
 
     // 登录
     wx.login({
       success(res) {
         if (res.code) {
           wx.request({
-            url: utils.getUrl('/api/login'),
+            url: utils.getUrl('login'),
             header: {
               "content-type": "application/json"
             },
             method: 'POST',
-            data: {
+            data: JSON.stringify({
               "username": "",
               "password": "",
               "usercode": res.code,
-            },
-            complete: function (res) {
-              if (res == null || res.data == null) {
-                utils.userShowInfo('网络请求失败');
-                console.log('网络请求失败')
-              } else if (data.state == 'success') {
-                var data = JSON.parse(res.data);
+            }),
+            success: function (res) {
+              /* tmp token */
+              that.globalData.token = "root";
+              return;
+
+              console.log(res);
+              var data = JSON.parse(res.data);
+              if (data.state == 'success') {
                 console.log(data.token)
                 this.globalData.token = data.token;
               } else {
-                var data = JSON.parse(res.data);
                 utils.userShowInfo(data.message);
                 console.log(data.reason);
               }
-            }
+            },
+            fail: function (res) {
+              utils.userShowInfo('登陆失败');
+              console.log('登陆失败')
+            },
           })
         }
         // 发送 res.code 到后台换取 openId, sessionKey, unionId

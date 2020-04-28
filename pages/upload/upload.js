@@ -3,12 +3,12 @@ var app = getApp();
 
 Page({
   data: {
-    hospital: "",
-    doctor: "",
+    hospital: "1",
+    doctor: "2",
     date: "",
-    situation: "",
-    diagnosis: "",
-    prescription: "",
+    situation: "3",
+    diagnosis: "4",
+    prescription: "5",
     remark: "",
     files: [],
     tempFilePaths: [],
@@ -98,11 +98,11 @@ Page({
       var path = tempFilePaths[i]; // 临时路径
       var name = path.slice(path.lastIndexOf('/') + 1); // 临时路径中文件名作为文件名
       uploadTask = wx.uploadFile({
-        url: utils.getUrl('/api/attachments/' + name),
+        url: utils.getUrl('attachments/' + name),
         filePath: path,
         name: name,
         header: {
-          "Content-Type": "application/binary",
+          "content-type": "application/binary",
           "Token": app.globalData.token,
         },
         success: function (res) {
@@ -150,7 +150,7 @@ Page({
   /* =============== Upload Form =============== */
 
   /** 上传病例信息 */
-  upload: async function (e) {
+  upload: function (e) {
     var noerr = true;
     console.log(this.data.tempFilePaths);
 
@@ -163,7 +163,7 @@ Page({
       utils.userShowInfo('病历信息不完整。');
       return;
     }
-
+    /*
     new Promise(this.uploadPromiseParam).then(function (res) {
       console.log('upload success', res)
     }).catch(function (res) {
@@ -174,23 +174,21 @@ Page({
         showCancel: false,
       })
     })
-    if (!noerr) return;
+    if (!noerr) return;*/
 
     // 上传病历信息
     console.log("try to upload form");
-    for (var key in this.data) {
-      console.log(key + ": " + this.data[key]);
-    }
 
     wx.request({
-      url: utils.getUrl('/api/upload'),
+      url: utils.getUrl('upload'),
       header: {
-        "Content-Type": "application/json",
-        "Token": app.globalData.token,
+        "content-type": "application/json",
+        "token": app.globalData.token,
       },
       method: "POST",
       data: this.dataToJson(),
       complete: function (res) {
+        console.log(res);
         if (res == null || res.data == null) {
           utils.userShowInfo('网络请求失败');
           console.error("网络请求失败");
@@ -202,7 +200,8 @@ Page({
           console.log(res.data);
           utils.userShowInfo(res.data.message);
         }
-      }
+      },
+      timeout: 10000000,
     });
   },
 
@@ -253,7 +252,7 @@ Page({
   /** 获得上传所需字符串，标准符合api.md */
   dataToJson: function () {
     return JSON.stringify({
-      record: {
+      "record": {
         "hospital": {
           "name": this.data.hospital,
           "id": "",

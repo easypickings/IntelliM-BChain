@@ -5,7 +5,9 @@ Page({
     logs: [],
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    records: [],
+    
   },
 
   onLoad: function () {

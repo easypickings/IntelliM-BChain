@@ -26,6 +26,6 @@ module.exports = {
 
   /** 获取服务器 url/ext */
   getUrl: function(ext) {
-    return 'tmpurl' + ext;  // TODO
+    return 'http://imbc.yukim.ai/api/v0/' + ext;  // TODO
   }
 }

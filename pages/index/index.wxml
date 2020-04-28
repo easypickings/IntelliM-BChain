@@ -10,10 +10,11 @@
 				<image slot="icon" src="../../assets/plus.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
 			</mp-cell>
 		</mp-cells>
-		<block wx:if="{{ todos.length }}">
-			<view class="todos">
+
+		<block wx:if="{{ records.length }}">
+			<view class="records">
 				<!-- List items should get the class `completed` when marked as completed -->
-				<view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+				<view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ records }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
 					<!-- completed: success, todo: circle -->
 					<icon class="checkbox" type="{{ item.completed ? 'success' : 'circle' }}" />
 					<text class="name">{{ item.name }}</text>
