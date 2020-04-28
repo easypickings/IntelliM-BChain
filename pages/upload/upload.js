@@ -183,7 +183,7 @@ Page({
       url: utils.getUrl('upload'),
       header: {
         "content-type": "application/json",
-        "token": app.globalData.token,
+        "token": "root", // app.globalData.token,
       },
       method: "POST",
       data: this.dataToJson(),
