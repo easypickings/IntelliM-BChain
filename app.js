@@ -32,14 +32,14 @@ App({
             }),
             success: function (res) {
               /* tmp token */
-              that.globalData.token = "root";
-              return;
+              // that.globalData.token = "root";
+              // return;
 
               console.log(res);
-              var data = JSON.parse(res.data);
+              var data = res.data;
               if (data.state == 'success') {
                 console.log(data.token)
-                this.globalData.token = data.token;
+                that.globalData.token = data.token;
               } else {
                 utils.userShowInfo(data.message);
                 console.log(data.reason);

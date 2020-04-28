@@ -3,12 +3,12 @@ var app = getApp();
 
 Page({
   data: {
-    hospital: "1",
-    doctor: "2",
+    hospital: "",
+    doctor: "",
     date: "",
-    situation: "3",
-    diagnosis: "4",
-    prescription: "5",
+    situation: "",
+    diagnosis: "",
+    prescription: "",
     remark: "",
     files: [],
     tempFilePaths: [],
@@ -183,7 +183,7 @@ Page({
       url: utils.getUrl('upload'),
       header: {
         "content-type": "application/json",
-        "token": app.globalData.token,
+        "token": "root", // app.globalData.token,
       },
       method: "POST",
       data: this.dataToJson(),
