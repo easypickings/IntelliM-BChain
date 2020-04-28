@@ -152,13 +152,8 @@ Page({
       !this.data.situation || !this.data.situation.trim() ||
       !this.data.diagnosis || !this.data.diagnosis.trim() ||
       !this.data.prescription || !this.data.prescription.trim()) {
-      wx.showModal({
-        title: '提示',
-        content: '病历信息不完整，是否继续上传?',
-        success (res) {
-          if (res.cancel) return;
-        }
-      })
+      utils.userShowInfo('病历信息不完整。');
+      return;
     }
 
     // 上传病历信息
