@@ -5,12 +5,10 @@
 	</view>
 
 	<block wx:else>
-		<mp-cells title="">
-			<mp-cell link url="../index" value="点击上传电子病历" footer="" bindtap="tapUpLoad">
-				<image slot="icon" src="../../assets/plus.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
-			</mp-cell>
-		</mp-cells>
 
+			<image src="../../assets/t1/shuaxin.png" style="width: 80rpx; height: 80rpx;  position:static;left:10px; top:5px " bindtap="tapUpLoad"></image>
+			<image src="../../assets/t1/jiahao.png" style="width: 80rpx; height: 80rpx; position:relative;left:77%;  " bindtap="tapUpLoad"></image>
+	
 		<block wx:if="{{ records.length }}">
 			<view class="records">
 				<!-- List items should get the class `completed` when marked as completed -->
