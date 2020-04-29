@@ -1,11 +1,19 @@
 Page({
   data:{
-    logs: []
+    record: {}
   },
-  onShow: function () {
-    var logs = wx.getStorageSync('todo_logs')
-    if (logs) {
-      this.setData({ logs: logs.reverse() })
-    }
+
+  onLoad: function (options) {
+    var record = JSON.parse(options.record);
+    console.log(record);
+    this.setData({
+      record: record,
+    });
   },
+
+  tapReturn: function(e) {
+    wx.navigateBack({
+      delta: 1,
+    })
+  }
 })
