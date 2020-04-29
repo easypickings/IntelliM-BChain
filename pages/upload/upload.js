@@ -163,6 +163,7 @@ Page({
       utils.userShowInfo('病历信息不完整。');
       return;
     }
+    
     /*
     new Promise(this.uploadPromiseParam).then(function (res) {
       console.log('upload success', res)
@@ -187,19 +188,16 @@ Page({
       },
       method: "POST",
       data: this.dataToJson(),
-      complete: function (res) {
-        console.log(res);
-        if (res == null || res.data == null) {
-          utils.userShowInfo('网络请求失败');
-          console.error("网络请求失败");
-          return;
-        } else {
-          wx.navigateBack({
-            delta: 1 //小程序关闭当前页面返回上一页面
-          })
-          console.log(res.data);
-          utils.userShowInfo(res.data.message);
-        }
+      success: function(res) {
+        wx.navigateBack({
+          delta: 1 //小程序关闭当前页面返回上一页面
+        })
+        console.log(res.data);
+        utils.userShowInfo(res.data.message);
+      },
+      fail: function(res) {
+        console.error(res);
+        utils.userShowInfo('网络请求失败');
       },
       timeout: 10000000,
     });

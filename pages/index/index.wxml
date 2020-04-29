@@ -9,9 +9,9 @@
 		<block wx:if="{{ records.length }}">
 			<view class="records">
 				<!-- List items should get the class `completed` when marked as completed -->
-				<view class="item" wx:for="{{ records }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+				<view class="item" wx:for="{{ records }}" wx:key="{{ index }}" bindtap="tapItem" data-index="{{ index }}">
 					<view class="hospital">
-						<text>{{ item.hospital}}</text>
+						<text>{{ item.hospital }}</text>
 					</view>
 					<view>
 						<text class="brief">{{ item.date }}</text>

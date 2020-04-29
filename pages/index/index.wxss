@@ -45,6 +45,9 @@
   padding-right: 40rpx;
   font-size: 30rpx;
   color: #666;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .records .item .detail {
