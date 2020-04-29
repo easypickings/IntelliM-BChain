@@ -1,0 +1,82 @@
+<view class="page">
+	<view class="weui-form weui-form__text-area">
+		<h2 class="weui-form__title">电子病历上传</h2>
+	</view>
+
+	<view class="page__bd">
+		<view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+
+		<view class="weui-cells weui-cells_after-title">
+			<view class="weui-cell weui-cell_input">
+				<view class="weui-cell__hd weui-label">就诊医院</view>
+				<view class="weui-cell__bd">
+					<input class="weui-input" bindinput="bindHospitalChange" placeholder="请输入就诊医院" />
+				</view>
+			</view>
+			<view class="weui-cell weui-cell_input">
+				<view class="weui-cell__hd weui-label">就诊医生</view>
+				<view class="weui-cell__bd">
+					<input class="weui-input" bindinput="bindDoctorChange" placeholder="请输入医生姓名" />
+				</view>
+			</view>
+			<view class="weui-cell weui-cell_input">
+				<view class="weui-cell__hd weui-label">日期</view>
+				<view class="weui-cell__bd">
+					<picker mode="date" start="1970-01-01" end="{{ date }}" bindchange="bindDateChange">
+						<view class="weui-input"> {{date}} </view>
+					</picker>
+				</view>
+			</view>
+		</view>
+
+		<!-- <view class="weui-cells__tips">病历内容记录</view> -->
+
+		<view class="weui-cells__title">病情</view>
+		<view class="weui-cells weui-cells_after-title">
+			<view class="weui-cell weui-cell__bd">
+				<textarea class="weui-textarea" bindinput="bindSituationChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
+				<view class="weui-textarea-counter">{{ situation.length }}/500</view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">诊断</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell__bd">
+                <textarea class="weui-textarea" bindinput="bindDiagnosisChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
+                <view class="weui-textarea-counter">{{ diagnosis.length }}/500</view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">处方</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell__bd">
+                <textarea class="weui-textarea" bindinput="bindPrescriptionChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
+                <view class="weui-textarea-counter">{{ prescription.length }}/500</view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">备注</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput="bindRemarkChange" placeholder="请输入文本" maxlength="100" />
+                    <view class="weui-textarea-counter">{{ remark.length }}/100</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="page">
+            <view class="page__bd">
+                <mp-cells>
+                    <mp-cell>
+                        <mp-uploader bindfail="loadError" bindsuccess="loadSuccess" select="{{selectImage}}" upload="{{loadImage}}" files="{{files}}" max-count="9" title="附件上传"></mp-uploader>
+                    </mp-cell>
+                </mp-cells>
+            </view>
+        </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="upload">上传</button>
+        </view>
+    </view>
+</view>
