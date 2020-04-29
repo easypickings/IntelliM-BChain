@@ -1,11 +1,12 @@
-var utils = require('./utils/utils.js')
+var utils = require('./utils/utils.js');
+var server = require('./utils/server.js');
 
 //app.js
 App({
   globalData: {
     url: 'unknown',
     userInfo: null,
-    token: 'null'
+    token: 'root'   // TODO
   },
 
   onLaunch: function () {
@@ -19,37 +20,12 @@ App({
     wx.login({
       success(res) {
         if (res.code) {
-          wx.request({
-            url: utils.getUrl('login'),
-            header: {
-              "content-type": "application/json"
-            },
-            method: 'POST',
-            data: JSON.stringify({
-              "username": "",
-              "password": "",
-              "usercode": res.code,
-            }),
-            success: function (res) {
-              /* tmp token */
-              // that.globalData.token = "root";
-              // return;
-
-              console.log(res);
-              var data = res.data;
-              if (data.state == 'success') {
-                console.log(data.token)
-                that.globalData.token = data.token;
-              } else {
-                utils.userShowInfo(data.message);
-                console.log(data.reason);
-              }
-            },
-            fail: function (res) {
-              utils.userShowInfo('登陆失败');
-              console.log('登陆失败')
-            },
-          })
+          try {
+            var token = server.login(res.code);
+            that.globalData.token = token;
+          } catch(e) {
+            utils.userShowInfo(e);
+          }
         }
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
