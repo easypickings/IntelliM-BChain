@@ -1,7 +1,7 @@
-# APIv0.7 文档
+# APIv0.8 文档
 **API1.0(的文档)会重做，文档会变得很好看，敬请期待**
 
-开发环境：`http://imbc.yukim.ai/api/v0`（平时不在线，需要调试请联系管理员）
+开发环境：`http://imbc1.yukim.ai/api/v0`（请勿传大文件或发大量请求，暂不支持`https`）
 
 ### 登录
 `POST /login`
@@ -14,13 +14,19 @@ Content-Type: application/json
 ##### 内容示例1
 ```js
 {
-	"username": "", //用户名
+    "username": "", //用户名
     "password" : "", //密码
     "usercode" : "{code}" //微信一键登录接口，通过wx.login()获取的code
 }
 ```
 
-可以只填前两项(用户名+密码登录)，可以只填第三项(微信一键登录)，**暂时未区分用户，不管提交什么内容都会登录到同一用户**。
+可以只填前两项(用户名+密码登录)，可以只填第三项(微信一键登录)，**暂时只有1个用户，用户名为`root`，密码为`asdfqwerkjh`**。
+
+由于`session`同时只能建立一个，所以两个人同时登陆可能会互相将对方踢下线，`usercode`部分请留空，非空将尝试用(现在还不支持的)`usercode`登录(从而失败)。
+
+一看就很麻烦所以测试时建议使用通用`token`。
+
+注册在写了，弄完https就写。
 
 ##### 响应示例1
 ```js
@@ -50,6 +56,16 @@ Token的保质期为5分钟。每以一有效Token收到一条请求，该Token�
 	"state" : "failure",
     "reason": "Invalid Code",
     "message": "登录信息无效或已过期"
+}
+```
+
+##### 响应示例4
+```js
+{
+        state: 'failure',
+        code: 400,
+        reason: 'Unregistered account',
+        message: '账户未注册，请注册新账户或关联已有账户'
 }
 ```
 
