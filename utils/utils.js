@@ -27,5 +27,26 @@ module.exports = {
   /** 获取服务器 url/ext */
   getUrl: function(ext) {
     return 'http://imbc.yukim.ai/api/v0/' + ext;  // TODO
+  },
+
+  readRecords: function(records) {
+    var res = [];
+    for (var i = 0; i < records.length; i++) {
+      var rcd = records[i].record;
+      res.push({
+        hospital: rcd.hospital.name,
+        hospital_id: rcd.hospital.id,
+        date: rcd.date,
+        doctor: rcd.doctor.name,
+        doctor_id: rcd.doctor.id,
+        situation: rcd.situation,
+        diagnosis: rcd.diagnosis,
+        prescription: rcd.prescription,
+        attachments: rcd.attachments,
+        situation_brief: rcd.situation.replace(/\n/g, " "),
+      })
+    }
+    console.log(res);
+    return res;
   }
 }

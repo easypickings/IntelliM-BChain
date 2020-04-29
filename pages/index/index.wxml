@@ -6,17 +6,23 @@
 
 	<block wx:else>
 
-			<image src="../../assets/t1/shuaxin.png" style="width: 80rpx; height: 80rpx;  position:static;left:10px; top:5px " bindtap="tapUpLoad"></image>
-			<image src="../../assets/t1/jiahao.png" style="width: 80rpx; height: 80rpx; position:relative;left:77%;  " bindtap="tapUpLoad"></image>
+		<image src="../../assets/t1/shuaxin.png" style="width: 80rpx; height: 80rpx;  position:static;left:10px; top:5px " bindtap="tapRefresh"></image>
+		<image src="../../assets/t1/jiahao.png" style="width: 80rpx; height: 80rpx; position:relative;left:77%;  " bindtap="tapUpload"></image>
 	
 		<block wx:if="{{ records.length }}">
 			<view class="records">
 				<!-- List items should get the class `completed` when marked as completed -->
-				<view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ records }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
-					<!-- completed: success, todo: circle -->
-					<icon class="checkbox" type="{{ item.completed ? 'success' : 'circle' }}" />
-					<text class="name">{{ item.name }}</text>
-					<icon class="remove" type="clear" size="16" catchtap="removeTodoHandle" data-index="{{ index }}" />
+				<view class="item" wx:for="{{ records }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+					<view class="hospital">
+						<text>{{ item.hospital}}</text>
+					</view>
+					<view>
+						<text class="brief">{{ item.date }}</text>
+						<text class="brief">{{ item.doctor }}</text>
+					</view>
+					<view class="detail">
+						<text>{{ item.situation_brief }}</text>
+					</view>
 				</view>
 			</view>
 			<view class="footer">

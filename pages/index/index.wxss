@@ -19,42 +19,43 @@
   font-size: 28rpx;
 }
 
-.todos {
+.records {
   border: 1rpx solid #e0e0e0;
   border-radius: 10rpx;
   box-shadow: 0 0 5rpx #e0e0e0;
 }
 
-.todos .item {
-  display: flex;
+.records .item {
   align-items: center;
   padding: 25rpx;
   border-bottom: 1rpx solid #e0e0e0;
 }
 
-.todos .item:last-child {
+.records .item:last-child {
   border-bottom: 0;
 }
 
-.todos .item .checkbox {
-  margin-right: 20rpx;
-}
-
-.todos .item .name {
-  flex: 1;
-  font-size: 30rpx;
+.records .item .hospital {
+  width: 100%;
+  font-size: 45rpx;
   color: #444;
 }
 
-.todos .item.completed .name {
-  text-decoration: line-through;
-  color: #888;
+.records .item .brief {
+  padding-right: 40rpx;
+  font-size: 30rpx;
+  color: #666;
 }
-/* 
-.todos .item .remove {
-  cursor: pointer;
+
+.records .item .detail {
+  width: 100%;
+  font-size: 30rpx;
+  color: #666;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-*/
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -63,11 +64,7 @@
   font-size: 26rpx;
   color: #777;
 }
-/* 
-.footer .btn {
-  cursor: pointer;
-}
-*/
+
 .empty {
   display: flex;
   flex-direction: column;
