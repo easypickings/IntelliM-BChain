@@ -22,11 +22,12 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"enhance": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.0",
-	"appid": "wxea1b722a8c8cd134",
+	"appid": "wx837b12e89990f9cd",
 	"projectname": "IntelliM-BChain",
 	"debugOptions": {
 		"hidedInDevtools": []
