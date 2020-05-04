@@ -1,54 +1,61 @@
-var utils = require('./utils/utils.js');
-var server = require('./utils/server.js');
+var utils = require('./utils/utils');
+var server = require('./utils/server');
+var PR = require('./utils/promisify')
 
 //app.js
 App({
   globalData: {
     url: 'unknown',
     userInfo: null,
-    token: 'root'   // TODO
+    token: null,
   },
 
-  onLaunch: function () {
+  onLaunch: async function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
+    /*var logs = await PR.getStorageSync('logs') || []
     logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    var that = this;
-
-    // 登录
-    wx.login({
-      success(res) {
-        if (res.code) {
-          try {
-            var token = server.login(res.code);
-            that.globalData.token = token;
-          } catch(e) {
-            utils.userShowInfo(e);
-          }
-        }
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
+    await PR.setStorageSync('logs', logs);
+    console.log("hhhhh");*/
+    await this.userLogin();
   },
+
+  userLogin: async function() {
+    var that = this;
+    // 登录
+    try {
+      var res = await PR.login();
+      console.log(res);
+      if (res.code) {
+        try {
+          var token = await server.login(res.code);
+          that.globalData.token = token;
+        } catch (e) {
+          utils.userShowInfo(e);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+      console.log("微信登陆失败");
+    }
+
+    // 获取用户信息
+    try {
+      var res = await PR.getSettings();
+      if (res.authSetting['scope.userInfo']) {
+        // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+        try {
+          var res = await PR.getUserInfo();
+          this.globalData.userInfo = res.userInfo;
+          if (this.userInfoReadyCallback) {
+            this.userInfoReadyCallback(res);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 })
