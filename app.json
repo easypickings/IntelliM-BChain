@@ -1,9 +1,11 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/upload/upload",
     "pages/logs/logs",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/signup/signup"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,6 +28,13 @@
       {
         "pagePath": "pages/profile/profile",
         "text": "个人中心",
+        "iconPath": "assets/profile.png",
+        "selectedIconPath": "assets/profile-active.png"
+      },
+
+      {
+        "pagePath": "pages/login/login",
+        "text": "login_test",
         "iconPath": "assets/profile.png",
         "selectedIconPath": "assets/profile-active.png"
       }

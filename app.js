@@ -16,7 +16,7 @@ App({
     logs.unshift(Date.now())
     await PR.setStorageSync('logs', logs);
     console.log("hhhhh");*/
-    await this.userLogin();
+    // await this.userLogin();
   },
 
   userLogin: async function() {

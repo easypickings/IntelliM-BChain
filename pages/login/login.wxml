@@ -1,0 +1,13 @@
+<view class="container">
+<button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信一键登录</button>
+<button class="weui-btn" type="primary" bindtap="accountLogin">账号密码登录</button>
+
+
+<modal hidden="{{accountLoginHidden}}" confirm-text="登录" cancel-text="取消" bindcancel="cancelLogin" bindconfirm="confirmLogin">
+<input class="weui-input" bindinput="bindUsernameChange" value="{{username}}"  placeholder="账号" auto-focus/>
+<input class="weui-input" type="password" bindinput="bindPasswordChange" value="{{password}}" placeholder="密码" auto-focus/>
+<button class="weui-btn_mini" type="primary" bindtap="signUp">注册</button>
+</modal>
+
+
+</view>

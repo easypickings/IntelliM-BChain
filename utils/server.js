@@ -7,10 +7,12 @@ module.exports = {
   /**
    * 登录后端服务器，获取本次对话的token
    * 
-   * @param {*} code 用户码，微信登陆时获取
+   * @param {*} username 用户名
+   * @param {*} password 密码
+   * @param {*} usercode 微信登录时获取的user code
    * @returns 返回值为token
    */
-  login: async function (code) {
+  login: async function (username, password, usercode) {
     if (CONFIG.useRootToken)
       return "root";
 
@@ -23,9 +25,9 @@ module.exports = {
         },
         method: 'POST',
         data: JSON.stringify({
-          "username": "",
-          "password": "",
-          "usercode": code,
+          "username": username,
+          "password": password,
+          "usercode": usercode,
         })
       });
       console.log(res);
@@ -35,7 +37,7 @@ module.exports = {
         console.log(data.token)
         return data.token;
       } else {
-        console.log(data.reason);
+        console.log(data.code);
         throw data.message;
       }
     } catch (e) {
