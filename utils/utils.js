@@ -18,7 +18,7 @@ module.exports = {
 
   /** 获取服务器 url/ext */
   getUrl: function (ext) {
-    return 'http://49.232.168.250/api/v0/' + ext; // TODO
+    return 'http://imbc.vbcpascal.cn/api/v0/' + ext; // TODO
   },
 
   /** 调试用输出，在config.js::debugOutput设置 */
@@ -71,6 +71,120 @@ module.exports = {
         },
         timestamp: "2020-04-21T17:30:08.000Z", //上链ISO时间戳(UTC时间)，YYYY-MM-DDThh:mm:ss.sssZ
         validity: null //无签名验证的记录是null
+      },
+      {
+        record: {
+          hospital: {
+            name: "兆京大学校医院",
+            id: "",
+          },
+          date: "2020-04-22",
+          doctor: {
+            name: "吴仁冀",
+            id: "",
+          },
+          situation: "吾有一數。曰三。名之曰「甲」。",
+          diagnosis: "問天地好在。",
+          prescription: "天才在左，疯子在右。",
+          attachments: []
+        },
+        timestamp: "2020-04-22T22:22:22.222Z",
+        validity: null
+      },
+      {
+        record: {
+          hospital: {
+            name: "兆京大学校医院",
+            id: "",
+          },
+          date: "2020-04-22",
+          doctor: {
+            name: "吴仁冀",
+            id: "",
+          },
+          situation: "吾有一數。曰三。名之曰「甲」。",
+          diagnosis: "問天地好在。",
+          prescription: "天才在左，疯子在右。",
+          attachments: []
+        },
+        timestamp: "2020-04-22T22:22:22.222Z",
+        validity: null
+      },
+      {
+        record: {
+          hospital: {
+            name: "兆京大学校医院",
+            id: "",
+          },
+          date: "2020-04-22",
+          doctor: {
+            name: "吴仁冀",
+            id: "",
+          },
+          situation: "吾有一數。曰三。名之曰「甲」。",
+          diagnosis: "問天地好在。",
+          prescription: "天才在左，疯子在右。",
+          attachments: []
+        },
+        timestamp: "2020-04-22T22:22:22.222Z",
+        validity: null
+      },
+      {
+        record: {
+          hospital: {
+            name: "兆京大学校医院",
+            id: "",
+          },
+          date: "2020-04-22",
+          doctor: {
+            name: "吴仁冀",
+            id: "",
+          },
+          situation: "吾有一數。曰三。名之曰「甲」。",
+          diagnosis: "問天地好在。",
+          prescription: "天才在左，疯子在右。",
+          attachments: []
+        },
+        timestamp: "2020-04-22T22:22:22.222Z",
+        validity: null
+      },
+      {
+        record: {
+          hospital: {
+            name: "兆京大学校医院",
+            id: "",
+          },
+          date: "2020-04-22",
+          doctor: {
+            name: "吴仁冀",
+            id: "",
+          },
+          situation: "吾有一數。曰三。名之曰「甲」。",
+          diagnosis: "問天地好在。",
+          prescription: "天才在左，疯子在右。",
+          attachments: []
+        },
+        timestamp: "2020-04-22T22:22:22.222Z",
+        validity: null
+      },
+      {
+        record: {
+          hospital: {
+            name: "兆京大学校医院",
+            id: "",
+          },
+          date: "2020-04-22",
+          doctor: {
+            name: "吴仁冀",
+            id: "",
+          },
+          situation: "吾有一數。曰三。名之曰「甲」。",
+          diagnosis: "問天地好在。",
+          prescription: "天才在左，疯子在右。",
+          attachments: []
+        },
+        timestamp: "2020-04-22T22:22:22.222Z",
+        validity: null
       },
       {
         record: {

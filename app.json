@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/upload/upload",
     "pages/logs/logs",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/debug/debug",
+    "pages/qrcode/qrcode"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,18 +18,22 @@
     "selectedColor": "#222",
     "backgroundColor": "#f8f9fb",
     "borderStyle": "white",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "text": "电子病历",
         "iconPath": "assets/todos.png",
         "selectedIconPath": "assets/todos-active.png"
       },
-
       {
         "pagePath": "pages/profile/profile",
         "text": "个人中心",
         "iconPath": "assets/profile.png",
         "selectedIconPath": "assets/profile-active.png"
+      },
+      {
+        "pagePath": "pages/debug/debug",
+        "text": "调试"
       }
     ]
   },

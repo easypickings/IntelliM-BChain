@@ -93,13 +93,16 @@ Page({
         that.setData({
           records: utils.readRecords(data.values)
         });
+        require('../../utils/global').recordDownloaded(this.data.records);
       } else {
         console.log(data.reason);
         utils.userShowInfo(data.message);
+        require('../../utils/global').recordDownloadFailed(data);
       }
     } catch (e) {
       console.log(e);
       utils.userShowInfo('信息查询失败');
+      require('../../utils/global').recordDownloadFailed();
     }
   },
 

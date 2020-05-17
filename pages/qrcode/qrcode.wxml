@@ -1,0 +1,54 @@
+<!--pages/qrcode/qrcode.wxml-->
+
+<view class="root-container">
+<view class="padding-container">
+
+<loading wx:if="{{loading}}">病历下载中</loading>
+
+<view class="header-container">
+  <view class="header-title">
+    <text>请您选择希望共享的病历</text>
+  </view>
+  <view class="flex-container">
+    <button class="button" bindtap="selectAll">全选</button>
+    <button class="button" bindtap="deselectAll">取消选择</button>
+    <button class="button" bindtap="share">分享</button>
+  </view>
+</view>
+
+<view class="selection-container">
+  <block wx:if="{{ records.length }}">
+    <scroll-view scroll-y class="selection-area">
+      <view class="records">
+        <checkbox-group bindchange="onSelectionChanged">
+          <!-- List items should get the class `completed` when marked as completed -->
+          <view class="item" wx:for="{{ records }}" wx:key="index" data-index="{{ index }}">
+            <view class="flex-container">
+              <view><checkbox value="{{item.value}}" checked="{{item.checked}}"></checkbox></view>
+              <view class="hospital">
+                <text>{{ item.hospital }}</text>
+              </view>
+            </view>
+            <view>
+              <text class="brief">{{ item.date }}</text>
+              <text class="brief">{{ item.doctor }}</text>
+            </view>
+            <view class="detail">
+              <text>{{ item.situation_brief }}</text>
+            </view>
+          </view>
+        </checkbox-group>
+      </view>
+    </scroll-view>
+  </block>
+  <block wx:else>
+    <view class="error-message">
+      <text>
+        {{ errorMsg }}
+      </text>
+    </view>
+  </block>
+</view>
+
+</view>
+</view>
