@@ -1,11 +1,4 @@
 <view class="container">
-
-	<view class="weui-btn-area" wx:if="{{!hasUserInfo && canIUse}}">
-		<button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">一键登录</button>
-	</view>
-
-	<block wx:else>
-
 		<block wx:if="{{ records.length }}">
 			<view class="records">
 				<!-- List items should get the class `completed` when marked as completed -->
@@ -37,7 +30,4 @@
 
 		<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
 		<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
-	
-	</block>
-
 </view>

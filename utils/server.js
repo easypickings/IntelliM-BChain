@@ -1,6 +1,6 @@
-var utils = require("./utils");
-var CONFIG = require("./config");
-var PR = require("./promisify");
+var utils = require('./utils');
+var CONFIG = require('./config');
+var PR = require('./promisify');
 
 module.exports = {
 
@@ -9,25 +9,25 @@ module.exports = {
    * 
    * @param {*} username 用户名
    * @param {*} password 密码
-   * @param {*} usercode 微信登录时获取的user code
+   * @param {*} usercode 微信登录时获取code
    * @returns 返回值为token
    */
   login: async function (username, password, usercode) {
     if (CONFIG.useRootToken)
-      return "root";
+      return 'root';
 
-    console.log('try to login.')
+    console.log('----- login -----')
     try {
-      var res = await PR.request({
+      let res = await PR.request({
         url: utils.getUrl('login'),
         header: {
-          "content-type": "application/json"
+          'content-type': 'application/json'
         },
         method: 'POST',
         data: JSON.stringify({
-          "username": username,
-          "password": password,
-          "usercode": usercode,
+          'username': username,
+          'password': password,
+          'usercode': usercode,
         })
       });
       console.log(res);
@@ -42,7 +42,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e)
-      throw "login failed";
+      throw '登录失败';
     }
   },
 
@@ -63,8 +63,8 @@ module.exports = {
       var res = await PR.request({
         url: utils.getUrl('download'),
         header: {
-          "content-type": "application/x-www-form-urlencoded",
-          "token": token,
+          'content-type': 'application/x-www-form-urlencoded',
+          'token': token,
         },
         method: 'POST'
       });
@@ -102,12 +102,12 @@ module.exports = {
           filePath: path,
           name: 'file',
           header: {
-            "content-type": "multipart/form-data",
-            "token": token,
+            'content-type': 'multipart/form-data',
+            'token': token,
           },
         });
         var data = JSON.parse(res.data);
-        if (data.state == "success") {
+        if (data.state == 'success') {
           var realpath = data.path;  // 服务器返回路径
           urls = urls.concat(realpath);
           console.log(urls);
@@ -118,7 +118,7 @@ module.exports = {
         }
       } catch(e) {
         console.log(e);
-        throw "网络连接错误";
+        throw '网络连接错误';
       }
     }
     console.log(urls);
@@ -133,7 +133,7 @@ module.exports = {
         var res = await PR.downloadFile({
           url: utils.getUrl(name),  // name is like 'attachments/xxx.jpg'
           header: {
-            "token": token,
+            'token': token,
           },          
         });
         if (res.statusCode == 200) {
@@ -141,14 +141,14 @@ module.exports = {
           continue;
         } else if (res.statusCode == 401) {
           console.error(res);
-          throw "认证信息错误";
+          throw '认证信息错误';
         } else if (res.statusCode == 404) {
           console.error(res);
-          throw "附件不存在或损坏";
+          throw '附件不存在或损坏';
         }
       } catch(e) {
         console.log(e);
-        throw "附件下载错误";
+        throw '附件下载错误';
       }
     }
     return tempFilePaths;

@@ -13,30 +13,10 @@ Page({
     records: [],
   },
 
-  /** 界面加载时调用：获取用户登录信息并下载病历。 */
+  /**
+   * 页面加载--根据token下载records
+   */
   onLoad: async function () {
-    console.log("index on load.")
-    if (app.globalData.userInfo) {
-      // 如果已有登录信息
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else {
-      // 如果尚没有登录信息
-      try {
-        var res = await PR.getUserInfo();
-        app.globalData.userInfo = res.userInfo;
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    // 根据token下载记录
     if (app.globalData.token) {
       try {
         await this.getRecords();
@@ -44,7 +24,7 @@ Page({
         console.log(e);
       }
     } else {
-      console.log("with no token.");
+      console.log('No token--not login yet');
     }
   },
 
@@ -61,7 +41,7 @@ Page({
       var token = await server.login(res.code);
       app.globalData.token = token;
     } catch (e) {
-      utils.userShowInfo(e);
+      utils.showToast(e);
     }
     if (app.globalData.token) {
       this.getRecords();
@@ -81,8 +61,8 @@ Page({
       var res = await PR.request({
         url: utils.getUrl('download'),
         header: {
-          "content-type": "application/x-www-form-urlencoded",
-          "token": app.globalData.token,
+          'content-type': 'application/x-www-form-urlencoded',
+          'token': app.globalData.token,
         },
         method: 'POST'
       });
@@ -95,11 +75,11 @@ Page({
         });
       } else {
         console.log(data.reason);
-        utils.userShowInfo(data.message);
+        utils.showToast(data.message);
       }
     } catch (e) {
       console.log(e);
-      utils.userShowInfo('信息查询失败');
+      utils.showToast('信息查询失败');
     }
   },
 

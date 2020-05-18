@@ -74,14 +74,20 @@ Page({
   },
 
   /**
-   * 点击账号密码登录按钮--弹出登录框
+   * 点击账号密码登录按钮
    */
   accountLogin: async function () {
-    this.setData({
-      accountLoginHidden: false,
-      username: null,
-      password: null
-    });
+    console.log('---login via account---');
+    try {
+      let token = await server.login(this.data.username, this.data.password, null);
+      app.globalData.token = token;
+      utils.showToast('登录成功', 'success');
+      wx.reLaunch({ // 关闭login页面并打开index页面
+        url: '../index/index',
+      })
+    } catch (e) {
+      utils.showToast(e);
+    }
   },
 
   bindUsernameChange: function (e) {
@@ -97,30 +103,40 @@ Page({
   },
 
   /**
-   * 点击取消按钮--隐藏登录框
-   */
-  cancelLogin: async function () {
-    this.setData({
-      accountLoginHidden: true
-    });
-  },
-
-  confirmLogin: async function () {
-    try {
-      var token = await server.login(this.data.username, this.data.password, null);
-      app.globalData.token = token;
-    } catch (e) {
-      utils.userShowInfo(e);
-    }
-  },
-
-  /**
    * 点击注册按钮--跳转至注册页面
    */
   signUp: async function () {
     wx.navigateTo({
       url: '../signup/signup'
     });
+  },
+
+  wechatLogin: async function (e) {
+    app.globalData.userInfo = e.detail.userInfo;
+    this.wxLogin(); // 微信登录
+  },
+
+  wxLogin: async function () {
+    try {
+      let res = await PR.login();
+      console.log('---login via wechat---');
+      console.log(res.code);
+      if (res.code) {
+        try {
+          let token = await server.login(null, null, res.code);
+          app.globalData.token = token;
+          utils.showToast('登录成功', 'success');
+          wx.reLaunch({ // 关闭login页面并打开index页面
+            url: '../index/index',
+          })
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+      utils.showToast('微信登录失败', 'fail');
+    }
   },
 
 })

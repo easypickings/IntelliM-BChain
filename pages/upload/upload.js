@@ -5,13 +5,13 @@ var app = getApp();
 
 Page({
   data: {
-    hospital: "",
-    doctor: "",
-    date: "",
-    situation: "",
-    diagnosis: "",
-    prescription: "",
-    remark: "",
+    hospital: '',
+    doctor: '',
+    date: '',
+    situation: '',
+    diagnosis: '',
+    prescription: '',
+    remark: '',
     files: [],
     tempFilePaths: [],
     urls: [],
@@ -96,7 +96,7 @@ Page({
       !this.data.situation || !this.data.situation.trim() ||
       !this.data.diagnosis || !this.data.diagnosis.trim() ||
       !this.data.prescription || !this.data.prescription.trim()) {
-      utils.userShowInfo('病历信息不完整。');
+      utils.showToast('病历信息不完整。');
       return;
     }
 
@@ -116,16 +116,16 @@ Page({
     }
 
     // 上传病历信息
-    console.log("try to upload form");
+    console.log('try to upload form');
 
     try {
       var res = await PR.request({
         url: utils.getUrl('upload'),
         header: {
-          "content-type": "application/json",
-          "token": "root", // app.globalData.token,
+          'content-type': 'application/json',
+          'token': 'root', // app.globalData.token,
         },
-        method: "POST",
+        method: 'POST',
         data: this.dataToJson(),
       })
       var data = res.data;
@@ -135,11 +135,11 @@ Page({
         })
       } else {
         console.log(data);
-        utils.userShowInfo(data.message);
+        utils.showToast(data.message);
       }
     } catch (e) {
       console.error(e);
-      utils.userShowInfo('网络请求失败');
+      utils.showToast('网络请求失败');
     };
   },
 
@@ -190,22 +190,22 @@ Page({
   /** 获得上传所需字符串，标准符合api.md */
   dataToJson: function () {
     return JSON.stringify({
-      "record": {
-        "hospital": {
-          "name": this.data.hospital,
-          "id": "",
+      'record': {
+        'hospital': {
+          'name': this.data.hospital,
+          'id': '',
         },
-        "date": this.data.date,
-        "doctor": {
-          "name": this.data.doctor,
-          "id": "",
+        'date': this.data.date,
+        'doctor': {
+          'name': this.data.doctor,
+          'id': '',
         },
-        "situation": this.data.situation,
-        "diagnosis": this.data.diagnosis,
-        "prescription": this.data.prescription,
-        "attachments": this.data.urls,
+        'situation': this.data.situation,
+        'diagnosis': this.data.diagnosis,
+        'prescription': this.data.prescription,
+        'attachments': this.data.urls,
       },
-      "signature": "",
+      'signature': '',
     })
   },
 
