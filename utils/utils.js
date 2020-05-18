@@ -18,7 +18,7 @@ module.exports = {
 
   /** 获取服务器 url/ext */
   getUrl: function (ext) {
-    return 'http://49.232.168.250/api/v0/' + ext; // TODO
+    return 'https://imbc.vbcpascal.cn/api/v1/' + ext; // TODO
   },
 
   /** 调试用输出，在config.js::debugOutput设置 */

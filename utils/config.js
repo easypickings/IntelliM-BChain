@@ -1,6 +1,6 @@
 module.exports = {
   debugOutput: false,
-  useRootToken: true,
+  useRootToken: false,
   useTestRecord: false,
   notUploadImage: true,
 }

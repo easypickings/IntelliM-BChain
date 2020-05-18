@@ -1,1 +1,60 @@
-/* pages/signup/signup.wxss */
+/* pages/login/login.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+#signup {
+  position: fixed;
+  width: 620rpx;
+  top: 450rpx;
+  left: 65rpx;
+}
+
+#username {
+  position: fixed;
+  height: 100rpx;
+  width: 600rpx;
+  top: 100rpx;
+  left: 65rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+#password {
+  position: fixed;
+  height: 100rpx;
+  width: 600rpx;
+  top: 250rpx;
+  left: 65rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+#username-warn {
+  position: fixed;
+  width: 600rpx;
+  top: 200rpx;
+  left: 65rpx;
+  font-size: 10pt;
+  color: red;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+#password-warn {
+  position: fixed;
+  width: 600rpx;
+  top: 350rpx;
+  left: 65rpx;
+  font-size: 10pt;
+  color: red;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}

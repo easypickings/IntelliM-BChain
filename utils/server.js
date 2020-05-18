@@ -13,10 +13,9 @@ module.exports = {
    * @returns 返回值为token
    */
   login: async function (username, password, usercode) {
-    if (CONFIG.useRootToken)
-      return 'root';
-
-    console.log('----- login -----')
+    // if (CONFIG.useRootToken)
+    //   return 'root';
+    console.log('-------- login --------')
     try {
       let res = await PR.request({
         url: utils.getUrl('login'),
@@ -32,17 +31,45 @@ module.exports = {
       });
       console.log(res);
 
-      var data = res.data;
-      if (data.state == 'success') {
-        console.log(data.token)
+      let data = res.data;
+      console.log(data);
+      if (data.state == 'success')
         return data.token;
-      } else {
-        console.log(data.code);
+      else
         throw data.message;
-      }
     } catch (e) {
-      console.log(e)
-      throw '登录失败';
+      throw e;
+    }
+  },
+
+  /**
+   * 注册账号，返回token
+   * @param {*} username 用户名
+   * @param {*} password 密码
+   */
+  signup: async function (username, password) {
+    try {
+      let res = await PR.request({
+        url: utils.getUrl('users'),
+        header: {
+          'content-type': 'application/json'
+        },
+        method: 'POST',
+        data: JSON.stringify({
+          'username': username,
+          'password': password,
+        })
+      });
+      console.log(res);
+
+      let data = res.data;
+      console.log(data);
+      if (data.state == 'success')
+        return data.token;
+      else
+        throw data.message;
+    } catch (e) {
+      throw e;
     }
   },
 
@@ -90,7 +117,7 @@ module.exports = {
    * @returns 服务器路径
    */
   uploadFiles: async function (token, tempFilePaths) {
-    var urls = [];    // 服务器返回结果
+    var urls = []; // 服务器返回结果
     for (var i = 0; i < tempFilePaths.length; i++) {
       var path = tempFilePaths[i]; // 临时路径
       var name = path.slice(path.lastIndexOf('/') + 1); // 临时路径中文件名作为文件名
@@ -108,7 +135,7 @@ module.exports = {
         });
         var data = JSON.parse(res.data);
         if (data.state == 'success') {
-          var realpath = data.path;  // 服务器返回路径
+          var realpath = data.path; // 服务器返回路径
           urls = urls.concat(realpath);
           console.log(urls);
           continue;
@@ -116,7 +143,7 @@ module.exports = {
           console.log(res);
           throw data.message;
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
         throw '网络连接错误';
       }
@@ -124,17 +151,17 @@ module.exports = {
     console.log(urls);
     return urls;
   },
-  
-  downloadFiles: async function(token, names) {
+
+  downloadFiles: async function (token, names) {
     var tempFilePaths = [];
     for (var i = 0; i < names.length; i++) {
       var name = names[i];
       try {
         var res = await PR.downloadFile({
-          url: utils.getUrl(name),  // name is like 'attachments/xxx.jpg'
+          url: utils.getUrl(name), // name is like 'attachments/xxx.jpg'
           header: {
             'token': token,
-          },          
+          },
         });
         if (res.statusCode == 200) {
           tempFilePaths = tempFilePaths.concat(res.tempFilePath);
@@ -146,7 +173,7 @@ module.exports = {
           console.error(res);
           throw '附件不存在或损坏';
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
         throw '附件下载错误';
       }

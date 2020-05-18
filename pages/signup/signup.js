@@ -1,66 +1,80 @@
-// pages/signup/signup.js
+var utils = require('../../utils/utils');
+var server = require('../../utils/server');
+var PR = require('../../utils/promisify');
+const app = getApp();
+
+/** 正则表达式--用户名为不少于3位的字母、数字或汉字的组合 */
+var usernameReg = /^[a-zA-Z0-9\u4e00-\u9fa5]{3,}$/;
+/** 正则表达式--密码为8-16位且必须包含字母、数字和特殊符号 */
+var passwordReg = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}$/;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    username: null,
+    password: null,
+    usernameWarnHidden: true,
+    passwordWarnHidden: true,
+    usernameOK: false,
+    passwordOK: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  bindUsernameFocus: function () {
+    if (!this.data.usernameOK)
+      this.setData({
+        usernameWarnHidden: false
+      });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  bindPasswordFocus: function () {
+    if (!this.data.passwordOK)
+      this.setData({
+        passwordWarnHidden: false
+      });
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  bindUsernameChange: function (e) {
+    let username = e.detail.value;
+    let ok = usernameReg.test(username);
+    this.setData({
+      username: username,
+      usernameWarnHidden: ok,
+      usernameOK: ok
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  bindPasswordChange: function (e) {
+    let password = e.detail.value;
+    let ok = passwordReg.test(password);  
+    this.setData({
+      password: password,
+      passwordWarnHidden: ok,
+      passwordOK: ok
+    });
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  signup: async function () {
+    console.log('------ sign up -------');
+    try {
+      let token = await server.signup(this.data.username, this.data.password);
+      app.globalData.token = token;
+      utils.showToast('注册成功', 'success');
+      wx.reLaunch({ // 关闭signup页面并打开index页面
+        url: '../index/index',
+      });
+    } catch (e) {
+      utils.showToast(e);
+    }
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

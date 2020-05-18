@@ -35,7 +35,7 @@
   left: 75rpx;
 }
 
-#account {
+#username {
   position: fixed;
   height: 100rpx;
   width: 600rpx;
