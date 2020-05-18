@@ -1,0 +1,75 @@
+/* pages/login/login.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+#wx-login {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 620rpx;
+  top: 700rpx;
+  left: 65rpx;
+}
+
+#account-login {
+  position: fixed;
+  width: 620rpx;
+  top: 350rpx;
+  left: 65rpx;
+}
+
+#signup {
+  position: fixed;
+  top: 500rpx;
+  left: 250rpx;
+  color: cornflowerblue;
+  text-decoration: underline;
+}
+
+#no-account {
+  position: fixed;
+  top: 500rpx;
+  left: 75rpx;
+}
+
+#username {
+  position: fixed;
+  height: 100rpx;
+  width: 600rpx;
+  top: 100rpx;
+  left: 65rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+#password {
+  position: fixed;
+  height: 100rpx;
+  width: 600rpx;
+  top: 225rpx;
+  left: 65rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+#wechat {
+  position: fixed;
+  height: 100rpx;
+  width: 100rpx;
+  top: 800rpx;
+  left: 325rpx;
+}
+
+.btn[plain] {
+  border: none;
+  border-color: transparent;
+}

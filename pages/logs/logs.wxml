@@ -33,44 +33,40 @@
 		<view class="weui-cells weui-cells_after-title">
 			<view class="weui-cell weui-cell__bd">
 				<textarea class="weui-textarea" value="{{ record.situation }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
-				</view>
-    </view>
+			</view>
+        </view>
     
-    <view class="weui-cells__title">诊断</view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell__bd">
-            <textarea class="weui-textarea" value="{{ record.diagnosis }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
+        <view class="weui-cells__title">诊断</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell__bd">
+                <textarea class="weui-textarea" value="{{ record.diagnosis }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
+            </view>
         </view>
-    </view>
 
-    <view class="weui-cells__title">处方</view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell__bd">
-            <textarea class="weui-textarea" value="{{ record.prescription }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
+        <view class="weui-cells__title">处方</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell__bd">
+                <textarea class="weui-textarea" value="{{ record.prescription }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
+            </view>
         </view>
-    </view>
 
-    <view class="weui-cells__title">备注</view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__bd">
-                <input class="weui-input" value="{{ record.remark }}" placeholder="暂无信息" disabled="true"/>
+        <view class="weui-cells__title">备注</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" value="{{ record.remark }}" placeholder="暂无信息" disabled="true"/>
+                </view>
             </view>
         </view>
     </view>
 
-    <view class="page">
-        <view class="page__bd">
-            <mp-cells>
-                <mp-cell>
-                    <mp-uploader bindfail="loadError" bindsuccess="loadSuccess" select="{{selectImage}}" upload="{{loadImage}}" files="{{files}}" max-count="9" title="附件上传"></mp-uploader>
-                </mp-cell>
-            </mp-cells>
+    <view class="container">
+        <view wx:for="{{imglist}}" wx:for-item="image" wx:key="index" class="previewimg">
+            <image src="{{image}}" data-src="{{image}}" bindtap="bindPreviewImage" style="aspectFill"></image>
         </view>
     </view>
 
     <view class="weui-btn-area">
         <button class="weui-btn" type="primary" bindtap="tapReturn">返回</button>
     </view>
-  </view>
 </view>

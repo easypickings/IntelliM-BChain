@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/login/login",
+    "pages/signup/signup",
     "pages/index/index",
     "pages/upload/upload",
     "pages/logs/logs",

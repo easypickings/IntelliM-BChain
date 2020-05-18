@@ -1,0 +1,8 @@
+<view class="container">
+<input class="weui-input" id="username" bindinput="bindUsernameChange" value="{{username}}"  placeholder="用户名" focus/>
+<input class="weui-input" id="password" type="password" bindinput="bindPasswordChange" value="{{password}}" placeholder="密码" focus/>
+<button class="weui-btn" id="account-login" type="primary" bindtap="accountLogin">登录</button>
+<view id="no-account">没有账号？</view><view id="signup" bindtap="signUp">点此注册</view>
+<view id="wx-login">———— 或通过微信一键登录 ————</view>
+<button class="btn" plain="true" id="wechat" open-type="getUserInfo" bindgetuserinfo="wechatLogin"><image id="wechat" src="../../assets/wechat.png"></image></button>
+</view>
