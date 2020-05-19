@@ -12,6 +12,7 @@ Page({
     username: null,
     password: null,
     usercode: null,
+    isPassword: true,
   },
 
   /**
@@ -90,6 +91,12 @@ Page({
     } catch (e) {
       utils.showToast(e);
     }
+  },
+
+  showPassword: function () {
+    this.setData({
+      isPassword: !this.data.isPassword
+    })
   },
 
 })

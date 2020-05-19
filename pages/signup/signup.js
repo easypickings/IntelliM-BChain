@@ -20,6 +20,7 @@ Page({
     passwordWarnHidden: true,
     usernameOK: false,
     passwordOK: false,
+    isPassword: true,
   },
 
   /**
@@ -55,7 +56,7 @@ Page({
 
   bindPasswordChange: function (e) {
     let password = e.detail.value;
-    let ok = passwordReg.test(password);  
+    let ok = passwordReg.test(password);
     this.setData({
       password: password,
       passwordWarnHidden: ok,
@@ -75,6 +76,12 @@ Page({
     } catch (e) {
       utils.showToast(e);
     }
+  },
+
+  showPassword: function () {
+    this.setData({
+      isPassword: !this.data.isPassword
+    })
   },
 
 })
