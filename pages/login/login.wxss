@@ -73,3 +73,19 @@
   border: none;
   border-color: transparent;
 }
+
+#password-image {
+  position: fixed;
+  height:40rpx;
+  width: 40rpx;
+  top: 255rpx;
+  left: 620rpx;
+}
+
+#show-password {
+  position: fixed;
+  height: 100rpx;
+  width: 100rpx;
+  top: 225rpx;
+  left: 590rpx;
+}
