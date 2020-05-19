@@ -8,6 +8,7 @@ App({
     url: null,
     userInfo: null,
     token: null,
+    records: null,
   },
 
   onLaunch: async function () {},

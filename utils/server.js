@@ -85,18 +85,19 @@ module.exports = {
       return utils.getTestRecord();
     }
 
-    console.log('begin to download record');
+    console.log('[Server] begin to download record');
     try {
-      var res = await PR.request({
-        url: utils.getUrl('download'),
+      let res = await PR.request({
+        url: utils.getUrl('records'),
         header: {
-          'content-type': 'application/x-www-form-urlencoded',
+          'content-type': 'application/json',
           'token': token,
         },
-        method: 'POST'
+        method: 'GET'
       });
-      var data = res.data;
+      let data = res.data;
       if (data.state == 'success') {
+        console.log("[Server] download success");
         utils.dbgPrint(data.values);
         return utils.readRecords(data.values);
       } else {
@@ -106,6 +107,35 @@ module.exports = {
     } catch (e) {
       console.log(e);
       throw '信息查询失败';
+    }
+  },
+
+  uploadRecord: async function (token, upload_data) {
+    console.log(token);
+    console.log('[Server] begin to upload record');
+    try {
+      let res = await PR.request({
+        url: utils.getUrl('records'),
+        header: {
+          'content-type': 'application/json',
+          'token': token,
+        },
+        method: 'POST',
+        data: upload_data,
+      })
+      let data = res.data;
+      if (data.state == 'success') {
+        console.log('[Server] record upload succeed');
+        wx.navigateBack({
+          delta: 1,
+        })
+      } else {
+        console.log(data);
+        throw data.message;
+      }
+    } catch(e) {
+      console.log(e);
+      throw '病历上传失败';
     }
   },
 
