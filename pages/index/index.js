@@ -6,9 +6,10 @@ const app = getApp();
 
 Page({
   data: {
-    records: [],
+    records: [],      // 显示的病历列表，而非完整病历列表
     userInfo: {},
     hasUserInfo: false,
+    selectMode: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
 
@@ -69,5 +70,10 @@ Page({
       url: '../logs/logs?record=' + JSON.stringify(rcd),
     })
   },
+
+  longPressItem: async function(e) {
+    let index = e.currentTarget.dataset.index;
+    console.log(index);
+  }
 
 })
