@@ -9,9 +9,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 620rpx;
+  width: 350rpx;
+  height: 50rpx;
   top: 700rpx;
-  left: 65rpx;
+  left: 200rpx;
+  /* border: 1rpx solid #e0e0e0; */
+}
+
+#wx-login:before,
+#wx-login:after {
+  content: "";
+  position: fixed;
+  display: block;
+  top: 725rpx;
+  left: 50%;
+
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-top: 2rpx solid;
+  width: 125rpx;
+}
+
+#wx-login:before {
+  margin-left: -235rpx;
+}
+
+#wx-login:after {
+  margin-left: 235rpx;
 }
 
 #account-login {
@@ -76,7 +100,7 @@
 
 #password-image {
   position: fixed;
-  height:40rpx;
+  height: 40rpx;
   width: 40rpx;
   top: 255rpx;
   left: 620rpx;

@@ -7,6 +7,6 @@
 </button>
 <button class="weui-btn" id="account-login" type="primary" bindtap="accountLogin">登录</button>
 <view id="no-account">没有账号？</view><view id="signup" bindtap="signUp">点此注册</view>
-<view id="wx-login">———— 或通过微信一键登录 ————</view>
+<view id="wx-login">或通过微信一键登录</view>
 <button class="btn" plain="true" id="wechat" open-type="getUserInfo" bindgetuserinfo="wechatLogin"><image id="wechat" src="../../assets/wechat.png"></image></button>
 </view>
