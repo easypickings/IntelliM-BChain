@@ -1,28 +1,32 @@
+<view class="page page__bd">
+	<mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+</view>
+
 <view class="container">
-		<block wx:if="{{ records.length }}">
-			<view class="records">
-				<!-- List items should get the class `completed` when marked as completed -->
-				<view class="item" wx:for="{{ records }}" wx:key="index" bindtap="tapItem" data-index="{{ index }}">
-					<view class="hospital">
-						<text>{{ item.hospital }}</text>
-					</view>
-					<view>
-						<text class="brief">{{ item.date }}</text>
-						<text class="brief">{{ item.doctor }}</text>
-					</view>
-					<view class="detail">
-						<text>{{ item.situation_brief }}</text>
-					</view>
+	<block wx:if="{{ records.length }}">
+		<view class="records">
+			<!-- List items should get the class `completed` when marked as completed -->
+			<view class="item" wx:for="{{ records }}" wx:key="index" bindtap="tapItem" data-index="{{ index }}">
+				<view class="hospital">
+					<text>{{ item.hospital }}</text>
+				</view>
+				<view>
+					<text class="brief">{{ item.date }}</text>
+					<text class="brief">{{ item.doctor }}</text>
+				</view>
+				<view class="detail">
+					<text>{{ item.situation_brief }}</text>
 				</view>
 			</view>
-		</block>
-		<block wx:else>
-			<view class="empty">
-				<text class="title">当前暂无病历记录</text>
-				<text class="content">点击添加按钮上传</text>
-			</view>
-		</block>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="empty">
+			<text class="title">当前暂无病历记录</text>
+			<text class="content">点击添加按钮上传</text>
+		</view>
+	</block>
 
-		<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
-		<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
+	<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
+	<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
 </view>
