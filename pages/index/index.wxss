@@ -1,3 +1,8 @@
+page {
+  padding-bottom: 20px;
+  background-color: #F0EFF5;
+}
+
 .header {
   display: flex;
   align-items: center;
