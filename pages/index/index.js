@@ -32,11 +32,6 @@ Page({
   getRecords: async function () {
     let that = this;
 
-    // 暂未登录，使用临时token
-    if (CONFIG.useTestRecord) {
-      return utils.getTestRecord();
-    }
-
     try {
       let res = await server.getRecords(app.globalData.token);
       console.log(res);

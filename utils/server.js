@@ -144,11 +144,6 @@ uploadBaseInfo: async function (token, upload_data) {
    * @returns 返回格式化后的病历信息的列表
    */
   getRecords: async function (token) {
-    // record for test
-    if (CONFIG.useTestRecord) {
-      return utils.getTestRecord();
-    }
-
     console.log('[Server] begin to download record');
     try {
       let res = await PR.request({
