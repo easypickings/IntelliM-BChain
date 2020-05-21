@@ -84,8 +84,9 @@
   position: fixed;
   height: 40rpx;
   width: 40rpx;
-  top: 280rpx;
-  left: 625rpx;
+  top: 250rpx;
+  left: 595rpx;
+  padding: 30rpx 25rpx;
 }
 
 #show-password {
