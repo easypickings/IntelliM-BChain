@@ -69,22 +69,14 @@ Page({
    * 点击微信一键登录
    */
   wechatLogin: async function (e) {
-    app.globalData.userInfo = e.detail.userInfo;
-    this.wxLogin(); // 微信登录
-  },
-
-  /**
-   * 微信登录
-   */
-  wxLogin: async function () {
     try {
       let res = await PR.login();
       console.log('---login via wechat---');
-      console.log(res.code);
       if (res.code) {
         try {
           let token = await server.login(null, null, res.code);
           app.globalData.token = token;
+          app.globalData.userInfo = e.detail.userInfo;
           utils.showToast('登录成功', 'success');
           wx.reLaunch({ // 关闭login页面并打开index页面
             url: '../index/index',
