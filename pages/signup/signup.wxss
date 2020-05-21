@@ -19,12 +19,32 @@
   left: 65rpx;
   padding-left: 10rpx;
   padding-right: 10rpx;
+}
+
+#username-wrapper {
+  position: fixed;
+  height: 100rpx;
+  width: 600rpx;
+  top: 100rpx;
+  left: 65rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
   border: 1rpx solid #e0e0e0;
   border-radius: 10rpx;
   box-shadow: 0 0 5rpx #e0e0e0;
 }
 
 #password {
+  position: fixed;
+  height: 100rpx;
+  width: 515rpx;
+  top: 250rpx;
+  left: 65rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+#password-wrapper {
   position: fixed;
   height: 100rpx;
   width: 600rpx;
@@ -66,16 +86,16 @@
 
 #password-image {
   position: fixed;
-  height:40rpx;
+  height: 40rpx;
   width: 40rpx;
   top: 280rpx;
-  left: 620rpx;
+  left: 625rpx;
 }
 
 #show-password {
   position: fixed;
   height: 100rpx;
-  width: 100rpx;
+  width: 85rpx;
   top: 250rpx;
-  left: 590rpx;
+  left: 600rpx;
 }

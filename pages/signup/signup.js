@@ -74,7 +74,8 @@ Page({
         url: '../index/index',
       });
     } catch (e) {
-      utils.showToast(e);
+      console.log(e);
+      utils.showToast('网络请求失败');
     }
   },
 
