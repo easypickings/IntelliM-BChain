@@ -61,21 +61,19 @@
 #username {
   position: fixed;
   height: 100rpx;
-  width: 600rpx;
+  width: 580rpx;
   top: 100rpx;
   left: 65rpx;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }
 
 #username-wrapper {
   position: fixed;
   height: 100rpx;
-  width: 600rpx;
+  width: 620rpx;
   top: 100rpx;
   left: 65rpx;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
   border: 1rpx solid #e0e0e0;
   border-radius: 10rpx;
   box-shadow: 0 0 5rpx #e0e0e0;
@@ -84,21 +82,19 @@
 #password {
   position: fixed;
   height: 100rpx;
-  width: 515rpx;
+  width: 495rpx;
   top: 225rpx;
   left: 65rpx;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }
 
 #password-wrapper {
   position: fixed;
   height: 100rpx;
-  width: 600rpx;
+  width: 620rpx;
   top: 225rpx;
   left: 65rpx;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
   border: 1rpx solid #e0e0e0;
   border-radius: 10rpx;
   box-shadow: 0 0 5rpx #e0e0e0;

@@ -47,8 +47,12 @@ Page({
         url: '../index/index',
       });
     } catch (e) {
-      console.log(e);
-      utils.showToast('网络请求失败');
+      if (typeof (e) == 'string')
+        utils.showToast(e);
+      else {
+        console.log(e);
+        utils.showToast('网络请求失败');
+      }
     }
   },
 
@@ -90,8 +94,12 @@ Page({
         }
       }
     } catch (e) {
-      console.log(e);
-      utils.showToast('网络请求失败');
+      if (typeof (e) == 'string')
+        utils.showToast(e);
+      else {
+        console.log(e);
+        utils.showToast('网络请求失败');
+      }
     }
   },
 
