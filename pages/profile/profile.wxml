@@ -43,9 +43,9 @@
 <view class="weui-cells">
   <navigator url="./children/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
     <view class="weui-cell__hd">
-      <image src="../../assets/t1/tuoyuankaobei.png" class="icon"></image>
+      <image src="../../assets/setting.png" class="icon"></image>
     </view>
-    <view class="weui-cell__bd">关于</view>
+    <view class="weui-cell__bd">设置</view>
     <view class="weui-cell__ft weui-cell__ft_in-access"></view>
   </navigator>
 </view>
