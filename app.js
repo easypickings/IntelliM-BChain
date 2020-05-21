@@ -12,4 +12,11 @@ App({
   },
 
   onLaunch: async function () {},
+
+  clearGlobalData: async function () {
+    this.globalData.url = null;
+    this.globalData.userInfo = null;
+    this.globalData.token = null;
+    this.globalData.records = null;
+  },
 })

@@ -1,60 +1,56 @@
+<view class="weui-cells">
+	<navigator url="./children/personal-information" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+		<view class="weui-cell__hd">
+			<view class="user-info__avatar">
+				<open-data type="userAvatarUrl"></open-data>
+			</view>
+		</view>
+		<view class="weui-cell__bd">
+			<view class="user-info__name">
+				<open-data type="userNickName"></open-data>
+			</view>
+			<view class="font-gray-28">查看 / 修改个人信息</view>
+		</view>
+		<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+	</navigator>
+</view>
 
 <view class="weui-cells">
-  <navigator url="./children/personal-information" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__hd">
-      <view class="user-info__avatar">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-    </view>
-    <view class="weui-cell__bd">
-      <view class="user-info__name">
-        <open-data type="userNickName"></open-data>
-      </view>
-      <view class="font-gray-28">查看 / 修改个人信息</view>
-    </view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+	<navigator url="./children/qrcode" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+		<image src="/assets/t1/zhankai.png" class="icon"></image>
+		<view class="weui-cell__bd">出示病历</view>
+		<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+	</navigator>
 </view>
+
 <view class="weui-cells">
-  <navigator url="./children/qrcode" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__hd">
-       <image src="/assets/t1/zhankai.png" class="icon"></image>
-    </view>
-    <view class="weui-cell__bd">出示病历</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+	<navigator url="./children/order-ongoing" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+		<image src="/assets/t1/xingzhuang.png" class="icon"></image>
+		<view class="weui-cell__bd">主要病史</view>
+		<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+	</navigator>
+
+	<navigator url="./children/order-history" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+		<image src="/assets/t1/xinxi.png" class="icon"></image>
+		<view class="weui-cell__bd">过敏信息</view>
+		<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+	</navigator>
 </view>
+
 <view class="weui-cells">
-  <navigator url="./children/order-ongoing" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__hd">
-      <image src="/assets/t1/xingzhuang.png" class="icon"></image>
-    </view>
-    <view class="weui-cell__bd">主要病史</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
-  <navigator url="./children/order-history" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__hd">
-      <image src="/assets/t1/xinxi.png" class="icon"></image>
-    </view>
-    <view class="weui-cell__bd">过敏信息</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+	<navigator url="./children/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+		<image src="../../assets/t1/tuoyuankaobei.png" class="icon"></image>
+		<view class="weui-cell__bd">关于</view>
+		<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+	</navigator>
 </view>
+
 <view class="weui-cells">
-  <navigator url="./children/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__hd">
-      <image src="../../assets/t1/tuoyuankaobei.png" class="icon"></image>
-    </view>
-    <view class="weui-cell__bd">关于</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+	<view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="triggerLogout">
+		<image src="../../assets/t1/xingzhuang_1.png" class="icon"></image>
+		<view class="weui-cell__bd">退出登录</view>
+		<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+	</view>
 </view>
-<view class="weui-cells">
-  <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__hd">
-      <image src="../../assets/t1/xingzhuang_1.png" class="icon"></image>
-    </view>
-    <view class="weui-cell__bd" bindtap="onLogout">退出登录</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </view>
-</view>
+
+<mp-actionSheet bindactiontap="logout" show="{{showLogout}}" actions="{{action}}"></mp-actionSheet>

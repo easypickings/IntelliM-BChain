@@ -13,7 +13,6 @@
   height: 50rpx;
   top: 700rpx;
   left: 200rpx;
-  /* border: 1rpx solid #e0e0e0; */
 }
 
 #wx-login:before,

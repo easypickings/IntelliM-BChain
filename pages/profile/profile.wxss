@@ -1,4 +1,3 @@
-
 page {
   padding-bottom: 20px;
   background-color: #F0EFF5;
@@ -13,6 +12,7 @@ page {
 collapse .ui-card {
   padding: 15px;
 }
+
 collapse .ui-card:before {
   display: none;
 }
@@ -20,12 +20,12 @@ collapse .ui-card:before {
 .icon {
   margin-right: 5px;
   vertical-align: middle;
-  width:20px; 
+  width: 20px;
   height: 20px;
 }
 
 .user-info__avatar {
-  width: 64px; 
+  width: 64px;
   height: 64px;
   margin-right: 15px;
   vertical-align: middle;
@@ -99,5 +99,3 @@ collapse .ui-card:before {
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
 }
-
-
