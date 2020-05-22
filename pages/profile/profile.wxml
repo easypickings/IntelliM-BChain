@@ -1,5 +1,5 @@
 <view class="weui-cells">
-	<navigator url="./children/personal-information" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+	<navigator url="./children/person" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
 		<view class="weui-cell__hd">
 			<view class="user-info__avatar">
 				<open-data type="userAvatarUrl"></open-data>

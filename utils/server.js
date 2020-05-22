@@ -73,6 +73,70 @@ module.exports = {
     }
   },
 
+/*
+从服务器获取个人信息
+*/
+getBaseInfo: async function (token) {
+  console.log('[Server] begin to download baseInfo');
+  try {
+    let res = await PR.request({
+      url: utils.getUrl('baseinfo'),
+      header: {
+        'content-type': 'application/json',
+        'token': token,
+      },
+      method: 'GET'
+    });
+    
+     console.log(res);
+    // let data = res.data;
+    // if (data.state == 'success') {
+    //   console.log("[Server] download success");
+    //   utils.dbgPrint(base.values);
+    //   return utils.readRecords(data.values);
+    // } else {
+    //   console.log(data.reason);
+    //   throw data.message;
+    // }
+  } catch (e) {
+    console.log(e);
+    throw '信息查询失败';
+  }
+},
+
+
+uploadBaseInfo: async function (token, upload_data) {
+  console.log(token);
+  console.log('[Server] begin to upload baseInfo');
+  try {
+    let res = await PR.request({
+      url: utils.getUrl('baseinfo'),
+      header: {
+        'content-type': 'application/json',
+        'token': token,
+      },
+      method: 'PUT',
+      data: upload_data,
+    })
+    let data = res.data;
+    if (data.state == 'success') {
+      console.log('[Server] record upload succeed');
+      wx.navigateBack({
+        delta: 1,
+      })
+    } else {
+      console.log(data);
+      throw data.message;
+    }
+  } catch(e) {
+    console.log(e);
+    throw '个人信息修改失败';
+  }
+},
+
+
+
+
   /**
    * 从服务器下载病历记录
    * 

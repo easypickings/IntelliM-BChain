@@ -1,5 +1,5 @@
 module.exports = {
-  debugOutput: false,
+  debugOutput: true,
   useRootToken: false,
   useTestRecord: false,
   notUploadImage: true,

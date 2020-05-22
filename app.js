@@ -9,6 +9,7 @@ App({
     userInfo: null,
     token: null,
     records: null,
+    baseInfo:null,
   },
 
   onLaunch: async function () {},
@@ -18,5 +19,6 @@ App({
     this.globalData.userInfo = null;
     this.globalData.token = null;
     this.globalData.records = null;
+    this.globalData.baseInfo = null;
   },
 })

@@ -29,7 +29,7 @@ Page({
 
   /** 下载用户病历数据 */
   getRecords: async function () {
-    var that = this;
+    let that = this;
 
     // 暂未登录，使用临时token
     if (CONFIG.useTestRecord) {

@@ -1,11 +1,14 @@
 {
   "pages": [
+    
+    "pages/profile/profile",
     "pages/login/login",
+    "pages/profile/children/person",
     "pages/signup/signup",
     "pages/index/index",
     "pages/upload/upload",
     "pages/logs/logs",
-    "pages/profile/profile"
+    "pages/profile/children/person-modify"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,13 +21,13 @@
     "selectedColor": "#222",
     "backgroundColor": "#f8f9fb",
     "borderStyle": "white",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "text": "电子病历",
         "iconPath": "assets/todos.png",
         "selectedIconPath": "assets/todos-active.png"
       },
-
       {
         "pagePath": "pages/profile/profile",
         "text": "个人中心",
