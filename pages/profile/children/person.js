@@ -9,16 +9,42 @@ Page({
    * 页面的初始数据
    */
   data: {
+    baseInfo: {
+      personalInfo:{
+          name: "",
+          sex: "",
+          bloodType: "",
+          birthDate: "",
+          contact: "",
+          emergencyContact: "",
+          avatar: "",
+      },
+    height: "",
+    weight: "",
+    chronicInfo:[],
+    allergicInfo:[],
+    notes:""
+    }
+
 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: async function () {
+    console.log("tring set baseInfo:")
+    if(app.globalData.baseInfo){
+      this.setData({baseInfo: app.globalData.baseInfo});
+    }
+    else{
+        console.log('baseInfo downLoad fail:No globalData');
+      
+    }
   },
 
+
+  /** 下载基础数据 */
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -66,5 +92,7 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+
 })

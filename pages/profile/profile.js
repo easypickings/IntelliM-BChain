@@ -16,32 +16,33 @@ Page({
   
   /**
    * 页面加载--根据token下载baseInfo
-   */
-  onLoad: async function () {
-    if (app.globalData.token) {
-      try {
-        await this.getBaseInfo();
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      console.log('profile onLoad fail:No token');
-    }
-  },
+    */
+   onLoad: async function () {
+     let that=this;
+     if (app.globalData.token) {
+       try {
+         await that.getBaseInfo();
+       } catch (e) {
+         console.log(e);
+       }
+     } else {
+       console.log('profile onLoad fail:No token');
+     }
+   },
 
-  /** 下载基础数据 */
-  getBaseInfo: async function () {
-    let that = this;
-    try {
-      let res = await server.getBaseInfo(app.globalData.token);
-      console.log(res);
-      app.globalData.baseInfo = res;
-    } catch (e) {
-      console.log(e);
-      utils.showToast('基础信息查询失败');
-    }
-    console.log(app.globalData.baseInfo);
-  },
+   /** 下载基础数据 */
+   getBaseInfo: async function () {
+     let that = this;
+     try {
+       console.log("trying download baseInfo")
+       let res = await server.getBaseInfo(app.globalData.token);
+       app.globalData.baseInfo = res;
+     } catch (e) {
+       console.log(e);
+       utils.showToast('基础信息查询失败');
+     }
+     console.log(app.globalData.baseInfo);
+   },
 
 
   triggerLogout: async function () {

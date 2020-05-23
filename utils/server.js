@@ -88,16 +88,15 @@ getBaseInfo: async function (token) {
       method: 'GET'
     });
     
-     console.log(res);
-    // let data = res.data;
-    // if (data.state == 'success') {
-    //   console.log("[Server] download success");
-    //   utils.dbgPrint(base.values);
-    //   return utils.readRecords(data.values);
-    // } else {
-    //   console.log(data.reason);
-    //   throw data.message;
-    // }
+     let data = res.data;
+     if (data.state == 'success') {
+       console.log("[Server] download success");
+       utils.dbgPrint(data.base);
+       return data.base.baseInfo;
+     } else {
+       console.log(data.reason);
+       throw data.message;
+     }
   } catch (e) {
     console.log(e);
     throw '信息查询失败';
@@ -120,10 +119,11 @@ uploadBaseInfo: async function (token, upload_data) {
     })
     let data = res.data;
     if (data.state == 'success') {
-      console.log('[Server] record upload succeed');
+      console.log('[Server] baseInfo upload succeed');
       wx.navigateBack({
         delta: 1,
       })
+      utils.showToast("上传个人信息成功");
     } else {
       console.log(data);
       throw data.message;

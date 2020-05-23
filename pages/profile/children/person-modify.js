@@ -34,12 +34,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // if(app.globalData.baseInfo.chronicInfo.length()){
-    //   this.baseInfo.chronicInfo=app.globalData.baseInfo.chronicInfo;
-    // }
-    // if(app.globalData.baseInfo.allergicInfo.length()){
-    //   this.baseInfo.allergicInfo=app.globalData.baseInfo.allergicInfo;
-    // }
+    if(app.globalData.baseInfo){
+      this.setData({baseInfo: app.globalData.baseInfo});
+    }
+    console.log(this.baseInfo);
 
   },
 
@@ -108,10 +106,10 @@ Page({
 
     try {
       await server.uploadBaseInfo(app.globalData.token, this.dataToJson());
+      
     } catch(e) {
       utils.showToast(e);
     }
-    console.log("PUT BaseInfo success");
 
   },
   
@@ -125,7 +123,7 @@ Page({
             'bloodType': this.data.baseInfo.personalInfo.bloodType,
             'birthDate': this.data.baseInfo.personalInfo.birthDate,
             'contact': this.data.baseInfo.personalInfo.contact,
-            'emergencyContact': this.data.baseInfo.personalInfo.name,
+            'emergencyContact': this.data.baseInfo.personalInfo.emergencyContact,
             'avatar': "",
         },
       'height': this.data.baseInfo.height,

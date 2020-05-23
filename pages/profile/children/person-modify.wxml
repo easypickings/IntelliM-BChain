@@ -57,7 +57,7 @@
       <view class="weui-label">联系方式</view>
     </view>
     <view class="weui-cell__bd">
-      <input placeholder="请填写联系电话" class="weui-input" bindinput="onInput" data-label="personalInfo.contact" value="{{baseInfo.personalInfo.contact}}" />
+      <input placeholder="请填写联系电话" class="weui-input" bindinput="onInput" type="number" data-label="personalInfo.contact" value="{{baseInfo.personalInfo.contact}}" />
     </view>
   </view>
 
@@ -66,7 +66,7 @@
       <view class="weui-label">紧急联系方式</view>
     </view>
     <view class="weui-cell__bd">
-      <input placeholder="请填写紧急联系电话" class="weui-input" bindinput="onInput" data-label="personalInfo.emergencyContact" value="{{baseInfo.personalInfo.emergencyContact}}" />
+      <input placeholder="请填写紧急联系电话" class="weui-input" type="number" bindinput="onInput" data-label="personalInfo.emergencyContact" value="{{baseInfo.personalInfo.emergencyContact}}" />
     </view>
   </view>
  

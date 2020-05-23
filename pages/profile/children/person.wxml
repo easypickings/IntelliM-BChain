@@ -17,12 +17,12 @@
   </view>
   <view class="weui-cell">
     <view class="weui-cell__bd">身高</view>
-    <view class="weui-cell__ft">{{baseInfo.height}}</view>
+    <view class="weui-cell__ft">{{baseInfo.height}}米</view>
   </view>
   
   <view class="weui-cell">
     <view class="weui-cell__bd">体重</view>
-    <view class="weui-cell__ft">{{baseInfo.weight}}</view>
+    <view class="weui-cell__ft">{{baseInfo.weight}}千克</view>
   </view>
   <!--
   <view wx:if="{{!userInfo.id_card_img.front && !userInfo.id_card_img.back}}" class="weui-cell">

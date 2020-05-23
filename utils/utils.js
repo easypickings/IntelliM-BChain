@@ -51,6 +51,31 @@ module.exports = {
     return res;
   },
 
+  // //BaseInfo版本的read函数
+  // readBase: function (base) {
+  //   var res = [];
+  //   for (var i = records.length - 1; i >= 0; i--) {
+  //     var rcd = records[i].record;
+  //     try {
+  //       res.push({
+  //         hospital: rcd.hospital.name,
+  //         hospital_id: rcd.hospital.id,
+  //         date: rcd.date,
+  //         doctor: rcd.doctor.name,
+  //         doctor_id: rcd.doctor.id,
+  //         situation: rcd.situation,
+  //         diagnosis: rcd.diagnosis,
+  //         prescription: rcd.prescription,
+  //         attachments: rcd.attachments,
+  //         situation_brief: rcd.situation.replace(/\n/g, ' '),
+  //       })
+  //     } catch (e) {
+  //       console.log('wrong format record.');
+  //     }
+  //   }
+  //   return res;
+  // },
+
   /** 获取测试用records */
   getTestRecord: function (num) {
     return this.readRecords([{
