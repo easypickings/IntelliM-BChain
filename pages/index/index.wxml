@@ -32,7 +32,6 @@
 										</view>
 										<view>
 											<text class="brief">{{ item.date }}</text>
-											<text class="brief">{{ item.doctor + " 医生" }}</text>
 										</view>
 										<view class="detail">
 											<text>{{ item.situation_brief }}</text>
