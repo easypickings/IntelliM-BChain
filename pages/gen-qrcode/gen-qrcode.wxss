@@ -1,0 +1,63 @@
+/* pages/gen-qrcode/gen-qrcode.wxss */
+
+page {
+  background-color: var(--theme-color);
+  --radius: 15rpx;
+}
+
+.container {
+  border: none;
+  padding: 60rpx;
+}
+
+.qrcode-card {
+  display: relative;
+  background-color: white;
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.title-text {
+  background-color: whitesmoke;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  box-sizing: border-box;
+  color: var(--theme-color);
+  font-size: large;
+  padding: 25rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.qrcode-area {
+  position: relative;
+  text-align: center;
+}
+
+.qrcode-img {
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  margin-top: 75rpx;
+  margin-bottom: 75rpx;
+}
+
+.loading {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+}
+
+.msg-text {
+  box-sizing: border-box;
+  color: gray;
+  font-size: medium;
+  margin: 0;
+  padding: 20rpx;
+  text-align: center;
+  width: 100%;
+}

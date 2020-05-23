@@ -1,0 +1,17 @@
+<!--pages/gen-qrcode/gen-qrcode.wxml-->
+
+<view class="container">
+  <view hidden="{{ hideCard }}" class="qrcode-card">
+    <view class="title-text">
+      <text>病历分享码</text>
+    </view>
+    <view class="qrcode-area">
+      <canvas canvas-id="qrcode-canvas" class="qrcode-img"></canvas>
+      <mp-loading wx:if="{{ isLoading }}" type="circle" class="loading"></mp-loading>
+      <text wx:if="{{ errorOccurred }}" class="loading">{{ errorMessage }}</text>
+    </view>
+    <view class="msg-text">
+      <text class="msg-text">分享码有效期为6小时</text>
+    </view>
+  </view>
+</view>

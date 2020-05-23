@@ -1,0 +1,105 @@
+/* pages/qrcode/qrcode.wxss */
+
+.root-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.padding-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 10px;
+}
+
+.header-container {
+  height: 20%;
+  width: 100%;
+  background-color: white;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.header-title {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  border-style: solid;
+  border-color: #37A849;
+  border-width: 1rpx;
+  box-shadow: 0 0 5rpx #37A849;
+  font-size: small;
+}
+
+.selection-container {
+  height: 80%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.selection-area {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.error-message {
+  text-align: center;
+  color: #e0e0e0;
+}
+
+/* From index.wxss */
+
+.records {
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+.records .item {
+  align-items: center;
+  padding: 25rpx;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+
+.records .item:last-child {
+  border-bottom: 0;
+}
+
+.records .item .hospital {
+  width: 100%;
+  font-size: 45rpx;
+  color: #444;
+}
+
+.records .item .brief {
+  padding-right: 40rpx;
+  font-size: 30rpx;
+  color: #666;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.records .item .detail {
+  width: 100%;
+  font-size: 30rpx;
+  color: #666;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

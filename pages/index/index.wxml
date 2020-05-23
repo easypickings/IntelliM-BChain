@@ -53,7 +53,7 @@
 
 		<block wx:if="{{ selectMode }}">
 			<view class="bottom-container">
-				<view class="bottom-item">
+				<view class="bottom-item" bindtap="tapShare">
 					<image src="../../assets/share.png" class="bottom-icon" />
 					<text class="bottom-label">分享</text>
 				</view>

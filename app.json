@@ -1,14 +1,19 @@
 {
   "pages": [
-    
     "pages/login/login",
     "pages/profile/profile",
     "pages/profile/children/person",
+    "pages/profile/children/person-modify",
     "pages/signup/signup",
     "pages/index/index",
     "pages/upload/upload",
     "pages/logs/logs",
-    "pages/profile/children/person-modify"
+    "pages/debug/debug",
+    "pages/qrcode/qrcode",
+    "pages/gen-qrcode/gen-qrcode",
+    "pages/view-shared/view-shared",
+    "pages/picture-record/picture-record",
+    "pages/camera/camera"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -33,6 +38,10 @@
         "text": "个人中心",
         "iconPath": "assets/profile.png",
         "selectedIconPath": "assets/profile-active.png"
+      },
+      {
+        "pagePath": "pages/debug/debug",
+        "text": "调试"
       }
     ]
   },

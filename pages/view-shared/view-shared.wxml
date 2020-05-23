@@ -1,0 +1,20 @@
+<!--pages/view-shared/view-shared.wxml-->
+<view class="container">
+  <block wx:if="{{ records.length }}">
+    <view class="records">
+      <!-- List items should get the class `completed` when marked as completed -->
+      <view class="item" wx:for="{{ records }}" wx:key="index" bindtap="tapItem" data-index="{{ index }}">
+        <view class="hospital">
+          <text>{{ item.hospital }}</text>
+        </view>
+        <view>
+          <text class="brief">{{ item.date }}</text>
+          <text class="brief">{{ item.doctor }}</text>
+        </view>
+        <view class="detail">
+          <text>{{ item.situation_brief }}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

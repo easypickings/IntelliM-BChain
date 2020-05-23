@@ -70,7 +70,7 @@ Page({
     that.getRecords();
   },
 
-  /** 点击某条记录：跳转 */
+  /** 点击某条记录：正常-跳转；选择模式-选择 */
   tapItem: async function (e) {
     if (this.data.selectMode) {
       let index = e.currentTarget.dataset.index;
@@ -142,16 +142,15 @@ Page({
     });
   },
 
-  /** 修改选择 */
-  onSelectionChanged: function (e) {
-    let records = this.data.records;
-    for (let i = 0; i < records.length; i++) {
-      if (e.detail.value.indexOf(records[i].value) >= 0) records[i].checked = true;
-      else records[i].checked = false;
+  /** 分享按钮 */
+  tapShare: function(e) {
+    let selectedRecords = [];
+    for (let item of this.data.records) {
+      if (item.checked) selectedRecords.push(item.id);
     }
-    this.setData({
-      records: records,
-    });
-  },
+    console.log(selectedRecords);
+    app.globalData.selectedRecords = selectedRecords;
+    console.log(app.globalData.selectedRecords);
+  }
 
 })

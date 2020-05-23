@@ -268,5 +268,41 @@ uploadBaseInfo: async function (token, upload_data) {
       }
     }
     return tempFilePaths;
-  }
+  },
+
+  /**
+   * 从服务器获取分享码
+   * 
+   * @param {*} token 通过login，服务器返回的token
+   * @returns 二维码包含的文字信息
+   */
+  getSharingCode: async function (token, records) {
+    console.log('[sharing] start to acquire sharing code');
+    try {
+      let res = await PR.request({
+        url: utils.getUrl('share'),
+        method: 'POST',
+        data: JSON.stringify(records),
+        header: {
+          "content-type": "application/json",
+          "token": token,
+        },
+      });
+      let data = res.data;
+      if (data.state == 'success') {
+        console.log('[sharing] success')
+        return data.token;
+      } else {
+        throw `statusCode = ${res.statusCode}`;
+      }
+    } catch (e) {
+      console.error('[sharing] request failed');
+      if (typeof(e) == 'string') {
+        throw e;
+      }
+      else {
+        throw 'HTTP request failed.';
+      }
+    }
+  },
 }
