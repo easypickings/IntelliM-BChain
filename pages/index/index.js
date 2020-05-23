@@ -72,15 +72,25 @@ Page({
 
   /** 点击某条记录：跳转 */
   tapItem: async function (e) {
-    let index = e.currentTarget.dataset.index;
-    let rcd = app.globalData.records[index];
-    wx.navigateTo({
-      url: '../logs/logs?record=' + JSON.stringify(rcd),
-    })
+    if (this.data.selectMode) {
+      let index = e.currentTarget.dataset.index;
+      let records = this.data.records;
+      records[index].checked = !records[index].checked;
+      this.setData({
+        records: records,
+      });
+    } else {
+      let index = e.currentTarget.dataset.index;
+      let rcd = app.globalData.records[index];
+      wx.navigateTo({
+        url: '../logs/logs?record=' + JSON.stringify(rcd),
+      })
+    }
   },
 
   /** 长按某一记录：多选 */
   longPressItem: async function (e) {
+    if (this.data.selectMode) return;
     let records = this.data.records;
     let index = e.currentTarget.dataset.index;
     records[index].checked = !records[index].checked;
@@ -127,16 +137,6 @@ Page({
       if (item.checked) item.checked = false;
       else item.checked = true;
     }
-    this.setData({
-      records: records,
-    });
-  },
-
-  /** 选择模式下点击记录：修改选中状态 */
-  tapSelect: function (e) {
-    let index = e.currentTarget.dataset.index;
-    let records = this.data.records;
-    records[index].checked = !records[index].checked;
     this.setData({
       records: records,
     });

@@ -4,24 +4,28 @@
 	</view>
 </block>
 <block wx:else>
-	<block wx:if="{{ selectMode }}">
-		<view class="root-container padding-container">
+	<view class="root-container padding-container">
+		<block wx:if="{{ selectMode }}">
 			<view class="header-container flex-container">
 				<text class="left-button" bindtap="tapCancelSelect">取消选择</text>
 				<text class="right-button" bindtap="tapSelectAll">全选</text>
 				<text class="right-button" bindtap="tapInverse">反选</text>
 			</view>
+		</block>
 
-			<view class="selection-container">
-				<scroll-view scroll-y class="selection-area">
+		<view class="selection-container">
+			<scroll-view scroll-y class="selection-area">
+				<block wx:if="{{ records.length }}">
 					<view class="records">
 						<checkbox-group>
-							<!-- List items should get the class `completed` when marked as completed -->
-							<view class="item" wx:for="{{ records }}" wx:key="index" data-index="{{ index }}" bindtap="tapSelect">
+							<view class="item" wx:for="{{ records }}" wx:key="index" data-index="{{ index }}" bindtap="tapItem" bindlongpress="longPressItem">
 								<view class="checkbox-container">
-									<view class="check-button">
-										<checkbox value="{{item.value}}" checked="{{item.checked}}"></checkbox>
-									</view>
+									<block wx:if="{{ selectMode }}">
+										<view class="check-button">
+											<checkbox value="{{item.value}}" checked="{{item.checked}}"></checkbox>
+										</view>
+									</block>
+
 									<view>
 										<view class="hospital">
 											<text>{{ item.hospital }}</text>
@@ -38,9 +42,17 @@
 							</view>
 						</checkbox-group>
 					</view>
-				</scroll-view>
-			</view>
+				</block>
+				<block wx:else>
+					<view class="empty">
+						<text class="title">当前暂无病历记录</text>
+						<text class="content">点击添加按钮上传</text>
+					</view>
+				</block>
+			</scroll-view>
+		</view>
 
+		<block wx:if="{{ selectMode }}">
 			<view class="bottom-container">
 				<view class="bottom-item">
 					<image src="../../assets/share.png" class="bottom-icon" />
@@ -55,44 +67,10 @@
 					<text class="bottom-label-red">删除</text>
 				</view>
 			</view>
-		</view>
-
-	</block>
-	<block wx:else>
-
-		<view class="page page__bd">
-			<mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
-		</view>
-
-		<view class="container">
-			<block wx:if="{{ records.length }}">
-				<view class="records">
-					<!-- List items should get the class `completed` when marked as completed -->
-					<view class="item" wx:for="{{ records }}" wx:key="index" bindtap="tapItem" bindlongpress="longPressItem" data-index="{{ index }}">
-						<view class="hospital">
-							<text>{{ item.hospital }}</text>
-						</view>
-						<view>
-							<text class="brief">{{ item.date }}</text>
-							<text class="brief">{{ item.doctor }}</text>
-						</view>
-						<view class="detail">
-							<text>{{ item.situation_brief }}</text>
-						</view>
-					</view>
-				</view>
-			</block>
-			<block wx:else>
-				<view class="empty">
-					<text class="title">当前暂无病历记录</text>
-					<text class="content">点击添加按钮上传</text>
-				</view>
-			</block>
-
+		</block>
+		<block wx:else>
 			<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
 			<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
-		</view>
-
-	</block>
-
+		</block>
+	</view>
 </block>
