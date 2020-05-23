@@ -9,6 +9,7 @@ App({
     userInfo: null,
     token: null,
     records: null,
+    selectedRecords: [],
   },
 
   onLaunch: async function () {},

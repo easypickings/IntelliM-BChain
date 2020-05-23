@@ -21,7 +21,7 @@ Page({
   onLoad: async function (options) {
     try {
       console.log("await");
-      records = await global.getRecords();
+      records = utils.getTestRecord();
       console.log("await");
       for (let i = 0; i < records.length; i++) {
         records[i].id = i.toString();

@@ -7,7 +7,11 @@
     "pages/logs/logs",
     "pages/profile/profile",
     "pages/debug/debug",
-    "pages/qrcode/qrcode"
+    "pages/qrcode/qrcode",
+    "pages/gen-qrcode/gen-qrcode",
+    "pages/view-shared/view-shared",
+    "pages/picture-record/picture-record",
+    "pages/camera/camera"
   ],
   "window": {
     "backgroundTextStyle": "light",
