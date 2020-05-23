@@ -5,13 +5,13 @@ var app = getApp();
 
 Page({
   data: {
-    hospital: "",
-    doctor: "",
-    date: "",
-    situation: "",
-    diagnosis: "",
-    prescription: "",
-    remark: "",
+    hospital: '',
+    doctor: '',
+    date: '',
+    situation: '',
+    diagnosis: '',
+    prescription: '',
+    note: '',
     files: [],
     tempFilePaths: [],
     urls: [],
@@ -90,16 +90,6 @@ Page({
     var that = this;
     console.log(this.data.tempFilePaths);
 
-    // 检查病历完整性
-    if (!this.data.hospital || !this.data.hospital.trim() ||
-      !this.data.doctor || !this.data.doctor.trim() ||
-      !this.data.situation || !this.data.situation.trim() ||
-      !this.data.diagnosis || !this.data.diagnosis.trim() ||
-      !this.data.prescription || !this.data.prescription.trim()) {
-      utils.userShowInfo('病历信息不完整。');
-      return;
-    }
-
     try {
       var urls = await server.uploadFiles(app.globalData.token, this.data.tempFilePaths);
       console.log('upload succeed');
@@ -116,31 +106,11 @@ Page({
     }
 
     // 上传病历信息
-    console.log("try to upload form");
-
     try {
-      var res = await PR.request({
-        url: utils.getUrl('upload'),
-        header: {
-          "content-type": "application/json",
-          "token": "root", // app.globalData.token,
-        },
-        method: "POST",
-        data: this.dataToJson(),
-      })
-      var data = res.data;
-      if (data.state == 'success') {
-        wx.navigateBack({
-          delta: 1 //小程序关闭当前页面返回上一页面
-        })
-      } else {
-        console.log(data);
-        utils.userShowInfo(data.message);
-      }
-    } catch (e) {
-      console.error(e);
-      utils.userShowInfo('网络请求失败');
-    };
+      await server.uploadRecord(app.globalData.token, this.dataToJson());
+    } catch(e) {
+      utils.showToast(e);
+    }
   },
 
   /* =============== Bindings =============== */
@@ -181,31 +151,32 @@ Page({
     });
   },
 
-  bindRemarkChange: function (e) {
+  bindNoteChange: function (e) {
     this.setData({
-      remark: e.detail.value
+      note: e.detail.value
     });
   },
 
   /** 获得上传所需字符串，标准符合api.md */
   dataToJson: function () {
     return JSON.stringify({
-      "record": {
-        "hospital": {
-          "name": this.data.hospital,
-          "id": "",
+      'record': {
+        'hospital': {
+          'name': this.data.hospital,
+          'id': '',
         },
-        "date": this.data.date,
-        "doctor": {
-          "name": this.data.doctor,
-          "id": "",
+        'date': this.data.date,
+        'doctor': {
+          'name': this.data.doctor,
+          'id': '',
         },
-        "situation": this.data.situation,
-        "diagnosis": this.data.diagnosis,
-        "prescription": this.data.prescription,
-        "attachments": this.data.urls,
+        'situation': this.data.situation,
+        'diagnosis': this.data.diagnosis,
+        'prescription': this.data.prescription,
+        'attachments': this.data.urls,
       },
-      "signature": "",
+      'signature': '',
+      'note': this.data.note,
     })
   },
 

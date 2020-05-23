@@ -1,0 +1,16 @@
+<view class="container">
+	<view id="username-wrapper">
+		<input class="weui-input" id="username" maxlength="20" bindfocus="bindUsernameFocus" bindinput="bindUsernameChange" value="{{username}}" placeholder="用户名" focus />
+		<view id="username-warn" hidden="{{usernameWarnHidden}}">用户名为不少于3位的字母、数字或汉字的组合</view>
+	</view>
+	<view id="password-wrapper">
+		<input class="weui-input" id="password" maxlength="20" password="{{isPassword}}" bindfocus="bindPasswordFocus" bindinput="bindPasswordChange" value="{{password}}" placeholder="密码">
+		<view id="password-warn" hidden="{{passwordWarnHidden}}">密码为8-16位且必须包含字母、数字和特殊符号</view>
+		<!-- <button class="btn" plain="true" id="show-password" bindtap="showPassword"> -->
+		<cover-image id="password-image" src="../../assets/show-password.png" bindtap="showPassword" />
+		<cover-image id="password-image" hidden="{{isPassword}}" src="../../assets/hide-password.png" bindtap="showPassword" />
+		<!-- </button> -->
+		</input>
+	</view>
+	<button class="weui-btn" id="signup" type="primary" bindtap="signup">注册</button>
+</view>

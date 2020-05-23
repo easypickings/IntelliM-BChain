@@ -59,8 +59,8 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
-                    <input class="weui-input" bindinput="bindRemarkChange" placeholder="请输入文本" maxlength="100" />
-                    <view class="weui-textarea-counter">{{ remark.length }}/100</view>
+                    <input class="weui-input" bindinput="bindNoteChange" placeholder="请输入文本" maxlength="100" />
+                    <view class="weui-textarea-counter">{{ note.length }}/100</view>
                 </view>
             </view>
         </view>

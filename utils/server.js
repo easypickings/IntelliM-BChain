@@ -1,46 +1,75 @@
-var utils = require("./utils");
-var CONFIG = require("./config");
-var PR = require("./promisify");
+var utils = require('./utils');
+var CONFIG = require('./config');
+var PR = require('./promisify');
 
 module.exports = {
 
   /**
    * 登录后端服务器，获取本次对话的token
    * 
-   * @param {*} code 用户码，微信登陆时获取
+   * @param {*} username 用户名
+   * @param {*} password 密码
+   * @param {*} usercode 微信登录时获取code
    * @returns 返回值为token
    */
-  login: async function (code) {
-    if (CONFIG.useRootToken)
-      return "root";
-
-    console.log('try to login.')
+  login: async function (username, password, usercode) {
+    // if (CONFIG.useRootToken)
+    //   return 'root';
+    console.log('-------- login --------')
     try {
-      var res = await PR.request({
+      let res = await PR.request({
         url: utils.getUrl('login'),
         header: {
-          "content-type": "application/json"
+          'content-type': 'application/json'
         },
         method: 'POST',
         data: JSON.stringify({
-          "username": "",
-          "password": "",
-          "usercode": code,
+          'username': username,
+          'password': password,
+          'usercode': usercode,
         })
       });
       console.log(res);
 
-      var data = res.data;
-      if (data.state == 'success') {
-        console.log(data.token)
+      let data = res.data;
+      console.log(data);
+      if (data.state == 'success')
         return data.token;
-      } else {
-        console.log(data.reason);
+      else
         throw data.message;
-      }
     } catch (e) {
-      console.log(e)
-      throw "login failed";
+      throw e;
+    }
+  },
+
+  /**
+   * 注册账号，返回token
+   * @param {*} username 用户名
+   * @param {*} password 密码
+   */
+  signup: async function (username, password) {
+    try {
+      let res = await PR.request({
+        url: utils.getUrl('users'),
+        header: {
+          'content-type': 'application/json'
+        },
+        method: 'POST',
+        data: JSON.stringify({
+          'username': username,
+          'password': password,
+        })
+      });
+      console.log(res);
+
+      let data = res.data;
+      console.log(data);
+      if (data.state == 'success')
+        return data.token;
+      else
+        throw data.message;
+    } catch (e) {
+      throw e;
     }
   },
 
@@ -56,18 +85,19 @@ module.exports = {
       return utils.getTestRecord();
     }
 
-    console.log('begin to download record');
+    console.log('[Server] begin to download record');
     try {
-      var res = await PR.request({
-        url: utils.getUrl('download'),
+      let res = await PR.request({
+        url: utils.getUrl('records'),
         header: {
-          "content-type": "application/x-www-form-urlencoded",
-          "token": token,
+          'content-type': 'application/json',
+          'token': token,
         },
-        method: 'POST'
+        method: 'GET'
       });
-      var data = res.data;
+      let data = res.data;
       if (data.state == 'success') {
+        console.log("[Server] download success");
         utils.dbgPrint(data.values);
         return utils.readRecords(data.values);
       } else {
@@ -80,6 +110,35 @@ module.exports = {
     }
   },
 
+  uploadRecord: async function (token, upload_data) {
+    console.log(token);
+    console.log('[Server] begin to upload record');
+    try {
+      let res = await PR.request({
+        url: utils.getUrl('records'),
+        header: {
+          'content-type': 'application/json',
+          'token': token,
+        },
+        method: 'POST',
+        data: upload_data,
+      })
+      let data = res.data;
+      if (data.state == 'success') {
+        console.log('[Server] record upload succeed');
+        wx.navigateBack({
+          delta: 1,
+        })
+      } else {
+        console.log(data);
+        throw data.message;
+      }
+    } catch(e) {
+      console.log(e);
+      throw '病历上传失败';
+    }
+  },
+
   /**
    * 上传附件到服务器
    * 
@@ -88,7 +147,7 @@ module.exports = {
    * @returns 服务器路径
    */
   uploadFiles: async function (token, tempFilePaths) {
-    var urls = [];    // 服务器返回结果
+    var urls = []; // 服务器返回结果
     for (var i = 0; i < tempFilePaths.length; i++) {
       var path = tempFilePaths[i]; // 临时路径
       var name = path.slice(path.lastIndexOf('/') + 1); // 临时路径中文件名作为文件名
@@ -100,13 +159,13 @@ module.exports = {
           filePath: path,
           name: 'file',
           header: {
-            "content-type": "multipart/form-data",
-            "token": token,
+            'content-type': 'multipart/form-data',
+            'token': token,
           },
         });
         var data = JSON.parse(res.data);
-        if (data.state == "success") {
-          var realpath = data.path;  // 服务器返回路径
+        if (data.state == 'success') {
+          var realpath = data.path; // 服务器返回路径
           urls = urls.concat(realpath);
           console.log(urls);
           continue;
@@ -114,39 +173,39 @@ module.exports = {
           console.log(res);
           throw data.message;
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
-        throw "网络连接错误";
+        throw '网络连接错误';
       }
     }
     console.log(urls);
     return urls;
   },
-  
-  downloadFiles: async function(token, names) {
+
+  downloadFiles: async function (token, names) {
     var tempFilePaths = [];
     for (var i = 0; i < names.length; i++) {
       var name = names[i];
       try {
         var res = await PR.downloadFile({
-          url: utils.getUrl(name),  // name is like 'attachments/xxx.jpg'
+          url: utils.getUrl(name), // name is like 'attachments/xxx.jpg'
           header: {
-            "token": token,
-          },          
+            'token': token,
+          },
         });
         if (res.statusCode == 200) {
           tempFilePaths = tempFilePaths.concat(res.tempFilePath);
           continue;
         } else if (res.statusCode == 401) {
           console.error(res);
-          throw "认证信息错误";
+          throw '认证信息错误';
         } else if (res.statusCode == 404) {
           console.error(res);
-          throw "附件不存在或损坏";
+          throw '附件不存在或损坏';
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
-        throw "附件下载错误";
+        throw '附件下载错误';
       }
     }
     return tempFilePaths;

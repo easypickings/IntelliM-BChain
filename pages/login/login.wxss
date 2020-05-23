@@ -1,0 +1,130 @@
+/* pages/login/login.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+#wx-login {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350rpx;
+  height: 50rpx;
+  top: 700rpx;
+  left: 200rpx;
+}
+
+#wx-login:before,
+#wx-login:after {
+  content: "";
+  position: fixed;
+  display: block;
+  top: 725rpx;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-top: 2rpx solid;
+  width: 125rpx;
+}
+
+#wx-login:before {
+  margin-left: -235rpx;
+}
+
+#wx-login:after {
+  margin-left: 235rpx;
+}
+
+#account-login {
+  position: fixed;
+  width: 620rpx;
+  top: 350rpx;
+  left: 65rpx;
+}
+
+#signup {
+  position: fixed;
+  top: 500rpx;
+  left: 250rpx;
+  color: cornflowerblue;
+  text-decoration: underline;
+}
+
+#no-account {
+  position: fixed;
+  top: 500rpx;
+  left: 75rpx;
+}
+
+#username {
+  position: fixed;
+  height: 100rpx;
+  width: 580rpx;
+  top: 100rpx;
+  left: 65rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+#username-wrapper {
+  position: fixed;
+  height: 100rpx;
+  width: 620rpx;
+  top: 100rpx;
+  left: 65rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+#password {
+  position: fixed;
+  height: 100rpx;
+  width: 495rpx;
+  top: 225rpx;
+  left: 65rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+#password-wrapper {
+  position: fixed;
+  height: 100rpx;
+  width: 620rpx;
+  top: 225rpx;
+  left: 65rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+#wechat {
+  position: fixed;
+  height: 100rpx;
+  width: 100rpx;
+  top: 800rpx;
+  left: 325rpx;
+}
+
+.btn[plain] {
+  border: none;
+  border-color: transparent;
+}
+
+#password-image {
+  position: fixed;
+  height: 40rpx;
+  width: 40rpx;
+  top: 225rpx;
+  left: 595rpx;
+  padding: 30rpx 25rpx;
+}
+
+#show-password {
+  position: fixed;
+  height: 100rpx;
+  width: 85rpx;
+  top: 225rpx;
+  left: 600rpx;
+}
