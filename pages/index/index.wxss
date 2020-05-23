@@ -42,7 +42,7 @@ page {
 
 .records .item .hospital {
   width: 100%;
-  font-size: 45rpx;
+  font-size: 40rpx;
   color: #444;
 }
 
@@ -55,7 +55,7 @@ page {
   text-overflow: ellipsis;
 }
 
-.records .item .detail {
+.detail {
   width: 100%;
   font-size: 30rpx;
   color: #666;
@@ -89,4 +89,95 @@ page {
 .empty .content {
   color: #666;
   text-align: center;
+}
+
+/* from qrcode */
+
+.root-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.padding-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 10px;
+}
+
+.header-container {
+  height: 20vh;
+  width: 100%;
+  background-color: white;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.header-title {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-container .left-button {
+  flex-grow: 7;
+  flex-basis: auto;
+  text-align: left;
+  color: #37A849;
+  font-size: large;
+}
+
+.flex-container .right-button {
+  flex-grow: 1;
+  flex-basis: auto;
+  text-align: right;
+  color: #37A849;
+  font-size: large;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox-container .check-button {
+  left: 50rpx;
+  margin-right: 20rpx;
+}
+
+.button {
+  border-style: solid;
+  border-color: #37A849;
+  border-width: 1rpx;
+  box-shadow: 0 0 5rpx #37A849;
+  font-size: small;
+}
+
+.selection-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.selection-area {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.error-message {
+  text-align: center;
+  color: #e0e0e0;
 }

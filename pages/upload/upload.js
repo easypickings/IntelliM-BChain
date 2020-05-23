@@ -5,6 +5,7 @@ var app = getApp();
 
 Page({
   data: {
+    todayDate: '',    // 默认日期、可选日期最大值
     hospital: '',
     doctor: '',
     date: '',
@@ -35,7 +36,8 @@ Page({
     var dateText = [year, month, day].map(utils.formatNumber).join('-');
 
     this.setData({
-      date: dateText
+      todayDate: dateText,
+      date: dateText,
     });
   },
 

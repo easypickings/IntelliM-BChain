@@ -22,7 +22,7 @@
 			<view class="weui-cell weui-cell_input">
 				<view class="weui-cell__hd weui-label">日期</view>
 				<view class="weui-cell__bd">
-					<picker mode="date" start="1970-01-01" end="{{ date }}" bindchange="bindDateChange">
+					<picker mode="date" start="1970-01-01" end="{{ todayDate }}" bindchange="bindDateChange">
 						<view class="weui-input"> {{date}} </view>
 					</picker>
 				</view>
