@@ -1,3 +1,4 @@
 <!--pages/debug/debug.wxml-->
 <button bindtap='gotoQrcode'>二维码调试入口</button>
 <button bindtap='gotoGenQrcode'>生成二维码调试入口</button>
+<button bindtap='gotoScan'>扫描二维码调试入口</button>

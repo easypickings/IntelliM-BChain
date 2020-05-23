@@ -77,5 +77,11 @@ Page({
     wx.navigateTo({
       url: '../gen-qrcode/gen-qrcode',
     });
+  },
+
+  gotoScan: function(e) {
+    wx.navigateTo({
+      url: '../scan-qrcode/scan-qrcode',
+    });
   }
 })

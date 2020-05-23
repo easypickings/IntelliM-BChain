@@ -13,7 +13,8 @@
     "pages/gen-qrcode/gen-qrcode",
     "pages/view-shared/view-shared",
     "pages/picture-record/picture-record",
-    "pages/camera/camera"
+    "pages/camera/camera",
+    "pages/scan-qrcode/scan-qrcode"
   ],
   "window": {
     "backgroundTextStyle": "light",
