@@ -1,0 +1,9 @@
+<!--pages/camera/camera.wxml-->
+
+<camera device-position="back" flash="off" class="camera"></camera>
+<view class="shutter-view">
+  <button class="button-album" bindtap="onOpenAlbum">相册</button>
+  <view class="shutter-decorator"></view>
+  <button class="button-shutter" bindtap="onShutter"></button>
+</view>
+<loading hidden="{{ !isLoading }}">请稍后</loading>

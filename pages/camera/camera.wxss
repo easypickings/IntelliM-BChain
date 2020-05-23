@@ -1,0 +1,54 @@
+/* pages/camera/camera.wxss */
+
+.camera {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.shutter-view {
+  position: fixed;
+  bottom: 45rpx;
+  width: 100vw;
+  height: 150rpx;
+}
+
+.button-album {
+  position: absolute;
+  left: 40rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border-style: solid;
+  border-width: 3px;
+  border-color: white;
+  color: white;
+  font-size: medium;
+}
+
+.button-album::after {
+  border: none;
+}
+
+.button-shutter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 125rpx;
+  height: 125rpx;
+  border-radius: 50%;
+}
+
+.shutter-decorator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+}

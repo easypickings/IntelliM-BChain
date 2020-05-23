@@ -1,0 +1,30 @@
+<!--pages/picture-record/picture-record.wxml-->
+
+<view class="page">
+  <view class="page__bd">
+    <mp-cells ext-class="my-cells" title="检查类型">
+      <mp-cell link>
+        <picker bindchange="onTypeChanged" value="{{ typeIndex }}" range="{{ typeArray }}">
+          <view class="picker">
+            {{ typeArray[typeIndex] }}
+          </view>
+        </picker>
+      </mp-cell>
+    </mp-cells>
+    <mp-cells ext-class="my-cells" title="检查单照片">
+      <mp-cell>
+        <image src="{{ tempImageSrc }}" mode="aspectFit" class="image"></image>
+      </mp-cell>
+    </mp-cells>
+    <mp-cells ext-class="my-cells" title="检查日期">
+      <mp-cell link>
+        <picker mode="date" value="selectedDate" bindchange="onDateChanged">
+          <view class="picker">
+            {{ selectedDate }}
+          </view>
+        </picker>
+      </mp-cell>
+    </mp-cells>
+    <button bindtap="onUpload">上传</button>
+  </view>
+</view>
