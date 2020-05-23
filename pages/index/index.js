@@ -148,9 +148,10 @@ Page({
     for (let item of this.data.records) {
       if (item.checked) selectedRecords.push(item.id);
     }
-    console.log(selectedRecords);
     app.globalData.selectedRecords = selectedRecords;
-    console.log(app.globalData.selectedRecords);
+    wx.navigateTo({
+      url: '../gen-qrcode/gen-qrcode',
+    });
   }
 
 })
