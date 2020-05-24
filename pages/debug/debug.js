@@ -83,5 +83,17 @@ Page({
     wx.navigateTo({
       url: '../scan-qrcode/scan-qrcode',
     });
+  },
+
+  gotoUploadExamination: function(e) {
+    wx.navigateTo({
+      url: '../camera/camera',
+    });
+  },
+
+  gotoViewExamination: function(e) {
+    wx.navigateTo({
+      url: '../view-examination/view-examination?record={"type":"眼科检查","date":"2020-05-23","attachments":[]}',
+    });
   }
 })

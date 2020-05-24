@@ -1,0 +1,45 @@
+<!--pages/picture-record/picture-record.wxml-->
+
+<view class="page">
+  <view class="header-region">
+    <image src="/assets/examination-result.svg" class="title-img"></image>
+    <view class="title-area">查看检查单</view>
+  </view>
+
+  <view class="page__bd">
+    <mp-cells ext-class="my-cells" title="检查单照片">
+      <scroll-view class="image-selector" scroll-x enable-flex>
+        <view wx:for="{{ images }}" class="scroll-item">
+          <image src="{{ item }}" mode="aspectFit" class="image"></image>
+        </view>
+      </scroll-view>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="检查类型">
+      <mp-cell>
+        <picker disabled value="{{ typeIndex }}" range="{{ typeArray }}">
+          <view class="picker">
+            {{ typeArray[typeIndex] }}
+          </view>
+        </picker>
+      </mp-cell>
+    </mp-cells>
+    <mp-cells ext-class="my-cells" title="检查日期">
+      <mp-cell>
+        <picker disabled mode="date" value="selectedDate">
+          <view class="picker">
+            {{ selectedDate }}
+          </view>
+        </picker>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="备注">
+      <mp-cell>
+        <textarea disabled class="weui-text-area long-text" maxlength="500" />
+      </mp-cell>
+    </mp-cells>
+  </view>
+</view>
+
+<loading wx:if="{{ isLoading }}"></loading>

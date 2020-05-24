@@ -11,12 +11,13 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad: function (options) {
-    console.log("asdf");
+  onShow: function (options) {
+    this.setData({
+      isLoading: false
+    });
   },
 
   onShutter: function(e) {
-    console.log('onShutter');
     this.setData({
       isLoading: true
     });
@@ -24,15 +25,14 @@ Page({
     ctx.takePhoto({
       quality: 'high',
       success: (res) => {
-        console.log(res.tempImagePath);
         wx.navigateTo({
-          url: `../picture-record/picture-record?tempImageSrc=${res.tempImagePath}`
+          url: `../upload-examination/upload-examination?tempImageSrc=${res.tempImagePath}`
         });
       }
     })
   },
 
   onOpenAlbum: function(e) {
-    console.log('album');
+    console.log('[camera] on open album');
   }
 })

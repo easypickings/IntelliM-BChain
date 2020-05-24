@@ -1,0 +1,65 @@
+/* pages/picture-record/picture-record.wxss */
+
+.header-region {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 50rpx;
+  color: var(--theme-color);
+  display: flex;
+  flex-direction: row;
+}
+
+.title-img {
+  width: 28px;
+  height: 28px;
+}
+
+.title-area {
+  font-size: large;
+  font-weight: bold;
+  margin-left: 20rpx;
+}
+
+.image-selector {
+  box-sizing: border-box;
+  position: relative;
+  height: 500rpx;
+  white-space: nowrap;
+}
+
+.scroll-item {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 100%;
+  width: 350rpx;
+  border: solid transparent 30rpx;
+}
+
+.image {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button-insert {
+  display: inline-block;
+  position: absolute;
+  top: calc(250rpx - 25px);
+  width: 50px;
+  height: 50px;
+  padding-left: 20rpx;
+  padding-right: 50rpx;
+}
+
+.button-insert::after {
+  border: none;
+}
+
+.long-text {
+  height: 150rpx;
+}
+
+.more-margin-bottom {
+  margin-bottom: 75rpx;
+}

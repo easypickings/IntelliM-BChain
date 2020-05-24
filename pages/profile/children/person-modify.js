@@ -36,6 +36,7 @@ Page({
   onLoad: function (options) {
     if(app.globalData.baseInfo){
       this.setData({baseInfo: app.globalData.baseInfo});
+      console.log(app.globalData.baseInfo);
     }
     console.log(this.baseInfo);
 
@@ -94,7 +95,8 @@ Page({
     var params = {}
     let label = e.currentTarget.dataset.label
     params['baseInfo.' + label] = e.detail.value
-    this.setData(params)
+    this.setData(params);
+    console.log(params);
   },
 
   //提交baseinfo

@@ -2,3 +2,5 @@
 <button bindtap='gotoQrcode'>二维码调试入口</button>
 <button bindtap='gotoGenQrcode'>生成二维码调试入口</button>
 <button bindtap='gotoScan'>扫描二维码调试入口</button>
+<button bindtap='gotoUploadExamination'>检查单上传调试入口</button>
+<button bindtap='gotoViewExamination'>检查单查看调试入口</button>

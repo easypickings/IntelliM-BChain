@@ -1,5 +1,0 @@
-/* pages/picture-record/picture-record.wxss */
-
-.image {
-  width: 100%;
-}
