@@ -31,14 +31,12 @@
   display: inline-block;
   box-sizing: border-box;
   height: 100%;
-  width: 350rpx;
   border: solid transparent 30rpx;
 }
 
 .image {
   box-sizing: border-box;
   height: 100%;
-  width: 100%;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
 }
 
