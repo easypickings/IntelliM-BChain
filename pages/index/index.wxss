@@ -25,19 +25,7 @@ page {
 }
 
 .records {
-  border: 1rpx solid #e0e0e0;
   border-radius: 10rpx;
-  box-shadow: 0 0 5rpx #e0e0e0;
-}
-
-.records .item {
-  align-items: center;
-  padding: 25rpx;
-  border-bottom: 1rpx solid #e0e0e0;
-}
-
-.records .item:last-child {
-  border-bottom: 0;
 }
 
 .records .item .hospital {
@@ -145,12 +133,6 @@ page {
   font-size: large;
 }
 
-.checkbox-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 .checkbox-container .check-button {
   left: 50rpx;
   margin-right: 20rpx;
@@ -214,4 +196,51 @@ page {
 .error-message {
   text-align: center;
   color: #e0e0e0;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  align-self: center;
+  border-radius: 50%;
+  background-color: var(--theme-color);
+}
+
+.line {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  bottom: 0;
+  border-left: solid var(--theme-color) 1px;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  box-sizing: border-box;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow: hidden;
+}
+
+.checkbox-frame {
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
 }

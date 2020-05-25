@@ -19,6 +19,8 @@ Page({
    * 页面加载--根据token下载records
    */
   onLoad: async function () {
+    await this.getRecords();
+    return;
     if (app.globalData.token) {
       try {
         await this.getRecords();

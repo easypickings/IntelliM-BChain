@@ -20,22 +20,27 @@
 					<view class="records">
 						<checkbox-group>
 							<view class="item" wx:for="{{ records }}" wx:key="index" data-index="{{ index }}" bindtap="tapItem" bindlongpress="longPressItem">
-								<view class="checkbox-container">
-									<block wx:if="{{ selectMode }}">
-										<view class="check-button">
-											<checkbox value="{{item.value}}" checked="{{item.checked}}"></checkbox>
-										</view>
-									</block>
+								<view class="dot"></view>
+								<view class="line"></view>
 
-									<view>
-										<view class="hospital">
-											<text>{{ item.hospital }}</text>
-										</view>
+								<view class="checkbox-container">
+									<view class="checkbox-frame">
+										<block wx:if="{{ selectMode }}">
+											<view class="check-button">
+												<checkbox value="{{item.value}}" checked="{{item.checked}}"></checkbox>
+											</view>
+										</block>
+
 										<view>
-											<text class="brief">{{ item.date }}</text>
-										</view>
-										<view class="detail">
-											<text>{{ item.situation_brief }}</text>
+											<view class="hospital">
+												<text>{{ item.hospital }}</text>
+											</view>
+											<view>
+												<text class="brief">{{ item.date }}</text>
+											</view>
+											<view class="detail">
+												<text>{{ item.situation_brief }}</text>
+											</view>
 										</view>
 									</view>
 								</view>

@@ -73,5 +73,73 @@ module.exports = {
         });
       },
     });
+  },
+
+  getTestRecord: function() {
+    return [
+      {
+        "record": {
+          "hospital": {
+            "name": "北京大学医院",
+            "id": "6a1da507a6ef9b5beac83ab5c1103019e92181875a634f0ae2cf243aa6718db6"
+          },
+          "date": "2020-02-20",
+          "doctor": {
+            "name": "乌仁吉",
+            "id": "a8376d887ef47a714546d3c61f32c9ac5f5100331423f76dd62f2a9242741a3e"
+          },
+          "situation": "1. 半边身子不能动\n2.嘴唇憋的紫\n3.心突突的跳\n",
+          "diagnosis": "1. 中风偏瘫\n2. 老咳喘\n3. 心肺同时衰竭死亡\n",
+          "prescription": "1. 雄氏老方 每日3次 每次10片\n2. 丹神定喘 每日40次 每次0.3ml\n3. 蒙药心脑方 每日1次 每次1g\n",
+          "attachments": [
+            "e800a6b612e37b9c191107236e07bc2cdd7d7d21a66a8781138e409b5484d537.png"
+          ]
+        },
+        "signature": null,
+        "note": "天底下再也没有比大骟人还好的人喽。\n"
+      },
+      {
+        "record": {
+          "hospital": {
+            "name": "北京大学医院",
+            "id": "6a1da507a6ef9b5beac83ab5c1103019e92181875a634f0ae2cf243aa6718db6"
+          },
+          "date": "2020-02-20",
+          "doctor": {
+            "name": "乌仁吉",
+            "id": "a8376d887ef47a714546d3c61f32c9ac5f5100331423f76dd62f2a9242741a3e"
+          },
+          "situation": "1. 半边身子不能动\n2.嘴唇憋的紫\n3.心突突的跳\n",
+          "diagnosis": "1. 中风偏瘫\n2. 老咳喘\n3. 心肺同时衰竭死亡\n",
+          "prescription": "1. 雄氏老方 每日3次 每次10片\n2. 丹神定喘 每日40次 每次0.3ml\n3. 蒙药心脑方 每日1次 每次1g\n",
+          "attachments": [
+            "e800a6b612e37b9c191107236e07bc2cdd7d7d21a66a8781138e409b5484d537.png"
+          ]
+        },
+        "signature": null,
+        "note": "天底下再也没有比大骟人还好的人喽。\n"
+      },
+      {
+        "record": {
+          "hospital": {
+            "name": "北京大学医院",
+            "id": "6a1da507a6ef9b5beac83ab5c1103019e92181875a634f0ae2cf243aa6718db6"
+          },
+          "date": "2020-02-20",
+          "doctor": {
+            "name": "乌仁吉",
+            "id": "a8376d887ef47a714546d3c61f32c9ac5f5100331423f76dd62f2a9242741a3e"
+          },
+          "situation": "1. 半边身子不能动\n2.嘴唇憋的紫\n3.心突突的跳\n",
+          "diagnosis": "1. 中风偏瘫\n2. 老咳喘\n3. 心肺同时衰竭死亡\n",
+          "prescription": "1. 雄氏老方 每日3次 每次10片\n2. 丹神定喘 每日40次 每次0.3ml\n3. 蒙药心脑方 每日1次 每次1g\n",
+          "attachments": [
+            "e800a6b612e37b9c191107236e07bc2cdd7d7d21a66a8781138e409b5484d537.png"
+          ]
+        },
+        "signature": null,
+        "note": "天底下再也没有比大骟人还好的人喽。\n"
+      }
+    ];
   }
 }
