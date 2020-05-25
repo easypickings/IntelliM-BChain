@@ -66,7 +66,7 @@ module.exports = {
 
   showScanPage: function() {
     wx.scanCode({
-      complete: (res) => {
+      success: (res) => {
         console.log("[scan] token =", res.result);
         wx.navigateTo({
           url: `/pages/view-shared/view-shared?token=${res.result}`,
