@@ -56,6 +56,10 @@ Page({
     wx.reLaunch({
       url: '../login/login',
     });
-  }
+  },
+
+  onScan: function() {
+    utils.showScanPage();
+  },
 
 })

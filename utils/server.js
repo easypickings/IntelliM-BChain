@@ -305,4 +305,12 @@ uploadBaseInfo: async function (token, upload_data) {
       }
     }
   },
+
+  uploadExaminationResult: async function(data) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    })
+  },
 }

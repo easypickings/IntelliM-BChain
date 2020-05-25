@@ -30,6 +30,12 @@ Page({
     }
   },
 
+  onShow: function () {
+    this.setData({
+      records: app.globalData.records
+    });
+  },
+
   /** 下载用户病历数据 */
   getRecords: async function () {
     let that = this;
@@ -56,8 +62,20 @@ Page({
 
   /** 点击上传按钮：跳转 */
   tapUpload: async function (e) {
-    wx.navigateTo({
-      url: '../upload/upload'
+    wx.showActionSheet({
+      itemList: ['新建就诊记录', '新建检查记录'],
+      success: (res) => {
+        if (res.tapIndex == 0) {
+          wx.navigateTo({
+            url: '../upload/upload',
+          });
+        }
+        else if (res.tapIndex == 1) {
+          wx.navigateTo({
+            url: '../camera/camera'
+          });
+        }
+      }
     })
   },
 

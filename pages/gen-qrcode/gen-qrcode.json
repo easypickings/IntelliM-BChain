@@ -2,5 +2,7 @@
   "usingComponents": {
     "mp-loading": "../../miniprogram_npm/weui-miniprogram/loading/loading"
   },
-  "navigationBarBackgroundColor": "#37A849"
+  "navigationBarBackgroundColor": "#37A849",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "登录"
 }

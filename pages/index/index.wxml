@@ -1,8 +1,9 @@
-<block wx:if="{{ downloading }}">
+<!-- <block wx:if="{{ downloading }}">
 	<view class="empty">
 		<text class="title">病历下载中……</text>
 	</view>
-</block>
+</block> -->
+<loading wx:if="{{ downloading }}">病历下载中</loading>
 <block wx:else>
 	<view class="root-container padding-container">
 		<block wx:if="{{ selectMode }}">

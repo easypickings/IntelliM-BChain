@@ -36,7 +36,7 @@ Page({
     wx.chooseImage({
       complete: (res) => {
         this.setData({
-          images: this.data.images.concat(res.tempFilePaths)
+          images: this.data.images.concat(res.tempFilePaths || [])
         });
       },
     });
@@ -60,16 +60,21 @@ Page({
     });
   },
 
-  onUpload: function(e) {
+  onUpload: async function(e) {
     this.setData({
       isLoading: true
     });
     try {
-      server.uploadExaminationResult();
+      await server.uploadExaminationResult();
     }
     catch (e) {
       console.error('[examination] upload failed');
     }
-    wx.navigateBack();
+    this.setData({
+      isLoading: false
+    });
+    wx.navigateBack({
+      delta: 2
+    });
   }
 })

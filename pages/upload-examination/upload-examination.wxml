@@ -43,9 +43,9 @@
     </mp-cells>
     
     <view class="weui-btn-area more-margin-bottom">
-      <button class="weui-btn" type="primary" bindtap="upload">上传</button>
+      <button class="weui-btn" type="primary" bindtap="onUpload">上传</button>
     </view>
   </view>
 </view>
 
-<loading wx:if="{{ isLoading }}"></loading>
+<loading wx:if="{{ isLoading }}">正在上传</loading>

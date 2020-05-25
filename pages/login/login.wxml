@@ -17,4 +17,8 @@
 	<button class="btn" plain="true" id="wechat" open-type="getUserInfo" bindgetuserinfo="wechatLogin">
 		<image id="wechat" src="../../assets/wechat.png"></image>
 	</button>
+	<button class="btn" plain="true" id="scan" bindtap="onScan">
+		<image id="scan-img" src="../../assets/scan-green.svg"></image>
+		<text id="scan-text">扫描病历分享码</text>
+	</button>
 </view>

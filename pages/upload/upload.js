@@ -110,6 +110,7 @@ Page({
     // 上传病历信息
     try {
       await server.uploadRecord(app.globalData.token, this.dataToJson());
+      app.globalData.records.unshift(utils.readRecords([JSON.parse(this.dataToJson())])[0]); // very unclear
     } catch(e) {
       utils.showToast(e);
     }

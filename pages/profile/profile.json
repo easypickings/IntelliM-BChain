@@ -6,5 +6,6 @@
     "mp-badge": "../miniprogram_npm/weui-miniprogram/badge/badge",
     "mp-icon": "../miniprogram_npm/weui-miniprogram/icon/icon",
     "mp-actionSheet": "../miniprogram_npm/weui-miniprogram/actionsheet/actionsheet"
-  }
+  },
+  "navigationBarTitleText": "个人中心"
 }

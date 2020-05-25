@@ -9,8 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: null,
-    password: null,
+    username: "",
+    password: "",
     usercode: null,
     isPassword: true,
   },
@@ -99,4 +99,7 @@ Page({
     });
   },
 
+  onScan: function () {
+    utils.showScanPage();
+  }
 })

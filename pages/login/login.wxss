@@ -128,3 +128,26 @@
   top: 225rpx;
   left: 600rpx;
 }
+
+#scan {
+  position: fixed;
+  top: 950rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+#scan-img {
+  height: 60rpx;
+  width: 60rpx;
+  align-self: center;
+}
+
+#scan-text {
+  align-self: center;
+  margin-left: 5px;
+  font-size: small;
+  text-decoration: underline;
+}

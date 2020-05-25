@@ -1,5 +1,12 @@
 <!--pages/view-shared/view-shared.wxml-->
 <view class="container">
+  <view wx:if="{{ !isLoading }}" class="baseinfo">
+    <view class="info-name">{{ baseinfo.personalInfo.name }}</view>
+    <view class="info-sex">性别：{{ baseinfo.personalInfo.sex }}</view>
+    <view class="info-age">年龄：{{ baseinfo.age }}</view>
+    <view class="info-bloodtype">血型：{{ baseinfo.personalInfo.bloodType }}</view>
+  </view>
+
   <block wx:if="{{ records.length }}">
     <view class="records">
       <!-- List items should get the class `completed` when marked as completed -->
@@ -18,3 +25,5 @@
     </view>
   </block>
 </view>
+
+<loading wx:if="{{ isLoading }}">信息下载中</loading>

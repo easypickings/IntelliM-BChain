@@ -52,4 +52,26 @@ module.exports = {
     return res;
   },
 
+  /** 给定出生日期，返回年龄 */
+  getAge: function(date) {
+    let today = new Date();
+    let age = today.getFullYear() - date.getFullYear();
+    if (today.getMonth() > date.getMonth() || (today.getMonth() == date.getMonth() && today.getDate() >= date.getDate())) {
+      return age;
+    }
+    else {
+      return age - 1;
+    }
+  },
+
+  showScanPage: function() {
+    wx.scanCode({
+      complete: (res) => {
+        console.log("[scan] token =", res.result);
+        wx.navigateTo({
+          url: `/pages/view-shared/view-shared?token=${res.result}`,
+        });
+      },
+    });
+  }
 }

@@ -14,8 +14,7 @@
     "pages/view-shared/view-shared",
     "pages/camera/camera",
     "pages/upload-examination/upload-examination",
-    "pages/view-examination/view-examination",
-    "pages/scan-qrcode/scan-qrcode"
+    "pages/view-examination/view-examination"
   ],
   "window": {
     "backgroundTextStyle": "light",
