@@ -19,8 +19,6 @@ Page({
    * 页面加载--根据token下载records
    */
   onLoad: async function () {
-    await this.getRecords();
-    return;
     if (app.globalData.token) {
       try {
         await this.getRecords();
@@ -65,7 +63,7 @@ Page({
   /** 点击上传按钮：跳转 */
   tapUpload: async function (e) {
     wx.showActionSheet({
-      itemList: ['新建就诊记录', '新建检查记录'],
+      itemList: ['新建就诊记录', '检查单拍照'],
       success: (res) => {
         if (res.tapIndex == 0) {
           wx.navigateTo({
