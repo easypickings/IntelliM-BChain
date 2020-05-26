@@ -59,7 +59,7 @@ Page({
 
   onTypeChanged: function(e) {
     this.setData({
-      "record.examination.type": e.detail.value
+      "record.examination.type": this.data.typeArray[e.detail.value]
     });
   },
 
