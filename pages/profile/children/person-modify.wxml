@@ -13,7 +13,7 @@
       <view class="weui-label">出生年月</view>
     </view>
     <view class="weui-cell__bd">
-      <picker bindchange="onInput" mode="date" value="{{baseInfo.personalInfo.birthDate}}" data-label="personalInfo.birthDate">
+      <picker bindchange="onInput" mode="date" start="1900-01-01" value="{{baseInfo.personalInfo.birthDate}}" data-label="personalInfo.birthDate">
         <view class="weui-select weui-select_in-select-after">{{baseInfo.personalInfo.birthDate}}</view>
       </picker>
     </view>
