@@ -8,6 +8,7 @@ Page({
    * Page initial data
    */
   data: {
+    record: {},
     images: [],
     typeIndex: 0,
     typeArray: ['检验科检查', '放射科检查', '外科检查', '内科检查', '辅诊科检查', '眼科检查', '口腔科检查', '耳鼻喉科检查', '妇科检查', '一般形态', '其他检查'],
@@ -20,12 +21,8 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    const record = JSON.parse(options.record);
-    console.log(record);
-
     this.setData({
-      typeIndex: this.data.typeArray.indexOf(record.type),
-      selectedDate: record.date
+      record: JSON.parse(options.record)
     });
   }
 })

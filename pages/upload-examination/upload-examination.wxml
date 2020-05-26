@@ -20,7 +20,7 @@
       <mp-cell link>
         <picker bindchange="onTypeChanged" value="{{ typeIndex }}" range="{{ typeArray }}">
           <view class="picker">
-            {{ typeArray[typeIndex] }}
+            {{ record.examination.type }}
           </view>
         </picker>
       </mp-cell>
@@ -29,7 +29,7 @@
       <mp-cell link>
         <picker mode="date" value="selectedDate" bindchange="onDateChanged">
           <view class="picker">
-            {{ selectedDate }}
+            {{ record.examination.date }}
           </view>
         </picker>
       </mp-cell>
@@ -38,7 +38,7 @@
     <mp-cells ext-class="my-cells" title="备注">
       <mp-cell>
         <textarea class="weui-text-area long-text" bindinput="onNoteChanged" placeholder="请输入文本" maxlength="500" />
-        <view class="weui-textarea-counter">{{ note.length }}/100</view>
+        <view class="weui-textarea-counter">{{ record.examination.note.length }}/100</view>
       </mp-cell>
     </mp-cells>
     

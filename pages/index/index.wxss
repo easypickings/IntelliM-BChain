@@ -100,7 +100,6 @@ page {
 }
 
 .header-container {
-  height: 20vh;
   width: 100%;
   margin: 0;
   margin-bottom: 10px;
@@ -204,6 +203,7 @@ page {
   flex-direction: row;
   box-sizing: border-box;
   width: 100%;
+  align-items: center;
 }
 
 .dot {
@@ -224,15 +224,12 @@ page {
 }
 
 .checkbox-container {
-  display: flex;
-  flex-direction: row;
   flex-grow: 1;
   box-sizing: border-box;
-  align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
-  padding-right: 15px;
+  padding-right: 5px;
   overflow: hidden;
 }
 
@@ -243,4 +240,11 @@ page {
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.check-button {
+  padding-left: 8px;
 }

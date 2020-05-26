@@ -47,15 +47,17 @@ Page({
       for (let i = 0; i < res.length; i++) {
         res[i].checked = false;
         res[i].value = res[i].id;
+        this.setData({
+          records: res
+        });
       }
-      that.setData({
-        records: res,
-        downloading: false,
-      });
     } catch (e) {
       console.log(e);
       utils.showToast('信息查询失败');
     }
+    that.setData({
+      downloading: false,
+    });
   },
 
   /* =============== Buttons =============== */

@@ -306,11 +306,27 @@ uploadBaseInfo: async function (token, upload_data) {
     }
   },
 
-  uploadExaminationResult: async function(data) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve();
-      }, 3000);
-    })
+  /** 上传检查结果（此函数需要修改，请勿使用此函数） */
+  uploadExaminationResult: async function(token, record) {
+    try {
+      record.record = {hospital:{name:'',id:''},doctor:{name:'',id:''},date:'',situation:'',diagnosis:'',prescription:'',attachments:[]};
+      let res = await PR.request({
+        url: utils.getUrl('records'),
+        header: {
+          'content-type': 'application/json',
+          'token': token,
+        },
+        method: 'POST',
+        data: JSON.stringify(record)
+      });
+      let data = res.data;
+      if (data.state == 'success') {
+        console.log('[Server] record upload succeed');;
+      } else {
+        throw data;
+      }
+    } catch(e) {
+      throw e;
+    }
   },
 }
