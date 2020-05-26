@@ -4,7 +4,6 @@ var utils = require('../../../utils/utils');
 var server = require('../../../utils/server');
 var PR = require('../../../utils/promisify');
 
-
 Page({
 
   /**
@@ -27,7 +26,9 @@ Page({
     chronicInfo:[],
     allergicInfo:[],
     notes:""
-    }
+    },
+    sexArray: ['男', '女', '其他'],
+    bloodArray: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', '不详'],
   },
 
   /**
@@ -35,68 +36,20 @@ Page({
    */
   onLoad: function (options) {
     if(app.globalData.baseInfo){
-      this.setData({baseInfo: app.globalData.baseInfo});
-      console.log(app.globalData.baseInfo);
+      this.setData({baseInfo: JSON.parse(JSON.stringify(app.globalData.baseInfo))});
+      // console.log(app.globalData.baseInfo);
     }
-    console.log(this.baseInfo);
+    // console.log(this.baseInfo);
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   //binding函数
   onInput: function (e) {
     var params = {}
     let label = e.currentTarget.dataset.label
     params['baseInfo.' + label] = e.detail.value
     this.setData(params);
-    console.log(params);
+    // console.log(params);
   },
 
   //提交baseinfo
@@ -107,8 +60,12 @@ Page({
     console.log(this.data.baseInfo);
 
     try {
-      await server.uploadBaseInfo(app.globalData.token, this.dataToJson());
-      
+      await server.uploadBaseInfo(app.globalData.token, this.data.baseInfo);
+      app.globalData.baseInfo = JSON.parse(JSON.stringify(this.data.baseInfo));
+      wx.navigateBack({
+        delta: 1,
+      })
+      utils.showToast("上传个人信息成功");
     } catch(e) {
       utils.showToast(e);
     }

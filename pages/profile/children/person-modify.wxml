@@ -1,79 +1,89 @@
 <toptip id="toptip"></toptip>
 <view class="weui-cells">
-  <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">姓名</view>
-    </view>
-    <view class="weui-cell__bd">
-      <input class="weui-input" placeholder="请输入姓名" bindinput="onInput" data-label="personalInfo.name" value="{{baseInfo.personalInfo.name}}" />
-    </view>
-  </view>
-  <view class="weui-cell weui-cell_select">
-    <view class="weui-cell__hd weui-cell__hd_in-select-after">
-      <view class="weui-label">出生年月</view>
-    </view>
-    <view class="weui-cell__bd">
-      <picker bindchange="onInput" mode="date" start="1900-01-01" value="{{baseInfo.personalInfo.birthDate}}" data-label="personalInfo.birthDate">
-        <view class="weui-select weui-select_in-select-after">{{baseInfo.personalInfo.birthDate}}</view>
-      </picker>
-    </view>
-  </view>
-  <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">性别</view>
-    </view>
-    <view class="weui-cell__bd">
+	<view class="weui-cell weui-cell_input">
+		<view class="weui-cell__hd">
+			<view class="weui-label">姓名</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" placeholder="请输入姓名" bindinput="onInput" data-label="personalInfo.name" value="{{baseInfo.personalInfo.name}}" />
+		</view>
+	</view>
+	<view class="weui-cell weui-cell_select">
+		<view class="weui-cell__hd weui-cell__hd_in-select-after">
+			<view class="weui-label">出生日期</view>
+		</view>
+		<view class="weui-cell__bd">
+			<picker bindchange="onInput" mode="date" value="{{baseInfo.personalInfo.birthDate}}" data-label="personalInfo.birthDate">
+				<view class="weui-select weui-select_in-select-after">{{baseInfo.personalInfo.birthDate}}</view>
+			</picker>
+		</view>
+	</view>
+	<view class="weui-cell weui-cell_input">
+		<view class="weui-cell__hd">
+			<view class="weui-label">性别</view>
+		</view>
+		<!-- <view class="weui-cell__bd">
       <input class="weui-input" placeholder="男/女/其他" bindinput="onInput" data-label="personalInfo.sex" value="{{baseInfo.personalInfo.sex}}" />
-    </view>
-  </view>
-  <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">血型</view>
-    </view>
-    <view class="weui-cell__bd">
+    </view> -->
+		<view class="weui-cell__bd">
+			<picker bindchange="onInput" value="{{sexArray[baseInfo.personalInfo.sex]}}" data-label="personalInfo.sex" range="{{sexArray}}">
+				<view class="weui-select weui-select_in-select-after">{{sexArray[baseInfo.personalInfo.sex]}}</view>
+			</picker>
+		</view>
+	</view>
+	<view class="weui-cell weui-cell_input">
+		<view class="weui-cell__hd">
+			<view class="weui-label">血型</view>
+		</view>
+		<!-- <view class="weui-cell__bd">
       <input placeholder="请填写血型" class="weui-input" bindinput="onInput" data-label="personalInfo.bloodType" value="{{baseInfo.personalInfo.bloodType}}" />
-    </view>
-  </view>
-  <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">身高</view>
-    </view>
-    <view class="weui-cell__bd">
-      <input class="weui-input" placeholder="请填写身高,单位:米" type="digit" bindinput="onInput" data-label="height" value="{{baseInfo.height}}" />
-    </view>
-  </view>
+    </view> -->
+		<view class="weui-cell__bd">
+			<picker bindchange="onInput" value="{{bloodArray[baseInfo.personalInfo.bloodType]}}" data-label="personalInfo.bloodType" range="{{bloodArray}}">
+				<view class="weui-select weui-select_in-select-after">{{bloodArray[baseInfo.personalInfo.bloodType]}}</view>
+			</picker>
+		</view>
+	</view>
+	<view class="weui-cell weui-cell_input">
+		<view class="weui-cell__hd">
+			<view class="weui-label">身高</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" placeholder="请填写身高,单位:米" type="digit" bindinput="onInput" data-label="height" value="{{baseInfo.height}}" />
+		</view>
+	</view>
 
-   <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">体重</view>
-    </view>
-    <view class="weui-cell__bd">
-      <input class="weui-input" placeholder="请填写体重,单位:千克" type="digit" bindinput="onInput" data-label="weight" value="{{baseInfo.weight}}" />
-    </view>
-  </view>
+	<view class="weui-cell weui-cell_input">
+		<view class="weui-cell__hd">
+			<view class="weui-label">体重</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input class="weui-input" placeholder="请填写体重,单位:千克" type="digit" bindinput="onInput" data-label="weight" value="{{baseInfo.weight}}" />
+		</view>
+	</view>
 
-    <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">联系方式</view>
-    </view>
-    <view class="weui-cell__bd">
-      <input placeholder="请填写联系电话" class="weui-input" bindinput="onInput" type="number" data-label="personalInfo.contact" value="{{baseInfo.personalInfo.contact}}" />
-    </view>
-  </view>
+	<view class="weui-cell weui-cell_input">
+		<view class="weui-cell__hd">
+			<view class="weui-label">联系方式</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input placeholder="请填写联系电话" class="weui-input" bindinput="onInput" type="number" data-label="personalInfo.contact" value="{{baseInfo.personalInfo.contact}}" />
+		</view>
+	</view>
 
-    <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">紧急联系方式</view>
-    </view>
-    <view class="weui-cell__bd">
-      <input placeholder="请填写紧急联系电话" class="weui-input" type="number" bindinput="onInput" data-label="personalInfo.emergencyContact" value="{{baseInfo.personalInfo.emergencyContact}}" />
-    </view>
-  </view>
- 
+	<view class="weui-cell weui-cell_input">
+		<view class="weui-cell__hd">
+			<view class="weui-label">紧急联系方式</view>
+		</view>
+		<view class="weui-cell__bd">
+			<input placeholder="请填写紧急联系电话" class="weui-input" type="number" bindinput="onInput" data-label="personalInfo.emergencyContact" value="{{baseInfo.personalInfo.emergencyContact}}" />
+		</view>
+	</view>
+
 </view>
 <view class="font-gray-28 weui-cells__tips">
-  请确保你的信息真实有效，我们会保护好你的个人信息，不会对外提供
+	请确保你的信息真实有效，我们会保护好你的个人信息，不会对外提供
 </view>
 <view class="weui-btn-area">
-  <button class="weui-btn" type="primary" catchtap="onSubmit">提交</button>
+	<button class="weui-btn" type="primary" catchtap="onSubmit">提交</button>
 </view>

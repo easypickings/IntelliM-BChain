@@ -73,66 +73,63 @@ module.exports = {
     }
   },
 
-/*
-从服务器获取个人信息
-*/
-getBaseInfo: async function (token) {
-  console.log('[Server] begin to download baseInfo');
-  try {
-    let res = await PR.request({
-      url: utils.getUrl('baseinfo'),
-      header: {
-        'content-type': 'application/json',
-        'token': token,
-      },
-      method: 'GET'
-    });
-    
-     let data = res.data;
-     if (data.state == 'success') {
-       console.log("[Server] download success");
-       utils.dbgPrint(data.base);
-       return data.base.baseInfo;
-     } else {
-       console.log(data.reason);
-       throw data.message;
-     }
-  } catch (e) {
-    console.log(e);
-    throw '信息查询失败';
-  }
-},
+  /*
+  从服务器获取个人信息
+  */
+  getBaseInfo: async function (token) {
+    console.log('[Server] begin to download baseInfo');
+    try {
+      let res = await PR.request({
+        url: utils.getUrl('baseinfo'),
+        header: {
+          'content-type': 'application/json',
+          'token': token,
+        },
+        method: 'GET'
+      });
 
-
-uploadBaseInfo: async function (token, upload_data) {
-  console.log(token);
-  console.log('[Server] begin to upload baseInfo');
-  try {
-    let res = await PR.request({
-      url: utils.getUrl('baseinfo'),
-      header: {
-        'content-type': 'application/json',
-        'token': token,
-      },
-      method: 'PUT',
-      data: upload_data,
-    })
-    let data = res.data;
-    if (data.state == 'success') {
-      console.log('[Server] baseInfo upload succeed');
-      wx.navigateBack({
-        delta: 1,
-      })
-      utils.showToast("上传个人信息成功");
-    } else {
-      console.log(data);
-      throw data.message;
+      let data = res.data;
+      if (data.state == 'success') {
+        console.log("[Server] download success");
+        utils.dbgPrint(data.base);
+        return data.base;
+      } else {
+        console.log(data.reason);
+        throw data.message;
+      }
+    } catch (e) {
+      console.log(e);
+      throw '信息查询失败';
     }
-  } catch(e) {
-    console.log(e);
-    throw '个人信息修改失败';
-  }
-},
+  },
+
+
+  uploadBaseInfo: async function (token, upload_data_json) {
+    console.log(token);
+    console.log('[Server] begin to upload baseInfo');
+    let upload_data = JSON.stringify(upload_data_json);
+    try {
+      let res = await PR.request({
+        url: utils.getUrl('baseinfo'),
+        header: {
+          'content-type': 'application/json',
+          'token': token,
+        },
+        method: 'PUT',
+        data: upload_data,
+      });
+      let data = res.data;
+      if (data.state == 'success') {
+        console.log('[Server] baseInfo upload succeed');
+      } else {
+        console.log(data);
+        throw data.message;
+      }
+    } catch (e) {
+      console.log(e);
+      throw '个人信息修改失败';
+    }
+  },
 
 
 
@@ -192,7 +189,7 @@ uploadBaseInfo: async function (token, upload_data) {
         console.log(data);
         throw data.message;
       }
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       throw '病历上传失败';
     }
@@ -297,19 +294,32 @@ uploadBaseInfo: async function (token, upload_data) {
       }
     } catch (e) {
       console.error('[sharing] request failed');
-      if (typeof(e) == 'string') {
+      if (typeof (e) == 'string') {
         throw e;
-      }
-      else {
+      } else {
         throw 'HTTP request failed.';
       }
     }
   },
 
   /** 上传检查结果（此函数需要修改，请勿使用此函数） */
-  uploadExaminationResult: async function(token, record) {
+  uploadExaminationResult: async function (token, record) {
     try {
-      record.record = {hospital:{name:'',id:''},doctor:{name:'',id:''},date:'',situation:'',diagnosis:'',prescription:'',attachments:[]};
+      record.record = {
+        hospital: {
+          name: '',
+          id: ''
+        },
+        doctor: {
+          name: '',
+          id: ''
+        },
+        date: '',
+        situation: '',
+        diagnosis: '',
+        prescription: '',
+        attachments: []
+      };
       let res = await PR.request({
         url: utils.getUrl('records'),
         header: {
@@ -325,7 +335,7 @@ uploadBaseInfo: async function (token, upload_data) {
       } else {
         throw data;
       }
-    } catch(e) {
+    } catch (e) {
       throw e;
     }
   },
