@@ -1,82 +1,83 @@
+<!--pages/picture-record/picture-record.wxml-->
+
 <view class="page">
-	<view class="weui-form weui-form__text-area">
-		<h2 class="weui-form__title">电子病历上传</h2>
-	</view>
+  <view class="header-region">
+    <image src="/assets/examination-result.svg" class="title-img"></image>
+    <view class="title-area">新建就诊记录</view>
+  </view>
 
-	<view class="page__bd">
-		<view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+  <view class="page__bd">
 
-		<view class="weui-cells weui-cells_after-title">
-			<view class="weui-cell weui-cell_input">
-				<view class="weui-cell__hd weui-label">就诊医院</view>
-				<view class="weui-cell__bd">
-					<input class="weui-input" bindinput="bindHospitalChange" placeholder="请输入就诊医院" />
-				</view>
-			</view>
-			<view class="weui-cell weui-cell_input">
-				<view class="weui-cell__hd weui-label">就诊医生</view>
-				<view class="weui-cell__bd">
-					<input class="weui-input" bindinput="bindDoctorChange" placeholder="请输入医生姓名" />
-				</view>
-			</view>
-			<view class="weui-cell weui-cell_input">
-				<view class="weui-cell__hd weui-label">日期</view>
-				<view class="weui-cell__bd">
-					<picker mode="date" start="1970-01-01" end="{{ todayDate }}" bindchange="bindDateChange">
-						<view class="weui-input"> {{date}} </view>
-					</picker>
-				</view>
-			</view>
-		</view>
+    <mp-cells ext-class="my-cells" title="就诊医院">
+      <mp-cell>
+        <input class="weui-input" bindinput="onHospitalChange" placeholder="请输入就诊医院" maxlength="20" />
+        <view class="weui-textarea-counter">{{ record.note.length }}/20</view>
+      </mp-cell>
+    </mp-cells>
 
-		<!-- <view class="weui-cells__tips">病历内容记录</view> -->
+    <mp-cells ext-class="my-cells" title="就诊医生">
+      <mp-cell>
+        <textarea class="weui-input" bindinput="onDoctorChange" placeholder="请输入就诊医生" maxlength="20" />
+        <view class="weui-textarea-counter">{{ record.note.length }}/20</view>
+      </mp-cell>
+    </mp-cells>
 
-		<view class="weui-cells__title">病情</view>
-		<view class="weui-cells weui-cells_after-title">
-			<view class="weui-cell weui-cell__bd">
-				<textarea class="weui-textarea" bindinput="bindSituationChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
-				<view class="weui-textarea-counter">{{ situation.length }}/500</view>
-            </view>
+    <mp-cells ext-class="my-cells" title="就诊日期">
+        <mp-cell link>
+        <picker mode="date" value="selectedDate" bindchange="onDateChanged">
+            <view class="picker"> {{ record.record.date }} </view>
+        </picker>
+        </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="病情">
+      <mp-cell>
+        <textarea class="weui-text-area long-text" bindinput="onSituationChange" placeholder="请输入文本" maxlength="500" />
+        <view class="weui-textarea-counter">{{ record.situation.length }}/500</view>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="诊断">
+      <mp-cell>
+        <textarea class="weui-text-area long-text" bindinput="onDiagnosisChange" placeholder="请输入文本" maxlength="500" />
+        <view class="weui-textarea-counter">{{ record.diagnosis.length }}/500</view>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="处方">
+      <mp-cell>
+        <textarea class="weui-text-area long-text" bindinput="onPrescriptionChange" placeholder="请输入文本" maxlength="500" />
+        <view class="weui-textarea-counter">{{ record.prescription.length }}/500</view>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="备注">
+      <mp-cell>
+        <textarea class="weui-text-area long-text" bindinput="onNoteChanged" placeholder="请输入文本" maxlength="500" />
+        <view class="weui-textarea-counter">{{ record.note.length }}/500</view>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="照片">
+      <scroll-view class="image-selector" scroll-x enable-flex>
+        <view wx:for="{{ images }}" class="scroll-item">
+          <image src="{{ item }}" mode="heightFix" class="image"></image>
         </view>
+        <image class="button-insert" src="/assets/plus_green.png" bindtap="onInsertImage"></image>
+      </scroll-view>
+    </mp-cells>
 
-        <view class="weui-cells__title">诊断</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell__bd">
-                <textarea class="weui-textarea" bindinput="bindDiagnosisChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
-                <view class="weui-textarea-counter">{{ diagnosis.length }}/500</view>
-            </view>
+    <mp-cells ext-class="my-cells" title="附件">
+        <view wx:for="{{ files }}">
+            <text> {{ item }} </text>
         </view>
+    </mp-cells>
+    <button bindtap="onInsertFile"> 点击添加附件 </button>
 
-        <view class="weui-cells__title">处方</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell__bd">
-                <textarea class="weui-textarea" bindinput="bindPrescriptionChange" placeholder="请输入文本" style="height: 3.3em" maxlength="500" />
-                <view class="weui-textarea-counter">{{ prescription.length }}/500</view>
-            </view>
-        </view>
-
-        <view class="weui-cells__title">备注</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__bd">
-                    <input class="weui-input" bindinput="bindNoteChange" placeholder="请输入文本" maxlength="100" />
-                    <view class="weui-textarea-counter">{{ note.length }}/100</view>
-                </view>
-            </view>
-        </view>
-
-        <view class="page">
-            <view class="page__bd">
-                <mp-cells>
-                    <mp-cell>
-                        <mp-uploader bindfail="loadError" bindsuccess="loadSuccess" select="{{selectImage}}" upload="{{loadImage}}" files="{{files}}" max-count="9" title="附件上传"></mp-uploader>
-                    </mp-cell>
-                </mp-cells>
-            </view>
-        </view>
-
-        <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" bindtap="upload">上传</button>
-        </view>
+    <view class="weui-btn-area more-margin-bottom">
+      <button class="weui-btn" type="primary" bindtap="onUpload">上传</button>
     </view>
+  </view>
 </view>
+
+<loading wx:if="{{ isLoading }}">正在上传</loading>

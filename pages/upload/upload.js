@@ -5,182 +5,171 @@ var app = getApp();
 
 Page({
   data: {
-    todayDate: '',    // 默认日期、可选日期最大值
-    hospital: '',
-    doctor: '',
-    date: '',
-    situation: '',
-    diagnosis: '',
-    prescription: '',
-    note: '',
+    record: { },
+    today: '',    // 默认日期、可选日期最大值
+    images: [],
     files: [],
-    tempFilePaths: [],
-    urls: [],
+    isLoading: false
   },
 
   /* =============== Initialization =============== */
 
   /** 初始化上传页面 */
   onLoad: function () {
-    this.setDefaultDate();
-    this.imageBinding();
+    this.setDefaultData();
   },
 
-  /** 设定初始日期 */
-  setDefaultDate: function () {
+  /** 设定初始数据 */
+  setDefaultData: function () {
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
     var day = date.getDate();
-
     var dateText = [year, month, day].map(utils.formatNumber).join('-');
 
     this.setData({
-      todayDate: dateText,
-      date: dateText,
+      images: [],
+      record: {
+        reserved: '',
+        record: {
+          hospital: {
+            name: '',
+            id: null
+          },
+          doctor: {
+            name: '',
+            id: null
+          },
+          date: dateText,
+          department: {
+            name: '',
+            id: null
+          },
+          situation: '',
+          diagnosis: '',
+          prescription: '',
+          attachments: []
+        },
+        note: '',
+        signature: null
+      },
     });
   },
 
-  /** 绑定图片上传函数 */
-  imageBinding: function () {
-    this.setData({
-      selectImage: this.selectImage.bind(this),
-      loadImage: this.loadImage.bind(this)
-    })
-  },
-
-  /* =============== Load Image =============== */
-
-  /** 选择图片 */
-  selectImage(files) {
-    console.log('files', files)
-    // 返回false可以阻止某次文件上传
-  },
-
-  /** 上传图片：仅为本地选择，并不上传到服务器。 */
-  loadImage(files) {
-    console.log('upload files', files)
-    // 文件上传的函数，返回一个promise
-    return new Promise((resolve, reject) => {
-      resolve({
-        urls: files.tempFilePaths
-      });
-    })
-  },
-
-  /** 加载失败返回函数 */
-  loadError(e) {
-    wx.showModal({
-      title: '提示',
-      content: '图片上传失败\n' + e.detail,
-      showCancel: false,
-    })
-  },
-
-  /** 加载成功返回函数 */
-  loadSuccess(e) {
-    this.setData({
-      tempFilePaths: this.data.tempFilePaths.concat(e.detail.urls),
+  onInsertFile: async function(e) {
+    wx.chooseMessageFile({
+      success: async (res) => {
+        try {
+          console.log(res);
+          this.setData({
+            isLoading: true
+          });
+          let tmpPaths = res.tempFiles.map(p => p.path);
+          let names = res.tempFiles.map(p => p.name);
+          let r = await server.uploadFiles(app.globalData.token, tmpPaths);
+          this.setData({
+            files: this.data.files.concat(names || []),
+            'record.record.attachments': this.data.record.record.attachments.concat(r)
+          });
+          console.log(this.data.files);
+        }
+        catch (e) {
+          console.log(e);
+          utils.showToast('文件上传失败');
+        }
+        this.setData({
+          isLoading: false
+        });
+      },
     });
-    console.log('upload success', e.detail)
+  },
+  
+  onInsertImage: async function(e) {
+    wx.chooseImage({
+      success: async (res) => {
+        try {
+          this.setData({
+            isLoading: true
+          });
+          let r = await server.uploadFiles(app.globalData.token, res.tempFilePaths);
+          this.setData({
+            images: this.data.images.concat(res.tempFilePaths || []),
+            'record.record.attachments': this.data.record.record.attachments.concat(r)
+          });
+        }
+        catch (e) {
+          console.log(e);
+          utils.showToast('文件上传失败');
+        }
+        this.setData({
+          isLoading: false
+        });
+      },
+    });
   },
 
-  /* =============== Upload Form =============== */
+  onDateChanged: function(e) {
+    this.setData({
+      "record.record.date": e.detail.value
+    });
+  },
 
-  /** 上传病例信息 */
-  upload: async function (e) {
-    var that = this;
-    console.log(this.data.tempFilePaths);
+  onNoteChanged: function(e) {
+    this.setData({
+      "record.note": e.detail.value
+    });
+  },
 
+  onHospitalChange: function (e) {
+    this.setData({
+      "record.record.hospital.name": e.detail.value
+    });
+  },
+
+  onDoctorChange: function (e) {
+    this.setData({
+      "record.record.doctor.name": e.detail.value
+    });
+  },
+
+  onSituationChange: function (e) {
+    this.setData({
+      "record.record.situation": e.detail.value
+    });
+  },
+
+  onDiagnosisChange: function (e) {
+    this.setData({
+      "record.record.diagnosis": e.detail.value
+    });
+  },
+
+  onPrescriptionChange: function (e) {
+    this.setData({
+      "record.record.prescription": e.detail.value
+    });
+  },
+
+  onUpload: async function(e) {
+    console.log(this.data.record);
+    this.setData({
+      isLoading: true
+    });
     try {
-      var urls = await server.uploadFiles(app.globalData.token, this.data.tempFilePaths);
-      console.log('upload succeed');
-      that.setData({
-        urls: urls,
-      });
-    } catch (e) {
-      console.log(e);
-      await PR.showModal({
-        title: '提示',
-        content: '图片上传失败\n' + e,
-        showCancel: false,
+      await server.uploadExaminationResult(app.globalData.token, this.data.record);
+      utils.showToast('上传成功');
+      wx.navigateBack({
+        delta: 1
       });
     }
-
-    // 上传病历信息
-    try {
-      await server.uploadRecord(app.globalData.token, this.dataToJson());
-      app.globalData.records.unshift(utils.readRecords([JSON.parse(this.dataToJson())])[0]); // very unclear
-    } catch(e) {
+    catch (e) {
+      console.error(e);
       utils.showToast(e);
     }
-  },
-
-  /* =============== Bindings =============== */
-
-  bindHospitalChange: function (e) {
     this.setData({
-      hospital: e.detail.value
+      isLoading: false
     });
   },
 
-  bindDoctorChange: function (e) {
-    this.setData({
-      doctor: e.detail.value
-    });
-  },
-
-  bindDateChange: function (e) {
-    this.setData({
-      date: e.detail.value
-    });
-  },
-
-  bindSituationChange: function (e) {
-    this.setData({
-      situation: e.detail.value
-    });
-  },
-
-  bindDiagnosisChange: function (e) {
-    this.setData({
-      diagnosis: e.detail.value
-    });
-  },
-
-  bindPrescriptionChange: function (e) {
-    this.setData({
-      prescription: e.detail.value
-    });
-  },
-
-  bindNoteChange: function (e) {
-    this.setData({
-      note: e.detail.value
-    });
-  },
-
-  /** 获得上传所需字符串，标准符合api.md */
-  dataToJson: function () {
-    return JSON.stringify({
-      'record': {
-        'hospital': {
-          'name': this.data.hospital,
-          'id': '',
-        },
-        'date': this.data.date,
-        'doctor': {
-          'name': this.data.doctor,
-          'id': '',
-        },
-        'situation': this.data.situation,
-        'diagnosis': this.data.diagnosis,
-        'prescription': this.data.prescription,
-        'attachments': this.data.urls,
-      },
-      'signature': '',
-      'note': this.data.note,
-    })
-  },
 
 });

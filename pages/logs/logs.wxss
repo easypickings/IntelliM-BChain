@@ -1,51 +1,67 @@
-.logs {
-  border: 1rpx solid #e0e0e0;
-  border-radius: 10rpx;
-  box-shadow: 0 0 5rpx #e0e0e0;
-}
+/* pages/picture-record/picture-record.wxss */
 
-.item {
-  padding: 30rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-  font-size: 30rpx;
-  color: #888;
-}
-
-.item:last-child {
-  border-bottom: 0;
-}
-
-.timestamp {
-  display: block;
-  margin-top: 20rpx;
-}
-
-.name {
-  display: inline-block;
-  width: 70%;
-  color: #aa0;
-}
-
-.action {
-  display: inline-block;
-  width: 30%;
-  color: #f40;
-  text-align: right;
-}
-
-.container {
+.header-region {
   box-sizing: border-box;
-  padding: 20px;
-}
-
-.previewimg {
-  float: left;
-  width: 30%;
-  height: 30vw;
-  margin: 1%;
-}
-
-.previewimg image {
   width: 100%;
+  padding: 50rpx;
+  color: var(--theme-color);
+  display: flex;
+  flex-direction: row;
+}
+
+.title-img {
+  width: 28px;
+  height: 28px;
+}
+
+.title-area {
+  font-size: large;
+  font-weight: bold;
+  margin-left: 20rpx;
+}
+
+.images-loading {
+  width: 100%;
+}
+
+.image-selector {
+  box-sizing: border-box;
+  position: relative;
+  height: 500rpx;
+  white-space: nowrap;
+}
+
+.scroll-item {
+  display: inline-block;
+  box-sizing: border-box;
   height: 100%;
+  border: solid transparent 30rpx;
+}
+
+.image {
+  box-sizing: border-box;
+  height: 100%;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button-insert {
+  display: inline-block;
+  position: absolute;
+  top: calc(250rpx - 25px);
+  width: 50px;
+  height: 50px;
+  padding-left: 20rpx;
+  padding-right: 50rpx;
+}
+
+.button-insert::after {
+  border: none;
+}
+
+.long-text {
+  height: 150rpx;
+}
+
+.more-margin-bottom {
+  margin-bottom: 75rpx;
 }

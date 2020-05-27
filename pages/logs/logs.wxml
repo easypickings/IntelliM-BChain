@@ -1,72 +1,72 @@
+<!--pages/picture-record/picture-record.wxml-->
+
 <view class="page">
-	<view class="weui-form weui-form__text-area">
-		<h2 class="weui-form__title">内容查看</h2>
-	</view>
+  <view class="header-region">
+    <image src="/assets/examination-result.svg" class="title-img"></image>
+    <view class="title-area">查看就诊记录</view>
+  </view>
 
-	<view class="page__bd">
-		<view class="weui-cells weui-cells_after-title">
-			<view class="weui-cell weui-cell_input">
-				<view class="weui-cell__hd weui-label">就诊医院</view>
-				<view class="weui-cell__bd">
-					<input class="weui-input" value="{{ record.hospital }}" placeholder="暂无信息" disabled="true"/>
-				</view>
-			</view>
-			<view class="weui-cell weui-cell_input">
-				<view class="weui-cell__hd weui-label">就诊医生</view>
-				<view class="weui-cell__bd">
-					<input class="weui-input" value="{{ record.doctor }}" placeholder="暂无信息" disabled="true"/>
-				</view>
-			</view>
-			<view class="weui-cell weui-cell_input">
-				<view class="weui-cell__hd weui-label">日期</view>
-				<view class="weui-cell__bd">
-					<picker mode="date" start="1970-01-01" end="{{ record.date }}">
-						<view class="weui-input"> {{ record.date }} </view>
-					</picker>
-				</view>
-			</view>
-		</view>
+  <view class="page__bd">
 
-		<!-- <view class="weui-cells__tips">病历内容记录</view> -->
+    <mp-cells ext-class="my-cells" title="就诊医院">
+      <mp-cell>
+        <textarea disabled class="weui-input" value="{{ record.record.hospital.name }}" placeholder="请输入就诊医院" maxlength="20" />
+      </mp-cell>
+    </mp-cells>
 
-		<view class="weui-cells__title">病情</view>
-		<view class="weui-cells weui-cells_after-title">
-			<view class="weui-cell weui-cell__bd">
-				<textarea class="weui-textarea" value="{{ record.situation }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
-			</view>
+    <mp-cells ext-class="my-cells" title="就诊医生">
+      <mp-cell>
+        <textarea disabled class="weui-input" value=" {{ record.record.doctor.name }}" placeholder="请输入就诊医生" maxlength="20" />
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="就诊日期">
+        <mp-cell link>
+        <picker disabled mode="date">
+            <view class="picker"> {{ record.record.date }} </view>
+        </picker>
+        </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="病情">
+      <mp-cell>
+        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.record.situation }}"/>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="诊断">
+      <mp-cell>
+        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.record.diagnosis }}"/>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="处方">
+      <mp-cell>
+        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.record.prescription }}"/>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="备注">
+      <mp-cell>
+        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.note }}"/>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells ext-class="my-cells" title="检查单照片">
+      <mp-cell wx:if="{{ imagesLoading }}">
+        <mp-loading type="circle" class="images-loading" tips="图片加载中"></mp-loading>
+      </mp-cell>
+      <scroll-view wx:if="{{ !imagesLoading && images.length > 0 }}" class="image-selector" scroll-x enable-flex>
+        <view wx:for="{{ images }}" class="scroll-item">
+          <image src="{{ item }}" mode="heightFix" class="image"></image>
         </view>
-    
-        <view class="weui-cells__title">诊断</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell__bd">
-                <textarea class="weui-textarea" value="{{ record.diagnosis }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
-            </view>
-        </view>
+      </scroll-view>
+      <mp-cell wx:if="{{ record.record.attachments.length == 0 }}">
+        本记录无图片
+      </mp-cell>
+    </mp-cells>
 
-        <view class="weui-cells__title">处方</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell__bd">
-                <textarea class="weui-textarea" value="{{ record.prescription }}" placeholder="暂无信息" style="height: 3.3em" disabled="true"/>
-            </view>
-        </view>
-
-        <view class="weui-cells__title">备注</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__bd">
-                    <input class="weui-input" value="{{ record.remark }}" placeholder="暂无信息" disabled="true"/>
-                </view>
-            </view>
-        </view>
-    </view>
-
-    <view class="container">
-        <view wx:for="{{imglist}}" wx:for-item="image" wx:key="index" class="previewimg">
-            <image src="{{image}}" data-src="{{image}}" bindtap="bindPreviewImage" style="aspectFill"></image>
-        </view>
-    </view>
-
-    <view class="weui-btn-area">
-        <button class="weui-btn" type="primary" bindtap="tapReturn">返回</button>
-    </view>
+  </view>
 </view>
+
+<loading wx:if="{{ isLoading }}"></loading>

@@ -28,35 +28,7 @@ module.exports = {
 
   /** 获取服务器端信息整合为本地存储信息 */
   readRecords: function (records) {
-    var res = [];
-    for (var i = records.length - 1; i >= 0; i--) {
-      var rcd = records[i];
-      try {
-        if (rcd.reserved == 'examination') {
-          res.push(rcd);
-        }
-        else {
-          rcd = rcd.record;
-          res.push({
-            type: "record",
-            id: records[i].id,
-            hospital: rcd.hospital.name,
-            hospital_id: rcd.hospital.id,
-            date: rcd.date,
-            doctor: rcd.doctor.name,
-            doctor_id: rcd.doctor.id,
-            situation: rcd.situation,
-            diagnosis: rcd.diagnosis,
-            prescription: rcd.prescription,
-            attachments: rcd.attachments,
-            situation_brief: rcd.situation.replace(/\n/g, ' '),
-          });
-        }
-      } catch (e) {
-        console.log('wrong format record.');
-      }
-    }
-    return res;
+    return records;
   },
 
   /** 给定出生日期，返回年龄 */

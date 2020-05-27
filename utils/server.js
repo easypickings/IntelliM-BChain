@@ -182,9 +182,7 @@ module.exports = {
       let data = res.data;
       if (data.state == 'success') {
         console.log('[Server] record upload succeed');
-        wx.navigateBack({
-          delta: 1,
-        })
+        return;
       } else {
         console.log(data);
         throw data.message;

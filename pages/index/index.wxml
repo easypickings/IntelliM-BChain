@@ -44,13 +44,10 @@
 											<block wx:else>
 												<view>
 													<view class="hospital">
-														<text>{{ item.hospital }}</text>
-													</view>
-													<view>
-														<text class="brief">{{ item.date }}</text>
+														<text>{{ item.record.hospital.name }}</text>
 													</view>
 													<view class="detail">
-														<text>{{ item.situation_brief }}</text>
+														<text>{{ item.record.situation }}</text>
 													</view>
 												</view>
 											</block>
