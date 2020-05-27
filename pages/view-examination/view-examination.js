@@ -2,6 +2,8 @@
 
 const server = require('../../utils/server');
 
+const app = getApp();
+
 Page({
 
   /**
@@ -20,9 +22,12 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
+    let record = JSON.parse(options.record);
+    let images = await server.downloadFiles(app.globalData.token, record.record.attachments);
     this.setData({
-      record: JSON.parse(options.record)
+      record: JSON.parse(options.record),
+      images
     });
   }
 })

@@ -24,17 +24,24 @@
 								<view class="line"></view>
 								<view class="checkbox-container">
 									<view class="checkbox-frame">
-										<view>
-											<view class="hospital">
-												<text>{{ item.hospital }}</text>
-											</view>
+										<block wx:if="{{ item.reserved == 'examination' }}">
+											{{ item.record.date }}
+											{{ item.record.department.name }}
+											{{ item.note }}
+										</block>
+										<block wx:else>
 											<view>
-												<text class="brief">{{ item.date }}</text>
+												<view class="hospital">
+													<text>{{ item.hospital }}</text>
+												</view>
+												<view>
+													<text class="brief">{{ item.date }}</text>
+												</view>
+												<view class="detail">
+													<text>{{ item.situation_brief }}</text>
+												</view>
 											</view>
-											<view class="detail">
-												<text>{{ item.situation_brief }}</text>
-											</view>
-										</view>
+										</block>
 									</view>
 								</view>
 								

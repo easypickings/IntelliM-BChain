@@ -26,32 +26,53 @@ Page({
     // Initialize record
     let d = new Date();
     this.setData({
-      images: [ options.tempImageSrc ],
+      images: [],
       record: {
-        type: 'examination',
-        examination: {
+        reserved: 'examination',
+        record: {
           hospital: {
             name: '',
-            id: ''
+            id: null
           },
           doctor: {
             name: '',
-            id: ''
+            id: null
           },
           date: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`,
-          type: '检验科检查',
-          note: ''
+          department: {
+            name: '检验科检查',
+            id: null
+          },
+          situation: '',
+          diagnosis: '',
+          prescription: '',
+          attachments: []
         },
+        note: '',
         signature: null
-      }
+      },
     });
   },
 
-  onInsertImage: function(e) {
+  onInsertImage: async function(e) {
     wx.chooseImage({
-      complete: (res) => {
+      success: async (res) => {
+        try {
+          this.setData({
+            isLoading: true
+          });
+          let r = await server.uploadFiles(app.globalData.token, res.tempFilePaths);
+          this.setData({
+            images: this.data.images.concat(res.tempFilePaths || []),
+            'record.record.attachments': this.data.record.record.attachments.concat(r)
+          });
+        }
+        catch (e) {
+          console.log(e);
+          utils.showToast('文件上传失败');
+        }
         this.setData({
-          images: this.data.images.concat(res.tempFilePaths || [])
+          isLoading: false
         });
       },
     });
@@ -59,30 +80,30 @@ Page({
 
   onTypeChanged: function(e) {
     this.setData({
-      "record.examination.type": this.data.typeArray[e.detail.value]
+      "record.record.department.name": this.data.typeArray[e.detail.value]
     });
   },
 
   onDateChanged: function(e) {
     this.setData({
-      "record.examination.date": e.detail.value
+      "record.record.date": e.detail.value
     });
   },
 
   onNoteChanged: function(e) {
     this.setData({
-      "record.examination.note": e.detail.value
+      "record.note": e.detail.value
     });
   },
 
   onUpload: async function(e) {
+    console.log(this.data.record);
     this.setData({
       isLoading: true
     });
     try {
-      // await server.uploadExaminationResult(app.globalData.token, this.data.record);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // utils.showToast('上传成功');
+      await server.uploadExaminationResult(app.globalData.token, this.data.record);
+      utils.showToast('上传成功');
       wx.navigateBack({
         delta: 2
       });

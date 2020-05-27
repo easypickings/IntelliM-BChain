@@ -65,7 +65,7 @@ Page({
   /** 点击上传按钮：跳转 */
   tapUpload: async function (e) {
     wx.showActionSheet({
-      itemList: ['新建就诊记录', '检查单拍照'],
+      itemList: ['新建就诊记录', '新建检查报告'],
       success: (res) => {
         if (res.tapIndex == 0) {
           wx.navigateTo({
@@ -74,7 +74,7 @@ Page({
         }
         else if (res.tapIndex == 1) {
           wx.navigateTo({
-            url: '../camera/camera'
+            url: '../upload-examination/upload-examination'
           });
         }
       }
@@ -102,9 +102,16 @@ Page({
     } else {
       let index = e.currentTarget.dataset.index;
       let rcd = app.globalData.records[index];
-      wx.navigateTo({
-        url: '../logs/logs?record=' + JSON.stringify(rcd),
-      })
+      if (rcd.reserved == 'examination') {
+        wx.navigateTo({
+          url: '../view-examination/view-examination?record=' + JSON.stringify(rcd),
+        });
+      }
+      else {
+        wx.navigateTo({
+          url: '../logs/logs?record=' + JSON.stringify(rcd),
+        });
+      }
     }
   },
 

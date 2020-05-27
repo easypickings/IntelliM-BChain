@@ -32,7 +32,10 @@ module.exports = {
     for (var i = records.length - 1; i >= 0; i--) {
       var rcd = records[i];
       try {
-        if ("record" in rcd) {
+        if (rcd.reserved == 'examination') {
+          res.push(rcd);
+        }
+        else {
           rcd = rcd.record;
           res.push({
             type: "record",
@@ -48,13 +51,6 @@ module.exports = {
             attachments: rcd.attachments,
             situation_brief: rcd.situation.replace(/\n/g, ' '),
           });
-        }
-        else if ("examination" in rcd) {
-          rcd.type = "examination";
-          res.push(rcd);
-        }
-        else {
-          throw undefined;
         }
       } catch (e) {
         console.log('wrong format record.');
@@ -84,6 +80,27 @@ module.exports = {
         });
       },
     });
+  },
+
+  // source: http://stackoverflow.com/a/11058858
+  str2ab: function (str) {
+    let buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+    let bufView = new Uint8Array(buf);
+    for (let i = 0, strLen = str.length; i < strLen; i++) {
+      bufView[i] = str.charCodeAt(i);
+    }
+    return buf;
+  },
+
+  abConcat: function (a, b) { // a, b TypedArray of same type
+    let c = new (a.constructor)(a.length + b.length);
+    c.set(a, 0);
+    c.set(b, a.length);
+    return c;
+  },
+
+  addPrefix: function (prefix, ab) {
+    return this.abConcat(new Uint8Array(this.str2ab('file=')), new Uint8Array(ab));
   },
 
   getTestRecord: function() {

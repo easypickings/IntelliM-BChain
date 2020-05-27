@@ -8,27 +8,30 @@
 
   <view class="page__bd">
     <mp-cells ext-class="my-cells" title="检查单照片">
-      <scroll-view class="image-selector" scroll-x enable-flex>
+      <scroll-view wx:if="{{ record.record.attachments.length > 0 }}" class="image-selector" scroll-x enable-flex>
         <view wx:for="{{ images }}" class="scroll-item">
-          <image src="{{ item }}" mode="aspectFit" class="image"></image>
+          <image src="{{ item }}" mode="heightFix" class="image"></image>
         </view>
       </scroll-view>
+      <mp-cell wx:else>
+        本记录无图片
+      </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="检查类型">
       <mp-cell>
-        <picker disabled value="{{ typeIndex }}" range="{{ typeArray }}">
+        <picker disabled>
           <view class="picker">
-            {{ typeArray[typeIndex] }}
+            {{ record.record.department.name }}
           </view>
         </picker>
       </mp-cell>
     </mp-cells>
     <mp-cells ext-class="my-cells" title="检查日期">
       <mp-cell>
-        <picker disabled mode="date" value="selectedDate">
+        <picker disabled mode="date">
           <view class="picker">
-            {{ selectedDate }}
+            {{ record.record.date }}
           </view>
         </picker>
       </mp-cell>
@@ -36,7 +39,7 @@
 
     <mp-cells ext-class="my-cells" title="备注">
       <mp-cell>
-        <textarea disabled class="weui-text-area long-text" maxlength="500" />
+        <textarea disabled class="weui-text-area long-text" maxlength="500" value="{{ record.note }}" />
       </mp-cell>
     </mp-cells>
   </view>

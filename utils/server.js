@@ -205,20 +205,24 @@ module.exports = {
   uploadFiles: async function (token, tempFilePaths) {
     var urls = []; // 服务器返回结果
     for (var i = 0; i < tempFilePaths.length; i++) {
-      var path = tempFilePaths[i]; // 临时路径
-      var name = path.slice(path.lastIndexOf('/') + 1); // 临时路径中文件名作为文件名
+      let path = tempFilePaths[i]; // 临时路径
+      let name = path.slice(path.lastIndexOf('/') + 1); // 临时路径中文件名作为文件名
+      let shortname = path.slice(path.length - 40); // 临时文件名过长，而服务器要求文件名不能超过50个字符
       console.log(name);
-      console.log(utils.getUrl('attachments/' + name));
+      console.log(utils.getUrl('attachments/' + shortname));
+      console.log(wx.getFileSystemManager().readFileSync(path));
+      console.log(utils.addPrefix('file=', wx.getFileSystemManager().readFileSync(path)));
       try {
-        var res = await PR.uploadFile({
-          url: utils.getUrl('attachments/' + name),
+        let res = await PR.uploadFile({
+          url: utils.getUrl('attachments/' + shortname),
           filePath: path,
           name: 'file',
           header: {
             'content-type': 'multipart/form-data',
-            'token': token,
-          },
+            'token': token
+          }
         });
+        console.log(res);
         var data = JSON.parse(res.data);
         if (data.state == 'success') {
           var realpath = data.path; // 服务器返回路径
@@ -243,8 +247,9 @@ module.exports = {
     for (var i = 0; i < names.length; i++) {
       var name = names[i];
       try {
+        console.log(utils.getUrl(name));
         var res = await PR.downloadFile({
-          url: utils.getUrl(name), // name is like 'attachments/xxx.jpg'
+          url: utils.getUrl('attachments/' + name), // name is like 'attachments/xxx.jpg'
           header: {
             'token': token,
           },
@@ -305,21 +310,6 @@ module.exports = {
   /** 上传检查结果（此函数需要修改，请勿使用此函数） */
   uploadExaminationResult: async function (token, record) {
     try {
-      record.record = {
-        hospital: {
-          name: '',
-          id: ''
-        },
-        doctor: {
-          name: '',
-          id: ''
-        },
-        date: '',
-        situation: '',
-        diagnosis: '',
-        prescription: '',
-        attachments: []
-      };
       let res = await PR.request({
         url: utils.getUrl('records'),
         header: {
@@ -331,7 +321,7 @@ module.exports = {
       });
       let data = res.data;
       if (data.state == 'success') {
-        console.log('[Server] record upload succeed');;
+        console.log('[Server] examination upload succeed');;
       } else {
         throw data;
       }
