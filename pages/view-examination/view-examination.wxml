@@ -8,12 +8,15 @@
 
   <view class="page__bd">
     <mp-cells ext-class="my-cells" title="检查单照片">
-      <scroll-view wx:if="{{ record.record.attachments.length > 0 }}" class="image-selector" scroll-x enable-flex>
+      <mp-cell wx:if="{{ imagesLoading }}">
+        <mp-loading type="circle" class="images-loading" tips="图片加载中"></mp-loading>
+      </mp-cell>
+      <scroll-view wx:if="{{ !imagesLoading && images.length > 0 }}" class="image-selector" scroll-x enable-flex>
         <view wx:for="{{ images }}" class="scroll-item">
           <image src="{{ item }}" mode="heightFix" class="image"></image>
         </view>
       </scroll-view>
-      <mp-cell wx:else>
+      <mp-cell wx:if="{{ record.record.attachments.length == 0 }}">
         本记录无图片
       </mp-cell>
     </mp-cells>

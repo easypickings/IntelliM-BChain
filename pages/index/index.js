@@ -7,6 +7,8 @@ const app = getApp();
 Page({
   data: {
     records: [], // 显示的病历列表，而非完整病历列表，添加被选中变量
+    imageLoaded: [],
+    previewImagePath: [],
     userInfo: {},
     hasUserInfo: false,
     /* 记录状态 */
@@ -19,15 +21,8 @@ Page({
    * 页面加载--根据token下载records
    */
   onLoad: async function () {
-    if (app.globalData.token) {
-      try {
-        await this.getRecords();
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      console.log('No token--not login yet');
-    }
+    await this.getRecords();
+    // await this.getTestRecords();
   },
 
   onShow: function () {
@@ -40,6 +35,8 @@ Page({
   getRecords: async function () {
     let that = this;
 
+    let imageLoaded = [];
+
     try {
       let res = await server.getRecords(app.globalData.token);
       console.log(res);
@@ -47,9 +44,28 @@ Page({
       for (let i = 0; i < res.length; i++) {
         res[i].checked = false;
         res[i].value = res[i].id;
-        this.setData({
-          records: res
-        });
+        res[i].sid = res[i].id.slice(0, 10);
+        imageLoaded.push(false);
+      }
+      this.setData({
+        records: res,
+        imageLoaded
+      });
+
+      // load images preview
+      for (let i = 0; i < res.length; i++) {
+        let record = res[i];
+        if (record.record.attachments.length > 0) {
+          let p = server.downloadFiles(app.globalData.token, [record.record.attachments[0]]);
+          console.log(p);
+          p.then((r) => {
+            console.log(r);
+            this.setData({
+              [`previewImagePath[${i}]`]: r[0],
+              [`imageLoaded[${i}]`]: true
+            });
+          });
+        }
       }
     } catch (e) {
       console.log(e);
@@ -103,6 +119,7 @@ Page({
       let index = e.currentTarget.dataset.index;
       let rcd = app.globalData.records[index];
       if (rcd.reserved == 'examination') {
+        console.log(rcd);
         wx.navigateTo({
           url: '../view-examination/view-examination?record=' + JSON.stringify(rcd),
         });
@@ -179,6 +196,111 @@ Page({
     wx.navigateTo({
       url: '../gen-qrcode/gen-qrcode',
     });
-  }
+  },
 
+  getTestRecords: async function () {
+    // Example records.
+    const records = [
+      {
+        record: {
+          department: {
+            name: '外科检查'
+          },
+          date: '2019-12-12',
+          attachments: []
+        },
+        note: '心脏彩超',
+        reserved: 'examination',
+        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
+        sid: '7a3e911675'
+      },
+      {
+        record: {
+          department: {
+            name: '外科检查'
+          },
+          date: '2019-12-12',
+          attachments: []
+        },
+        note: '胸部X光片',
+        reserved: 'examination',
+        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
+        sid: '7a3e911675'
+      },
+      {
+        record: {
+          department: {
+            name: '外科检查'
+          },
+          date: '2019-12-12',
+          attachments: []
+        },
+        note: '血常规',
+        reserved: 'examination',
+        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
+        sid: '7a3e911675'
+      },
+      {
+        record: {
+          department: {
+            name: '外科检查'
+          },
+          date: '2019-12-12',
+          attachments: []
+        },
+        note: '血常规',
+        reserved: 'examination',
+        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
+        sid: '7a3e911675'
+      },
+      {
+        record: {
+          department: {
+            name: '外科检查'
+          },
+          date: '2019-12-12',
+          attachments: []
+        },
+        note: '血常规',
+        reserved: 'examination',
+        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
+        sid: '7a3e911675'
+      },
+      {
+        record: {
+          department: {
+            name: '外科检查'
+          },
+          date: '2019-12-12',
+          attachments: []
+        },
+        note: '血常规',
+        reserved: 'examination',
+        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
+        sid: '7a3e911675'
+      },
+      {
+        record: {
+          department: {
+            name: '外科检查'
+          },
+          date: '2019-12-12',
+          attachments: []
+        },
+        note: '血常规',
+        reserved: 'examination',
+        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
+        sid: '7a3e911675'
+      },
+    ];
+
+    // Set local data.
+    this.setData({
+      records,
+      downloading: false
+    });
+    
+    // Set global data.
+    app.globalData.records = records;
+  },
 })

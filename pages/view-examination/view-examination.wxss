@@ -20,6 +20,10 @@
   margin-left: 20rpx;
 }
 
+.images-loading {
+  width: 100%;
+}
+
 .image-selector {
   box-sizing: border-box;
   position: relative;

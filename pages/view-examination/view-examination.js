@@ -12,11 +12,8 @@ Page({
   data: {
     record: {},
     images: [],
-    typeIndex: 0,
-    typeArray: ['检验科检查', '放射科检查', '外科检查', '内科检查', '辅诊科检查', '眼科检查', '口腔科检查', '耳鼻喉科检查', '妇科检查', '一般形态', '其他检查'],
-    selectedDate: '',
-    note: '',
-    isLoading: false
+    isLoading: false,
+    imagesLoading: true
   },
 
   /**
@@ -24,10 +21,13 @@ Page({
    */
   onLoad: async function (options) {
     let record = JSON.parse(options.record);
+    this.setData({
+      record
+    });
     let images = await server.downloadFiles(app.globalData.token, record.record.attachments);
     this.setData({
-      record: JSON.parse(options.record),
-      images
+      images,
+      imagesLoading: false
     });
   }
 })

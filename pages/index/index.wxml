@@ -23,35 +23,48 @@
 								<view class="dot"></view>
 								<view class="line"></view>
 								<view class="checkbox-container">
-									<view class="checkbox-frame">
-										<block wx:if="{{ item.reserved == 'examination' }}">
+									<view class="item-basicinfo">
+										<view class="info-date">
 											{{ item.record.date }}
-											{{ item.record.department.name }}
-											{{ item.note }}
-										</block>
-										<block wx:else>
-											<view>
-												<view class="hospital">
-													<text>{{ item.hospital }}</text>
+										</view>
+										<view class="info-sid">
+											{{ item.sid }}
+										</view>
+									</view>
+									<view class="checkbox-frame">
+										<view class="preview">
+											<block wx:if="{{ item.reserved == 'examination' }}">
+												<view class="preview-note">
+													{{ item.note }}
 												</view>
+												<view wx:if="{{ imageLoaded[index] }}" class="preview-images">
+													<image src="{{ previewImagePath[index] }}" class="image" mode="heightFix"></image>
+												</view>
+											</block>
+											<block wx:else>
 												<view>
-													<text class="brief">{{ item.date }}</text>
+													<view class="hospital">
+														<text>{{ item.hospital }}</text>
+													</view>
+													<view>
+														<text class="brief">{{ item.date }}</text>
+													</view>
+													<view class="detail">
+														<text>{{ item.situation_brief }}</text>
+													</view>
 												</view>
-												<view class="detail">
-													<text>{{ item.situation_brief }}</text>
-												</view>
-											</view>
-										</block>
+											</block>
+										</view>
+										<view wx:if="{{ selectMode }}" class="check-button">
+											<checkbox value="{{ item.value }}" checked="{{ item.checked }}"></checkbox>
+										</view>
 									</view>
 								</view>
-								
-								<block wx:if="{{ selectMode }}">
-									<view class="check-button">
-										<checkbox value="{{item.value}}" checked="{{item.checked}}"></checkbox>
-									</view>
-								</block>
 							</view>
 						</checkbox-group>
+					</view>
+					<view class="chain-start">
+						这是您病历链的起始
 					</view>
 				</block>
 				<block wx:else>

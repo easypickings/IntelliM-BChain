@@ -2,7 +2,8 @@
   "usingComponents": {
     "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells",
     "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell",
-    "mp-slideview": "../../miniprogram_npm/weui-miniprogram/slideview/slideview"
+    "mp-slideview": "../../miniprogram_npm/weui-miniprogram/slideview/slideview",
+    "mp-loading": "../../miniprogram_npm/weui-miniprogram/loading/loading"
   },
   "navigationBarBackgroundColor": "#37A849",
   "navigationBarTitleText": "查看检查单",
