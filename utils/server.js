@@ -92,7 +92,7 @@ module.exports = {
       if (data.state == 'success') {
         console.log("[Server] download success");
         utils.dbgPrint(data.base);
-        return data.base;
+        return data.base.baseInfo;
       } else {
         console.log(data.reason);
         throw data.message;
