@@ -28,7 +28,7 @@ module.exports = {
 
   /** 获取服务器端信息整合为本地存储信息 */
   readRecords: function (records) {
-    return records;
+    return records.reverse();
   },
 
   /** 给定出生日期，返回年龄 */

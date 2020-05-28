@@ -10,7 +10,8 @@
     <mp-cells ext-class="my-cells" title="检查单照片">
       <scroll-view class="image-selector" scroll-x enable-flex>
         <view wx:for="{{ images }}" class="scroll-item">
-          <image src="{{ item }}" mode="heightFix" class="image"></image>
+          <image src="{{ item.path }}" mode="heightFix" class="image"></image>
+          <view class="info-sid">Hash: {{ item.sid }}</view>
         </view>
         <image class="button-insert" src="/assets/plus_green.png" bindtap="onInsertImage"></image>
       </scroll-view>

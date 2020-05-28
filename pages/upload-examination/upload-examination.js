@@ -63,7 +63,11 @@ Page({
           });
           let r = await server.uploadFiles(app.globalData.token, res.tempFilePaths);
           this.setData({
-            images: this.data.images.concat(res.tempFilePaths || []),
+            images: this.data.images.concat(
+              res.tempFilePaths.map((path, i) => {
+                return { path, sid: r[i].slice(0, 10) }
+              }) || []
+            ),
             'record.record.attachments': this.data.record.record.attachments.concat(r)
           });
         }

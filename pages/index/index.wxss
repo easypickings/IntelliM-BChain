@@ -50,6 +50,7 @@ page {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 8px;
 }
 
 .footer {
@@ -139,7 +140,7 @@ page {
 
 .checkbox-container .check-button {
   left: 50rpx;
-  margin-right: 20rpx;
+  margin-right: 0;
 }
 
 .button {
@@ -269,6 +270,9 @@ page {
   padding: 10px;
   box-sizing: border-box;
   width: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 
 .preview-note {
@@ -277,11 +281,12 @@ page {
 
 .image {
   height: 120px;
-  max-width: 100%;
 }
 
 .check-button {
   padding-left: 12px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .chain-start {

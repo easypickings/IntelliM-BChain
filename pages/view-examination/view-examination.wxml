@@ -13,7 +13,8 @@
       </mp-cell>
       <scroll-view wx:if="{{ !imagesLoading && images.length > 0 }}" class="image-selector" scroll-x enable-flex>
         <view wx:for="{{ images }}" class="scroll-item">
-          <image src="{{ item }}" mode="heightFix" class="image"></image>
+          <image src="{{ item.path }}" mode="heightFix" class="image"></image>
+          <view class="info-sid">Hash: {{ item.sid }}</view>
         </view>
       </scroll-view>
       <mp-cell wx:if="{{ record.record.attachments.length == 0 }}">

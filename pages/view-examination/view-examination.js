@@ -24,9 +24,14 @@ Page({
     this.setData({
       record
     });
-    let images = await server.downloadFiles(app.globalData.token, record.record.attachments);
+    let paths = await server.downloadFiles(app.globalData.token, record.record.attachments);
     this.setData({
-      images,
+      images: paths.map((path, i) => {
+        return {
+          path,
+          sid: record.record.attachments[i].slice(0, 10)
+        };
+      }),
       imagesLoading: false
     });
   }

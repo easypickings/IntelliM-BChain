@@ -28,7 +28,7 @@
 											{{ item.record.date }}
 										</view>
 										<view class="info-sid">
-											{{ item.sid }}
+											Hash: {{ item.sid }}
 										</view>
 									</view>
 									<view class="checkbox-frame">
@@ -36,9 +36,6 @@
 											<block wx:if="{{ item.reserved == 'examination' }}">
 												<view class="preview-note">
 													{{ item.note }}
-												</view>
-												<view wx:if="{{ imageLoaded[index] }}" class="preview-images">
-													<image src="{{ previewImagePath[index] }}" class="image" mode="heightFix"></image>
 												</view>
 											</block>
 											<block wx:else>
@@ -51,6 +48,9 @@
 													</view>
 												</view>
 											</block>
+											<view wx:if="{{ imageLoaded[index] }}" class="preview-images">
+												<image src="{{ previewImagePath[index] }}" class="image" mode="heightFix"></image>
+											</view>
 										</view>
 										<view wx:if="{{ selectMode }}" class="check-button">
 											<checkbox value="{{ item.value }}" checked="{{ item.checked }}"></checkbox>
