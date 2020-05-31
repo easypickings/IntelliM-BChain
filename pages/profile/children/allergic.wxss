@@ -1,0 +1,80 @@
+/* pages/profile/children/allergic.wxss */
+.header-region {
+  background-color: #F0EFF5;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 50rpx;
+  color: var(--theme-color);
+  display: flex;
+  flex-direction: row;
+}
+
+.weui-text-area {
+  display: block;
+  border: solid 1px #E5E5E5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;  
+  resize: none;
+  background: transparent;
+  width: 100%;
+  color: inherit;
+  font-size: 1em;
+  line-height: inherit;
+}
+
+
+.title-img {
+  width: 28px;
+  height: 28px;
+}
+
+.title-area {
+  font-size: large;
+  font-weight: bold;
+  margin-left: 20rpx;
+}
+
+.image-selector {
+  box-sizing: border-box;
+  position: relative;
+  height: 500rpx;
+  white-space: nowrap;
+}
+
+.scroll-item {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 100%;
+  border: solid transparent 30rpx;
+}
+
+.image {
+  box-sizing: border-box;
+  height: 100%;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button-insert {
+  display: inline-block;
+  position: absolute;
+  top: calc(250rpx - 25px);
+  width: 50px;
+  height: 50px;
+  padding-left: 20rpx;
+  padding-right: 50rpx;
+}
+
+.button-insert::after {
+  border: none;
+}
+
+.long-text {
+  height: 450rpx;
+}
+
+.more-margin-bottom {
+  margin-bottom: 75rpx;
+}

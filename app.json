@@ -17,7 +17,9 @@
     "pages/view-examination/view-examination",
     "pages/view-cluster/view-cluster",
     "pages/upload-ok/upload-ok",
-    "components/image-list/image-list"
+    "components/image-list/image-list",
+    "pages/profile/children/chronic",
+    "pages/profile/children/allergic"
   ],
   "window": {
     "backgroundTextStyle": "light",

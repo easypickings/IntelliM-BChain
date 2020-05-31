@@ -1,0 +1,20 @@
+<!-- pages/profile/children/allergic.wxml -->
+ <view class="page__bd">
+    <mp-cells ext-class="my-cells" title="过敏信息">
+      <mp-cell>
+        <textarea class="weui-text-area long-text" bindinput="onInput" placeholder="请输入文本" maxlength="1000" value="{{baseInfo.allergicInfo[0].name}}" />
+        <view class="weui-textarea-counter">{{ baseInfo.allergicInfo[0].name.length}}/1000</view>
+      </mp-cell>
+    </mp-cells>
+</view>
+
+
+<view class="weui-btn-area">
+	<button class="weui-btn" type="primary" catchtap="onSubmit">确定</button>
+</view> 
+
+
+
+
+
+
