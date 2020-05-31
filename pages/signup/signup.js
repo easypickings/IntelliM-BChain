@@ -3,8 +3,8 @@ var server = require('../../utils/server');
 var PR = require('../../utils/promisify');
 const app = getApp();
 
-/** 正则表达式--用户名为不少于3位的字母、数字或汉字的组合 */
-var usernameReg = /^[a-zA-Z0-9\u4e00-\u9fa5]{3,}$/;
+/** 正则表达式--用户名为不少于5位的字母或数字的组合 */
+var usernameReg = /^[a-zA-Z0-9]{5,}$/;
 /** 正则表达式--密码为8-16位且必须包含字母、数字和特殊符号 */
 var passwordReg = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}$/;
 
@@ -63,23 +63,26 @@ Page({
   },
 
   signup: async function () {
-    console.log('------ sign up -------');
-    try {
-      let token = await server.signup(this.data.username, this.data.password);
-      app.globalData.token = token;
-      app.globalData.username = this.data.username;
-      utils.showToast('注册成功', 'success');
-      wx.reLaunch({ // 关闭signup页面并打开index页面
-        url: '../index/index',
-      });
-    } catch (e) {
-      if (typeof (e) == 'string')
-        utils.showToast(e);
-      else {
-        console.log(e);
-        utils.showToast('网络请求失败');
+    if (this.data.usernameOK && this.data.passwordOK) {
+      console.log('------ sign up -------');
+      try {
+        let token = await server.signup(this.data.username, this.data.password);
+        app.globalData.token = token;
+        app.globalData.username = this.data.username;
+        utils.showToast('注册成功', 'success');
+        wx.reLaunch({ // 关闭signup页面并打开index页面
+          url: '../index/index',
+        });
+      } catch (e) {
+        if (typeof (e) == 'string')
+          utils.showToast(e);
+        else {
+          console.log(e);
+          utils.showToast('网络请求失败');
+        }
       }
-    }
+    } else
+      utils.showToast('用户名或密码不符合要求');
   },
 
   showPassword: function () {

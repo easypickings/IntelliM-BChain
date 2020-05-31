@@ -75,7 +75,6 @@ Page({
         try {
           let token = await server.login(null, null, res.code);
           app.globalData.token = token;
-          app.globalData.username = '微信用户';
           app.globalData.userInfo = e.detail.userInfo;
           utils.showToast('登录成功', 'success');
           wx.reLaunch({ // 关闭login页面并打开index页面

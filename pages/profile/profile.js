@@ -5,7 +5,7 @@ const app = getApp();
 Page({
   data: {
     username: null,
-    avatarUrl: '../../assets/default_avatar.jpg',
+    avatarUrl: '../../assets/defaultAvatar.png',
     showLogout: false,
     action: [{
       text: '退出登录',
@@ -19,8 +19,14 @@ Page({
    onLoad: async function () {
      if (app.globalData.token) {
        this.setData({
-         username:app.globalData.username,
+         username: app.globalData.username,
        });
+       if (app.globalData.userInfo) {
+         this.setData({
+          username: app.globalData.userInfo.nickName,
+          avatarUrl: app.globalData.userInfo.avatarUrl,
+         });
+       }
        try {
          await this.getBaseInfo();
        } catch (e) {
