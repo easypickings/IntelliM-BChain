@@ -44,10 +44,6 @@
         "text": "个人中心",
         "iconPath": "assets/profile.png",
         "selectedIconPath": "assets/profile-active.png"
-      },
-      {
-        "pagePath": "pages/debug/debug",
-        "text": "调试"
       }
     ]
   },
