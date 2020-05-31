@@ -1,97 +1,32 @@
-<!-- <block wx:if="{{ downloading }}">
-	<view class="empty">
-		<text class="title">病历下载中……</text>
-	</view>
-</block> -->
 <loading wx:if="{{ downloading }}">病历下载中</loading>
-<block wx:else>
-	<view class="root-container">
-		<block wx:if="{{ selectMode }}">
-			<view class="header-container flex-container">
-				<text class="left-button" bindtap="tapCancelSelect">取消选择</text>
-				<text class="right-button" bindtap="tapSelectAll">全选</text>
-				<text class="right-button" bindtap="tapInverse">反选</text>
-			</view>
-		</block>
 
-		<view class="selection-container">
-			<scroll-view scroll-y class="selection-area" enable-flex>
-				<block wx:if="{{ records.length }}">
-					<view class="records">
-						<checkbox-group>
-							<view class="item" wx:for="{{ records }}" wx:key="index" data-index="{{ index }}" bindtap="tapItem" bindlongpress="longPressItem">
-								<view class="dot"></view>
-								<view class="line"></view>
-								<view class="checkbox-container">
-									<view class="item-basicinfo">
-										<view class="info-date">
-											{{ item.record.date }}
-										</view>
-										<view class="info-sid">
-											Hash: {{ item.sid }}
-										</view>
-									</view>
-									<view class="checkbox-frame">
-										<view class="preview">
-											<block wx:if="{{ item.reserved == 'examination' }}">
-												<view class="preview-note">
-													{{ item.note }}
-												</view>
-											</block>
-											<block wx:else>
-												<view>
-													<view class="hospital">
-														<text>{{ item.record.hospital.name }}</text>
-													</view>
-													<view class="detail">
-														<text>{{ item.record.situation }}</text>
-													</view>
-												</view>
-											</block>
-											<view wx:if="{{ imageLoaded[index] }}" class="preview-images">
-												<image src="{{ previewImagePath[index] }}" class="image" mode="heightFix"></image>
-											</view>
-										</view>
-										<view wx:if="{{ selectMode }}" class="check-button">
-											<checkbox value="{{ item.value }}" checked="{{ item.checked }}"></checkbox>
-										</view>
-									</view>
-								</view>
-							</view>
-						</checkbox-group>
-					</view>
-					<view class="chain-start">
-						这是您病历链的起始
-					</view>
-				</block>
-				<block wx:else>
-					<view class="empty">
-						<text class="title">当前暂无病历记录</text>
-						<text class="content">点击添加按钮上传</text>
-					</view>
-				</block>
-			</scroll-view>
+<view wx:else class="root-container">
+	<view class='tabs'>
+		<view class="{{0 == currentTab ? 'tab-sel-selected' : 'tab-sel'}}" bindtap='onTabClicked' data-idx='0'>
+			<text>按时间浏览</text>
+			<hr class="tab-line"/>
 		</view>
-
-		<block wx:if="{{ selectMode }}">
-			<view class="bottom-container">
-				<view class="bottom-item" bindtap="tapShare">
-					<image src="../../assets/share.png" class="bottom-icon" />
-					<text class="bottom-label">分享</text>
-				</view>
-				<view class="bottom-item">
-					<image src="../../assets/hide-record.png" class="bottom-icon" />
-					<text class="bottom-label">隐藏</text>
-				</view>
-				<view class="bottom-item">
-					<image src="../../assets/delete_red.png" class="bottom-icon" />
-					<text class="bottom-label-red">删除</text>
-				</view>
-			</view>
-		</block>
-		<block wx:if="{{ !selectMode }}">
-			<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
-			<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
-		</block>
+		<view class="{{1 == currentTab ? 'tab-sel-selected' : 'tab-sel'}}" bindtap='onTabClicked' data-idx='1'>
+			<text>按病程浏览</text>
+			<hr class="tab-line"/>
+		</view>
 	</view>
-</block>
+	<swiper class="swiper" current="{{ currentTab }}" duration="300" easing-function="easeInOutCubic" bindchange="onTabChanged">
+		<swiper-item class="swiper-item">
+			<record-list class="record-list-component" records="{{ records }}" bindTapItem="onTapItem" bindNew="onNew" bindShare="onShare" bindDelete="onDelete" bindEnterSelectionMode="onEnterSelectionMode" bindQuitSelectionMode="onQuitSelectionMode" bottom-message="这是您病历链的起始"></record-list>
+			<block wx:if="{{ !selectionMode }}">
+				<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
+				<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
+			</block>
+		</swiper-item>
+		<swiper-item class="swiper-item">
+			<scroll-view scroll-y class="record-clusters">
+				<view wx:for="{{ clusters }}" class="cluster" data-cluster="{{ item }}" bindtap="onTapCluster">
+					<view class="brief">详情：{{ item.last.record.note || '无预览信息' }}</view>
+					<view class="first-date">初次就诊日期：{{ item.first.record.date }}</view>
+					<view class="last-date">最后更新日期：{{ item.last.record.date }}</view>
+				</view>
+			</scroll-view>
+		</swiper-item>
+	</swiper>
+</view>

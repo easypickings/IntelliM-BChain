@@ -1,13 +1,21 @@
 /* pages/view-shared/view-shared.wxss */
 
-/* From index.wxss */
+.root-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .baseinfo {
   background: linear-gradient(100deg, var(--theme-color) 10%, rgb(140, 212, 16) 100%);
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.4);
   padding: 30rpx;
+  margin: 10px;
   margin-bottom: 50rpx;
   border-radius: 10rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -35,42 +43,7 @@
   font-size: medium;
 }
 
-.records {
-  border: 1rpx solid #e0e0e0;
-  border-radius: 10rpx;
-  box-shadow: 0 0 5rpx #e0e0e0;
-}
-
-.records .item {
-  align-items: center;
-  padding: 25rpx;
-  border-bottom: 1rpx solid #e0e0e0;
-}
-
-.records .item:last-child {
-  border-bottom: 0;
-}
-
-.records .item .hospital {
-  width: 100%;
-  font-size: 45rpx;
-  color: #444;
-}
-
-.records .item .brief {
-  padding-right: 40rpx;
-  font-size: 30rpx;
-  color: #666;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.records .item .detail {
-  width: 100%;
-  font-size: 30rpx;
-  color: #666;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.record-list-component {
+  flex-grow: 1;
+  flex-shrink: 1;
 }

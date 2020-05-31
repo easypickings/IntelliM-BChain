@@ -57,7 +57,7 @@ Page({
     }
     
     this.setData(params);
-    console.log(this.data.baseInfo);
+    //console.log(this.data.baseInfo);
   },
 
   //提交baseinfo

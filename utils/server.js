@@ -208,8 +208,6 @@ module.exports = {
       let shortname = path.slice(path.length - 40); // 临时文件名过长，而服务器要求文件名不能超过50个字符
       console.log(name);
       console.log(utils.getUrl('attachments/' + shortname));
-      console.log(wx.getFileSystemManager().readFileSync(path));
-      console.log(utils.addPrefix('file=', wx.getFileSystemManager().readFileSync(path)));
       try {
         let res = await PR.uploadFile({
           url: utils.getUrl('attachments/' + shortname),
@@ -319,7 +317,9 @@ module.exports = {
       });
       let data = res.data;
       if (data.state == 'success') {
-        console.log('[Server] examination upload succeed');;
+        console.log('[Server] examination upload succeed');
+        console.log(data);
+        return data.id;
       } else {
         throw data;
       }

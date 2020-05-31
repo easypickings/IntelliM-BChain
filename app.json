@@ -14,7 +14,10 @@
     "pages/view-shared/view-shared",
     "pages/camera/camera",
     "pages/upload-examination/upload-examination",
-    "pages/view-examination/view-examination"
+    "pages/view-examination/view-examination",
+    "pages/view-cluster/view-cluster",
+    "pages/upload-ok/upload-ok",
+    "components/image-list/image-list"
   ],
   "window": {
     "backgroundTextStyle": "light",

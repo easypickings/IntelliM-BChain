@@ -19,7 +19,7 @@
 	</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd">身高</view>
-		<view class="weui-cell__ft">{{baseInfo.height}}米</view>
+		<view class="weui-cell__ft">{{baseInfo.height}}</view>
 	</view>
 
 	<view class="weui-cell">

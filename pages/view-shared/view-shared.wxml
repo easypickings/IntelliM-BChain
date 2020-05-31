@@ -1,5 +1,5 @@
 <!--pages/view-shared/view-shared.wxml-->
-<view class="container">
+<view class="root-container">
   <view wx:if="{{ !isLoading }}" class="baseinfo">
     <view class="info-name">{{ baseinfo.personalInfo.name }}</view>
     <view class="info-sex">性别：{{ baseinfo.personalInfo.sex }}</view>
@@ -8,21 +8,7 @@
   </view>
 
   <block wx:if="{{ records.length }}">
-    <view class="records">
-      <!-- List items should get the class `completed` when marked as completed -->
-      <view class="item" wx:for="{{ records }}" wx:key="index" bindtap="tapItem" data-index="{{ index }}">
-        <view class="hospital">
-          <text>{{ item.hospital }}</text>
-        </view>
-        <view>
-          <text class="brief">{{ item.date }}</text>
-          <text class="brief">{{ item.doctor }}</text>
-        </view>
-        <view class="detail">
-          <text>{{ item.situation_brief }}</text>
-        </view>
-      </view>
-    </view>
+    <record-list class="record-list-component" records="{{ records }}" bindTapItem="onTapItem" can-select-single="{{ false }}" can-select-multiple="{{ false }}"></record-list>
   </block>
 </view>
 
