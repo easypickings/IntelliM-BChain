@@ -94,13 +94,15 @@ page {
 
 .first-date {
   font-size: small;
+  color: #555;
 }
 
 .last-date {
   font-size: small;
+  color: #555;
 }
 
 .brief {
-  color: #555;
   font-size: small;
+  margin-bottom: 3px;
 }
