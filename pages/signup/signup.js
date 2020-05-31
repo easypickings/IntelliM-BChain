@@ -67,6 +67,7 @@ Page({
     try {
       let token = await server.signup(this.data.username, this.data.password);
       app.globalData.token = token;
+      app.globalData.username = this.data.username;
       utils.showToast('注册成功', 'success');
       wx.reLaunch({ // 关闭signup页面并打开index页面
         url: '../index/index',

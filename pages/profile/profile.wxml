@@ -2,12 +2,14 @@
 	<navigator url="./children/person" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
 		<view class="weui-cell__hd">
 			<view class="user-info__avatar">
-				<open-data type="userAvatarUrl"></open-data>
+				<!-- <open-data type="userAvatarUrl"></open-data> -->
+				<image class="user-info__avatar" src="{{avatarUrl}}" />
 			</view>
 		</view>
 		<view class="weui-cell__bd">
 			<view class="user-info__name">
-				<open-data type="userNickName"></open-data>
+				<!-- <open-data type="userNickName"></open-data> -->
+				{{username}}
 			</view>
 			<view class="font-gray-28">查看 / 修改个人信息</view>
 		</view>
@@ -39,13 +41,13 @@
 </view>
 <!--
 <view class="weui-cells">
-  <navigator url="./children/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__hd">
-      <image src="../../assets/setting.png" class="icon"></image>
-    </view>
-    <view class="weui-cell__bd">设置</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>
+	<navigator url="./children/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+		<view class="weui-cell__hd">
+			<image src="../../assets/setting.png" class="icon"></image>
+		</view>
+		<view class="weui-cell__bd">设置</view>
+		<view class="weui-cell__ft weui-cell__ft_in-access"></view>
+	</navigator>
 
 </view>
 -->

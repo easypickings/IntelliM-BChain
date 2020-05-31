@@ -1,10 +1,11 @@
 var utils = require('../../utils/utils');
 var server = require('../../utils/server');
-var PR = require('../../utils/promisify');
 const app = getApp();
 
 Page({
   data: {
+    username: null,
+    avatarUrl: '../../assets/default_avatar.jpg',
     showLogout: false,
     action: [{
       text: '退出登录',
@@ -12,27 +13,26 @@ Page({
     }],
   },
 
-
-  
   /**
    * 页面加载--根据token下载baseInfo
     */
    onLoad: async function () {
-     let that=this;
      if (app.globalData.token) {
+       this.setData({
+         username:app.globalData.username,
+       });
        try {
-         await that.getBaseInfo();
+         await this.getBaseInfo();
        } catch (e) {
          console.log(e);
        }
      } else {
-       console.log('profile onLoad fail:No token');
+       console.log('profile onLoad fail: No token');
      }
    },
 
    /** 下载基础数据 */
    getBaseInfo: async function () {
-     let that = this;
      try {
        console.log("trying download baseInfo")
        let res = await server.getBaseInfo(app.globalData.token);

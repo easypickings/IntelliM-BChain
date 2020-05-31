@@ -99,4 +99,3 @@ collapse .ui-card:before {
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
 }
-

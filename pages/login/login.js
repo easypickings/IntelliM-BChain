@@ -9,8 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: "kable",
-    password: "11111111",
+    username: null,
+    password: null,
     usercode: null,
     isPassword: true,
   },
@@ -40,6 +40,7 @@ Page({
     try {
       let token = await server.login(this.data.username, this.data.password, null);
       app.globalData.token = token;
+      app.globalData.username = this.data.username;
       utils.showToast('登录成功', 'success');
       wx.reLaunch({ // 关闭login页面并打开index页面
         url: '../index/index',
@@ -74,6 +75,7 @@ Page({
         try {
           let token = await server.login(null, null, res.code);
           app.globalData.token = token;
+          app.globalData.username = '微信用户';
           app.globalData.userInfo = e.detail.userInfo;
           utils.showToast('登录成功', 'success');
           wx.reLaunch({ // 关闭login页面并打开index页面
