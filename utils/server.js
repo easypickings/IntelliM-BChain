@@ -13,9 +13,7 @@ module.exports = {
    * @returns 返回值为token
    */
   login: async function (username, password, usercode) {
-    // if (CONFIG.useRootToken)
-    //   return 'root';
-    console.log('-------- login --------')
+    console.log('-------- login --------');
     try {
       let res = await PR.request({
         url: utils.getUrl('login'),
@@ -35,7 +33,9 @@ module.exports = {
       console.log(data);
       if (data.state == 'success')
         return data.token;
-      else
+      else if (data.code == 4033) {
+        return this.wxSignup(usercode);
+      } else
         throw data.message;
     } catch (e) {
       throw e;
@@ -48,6 +48,7 @@ module.exports = {
    * @param {*} password 密码
    */
   signup: async function (username, password) {
+    console.log('------- signup -------');
     try {
       let res = await PR.request({
         url: utils.getUrl('users'),
@@ -73,6 +74,40 @@ module.exports = {
     }
   },
 
+  wxSignup: async function (usercode) {
+    console.log('--wechat login: signup--');
+    try {
+      let username = utils.randomUsername();
+      let token = await this.signup(username, '12345678');
+      let wx = await PR.login();
+      if (wx.code) {
+        try {
+          let res = await PR.request({
+            url: utils.getUrl('wechat'),
+            header: {
+              'content-type': 'application/json',
+              'token': token,
+            },
+            method: 'POST',
+            data: JSON.stringify({
+              'usercode': wx.code,
+            })
+          });
+          console.log(res);
+          let data = res.data;
+          if (data.state == 'success')
+            return token;
+          else
+            throw data.message;
+        } catch (e) {
+          throw e;
+        }
+      }
+    } catch (e) {
+      throw e;
+    }
+  },
+
   /*
   从服务器获取个人信息
   */
@@ -92,7 +127,7 @@ module.exports = {
       if (data.state == 'success') {
         console.log("[Server] download success");
         utils.dbgPrint(data.base);
-        return data.base.baseInfo;
+        return data.base;
       } else {
         console.log(data.reason);
         throw data.message;

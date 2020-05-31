@@ -6,6 +6,7 @@ var PR = require('./utils/promisify')
 App({
   globalData: {
     url: null,
+    username: null,
     userInfo: null,
     token: null,
     records: null,
