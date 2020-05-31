@@ -9,8 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: 'test4',
-    password: 'password+0',
+    username: '',
+    password: '',
     usercode: null,
     isPassword: true,
   },
