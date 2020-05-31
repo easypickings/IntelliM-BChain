@@ -20,6 +20,10 @@ Component({
     canSelectMultiple: {
       type: Boolean,
       value: true
+    },
+    bottomMessage: {
+      type: String,
+      value: '已到最底'
     }
   },
 

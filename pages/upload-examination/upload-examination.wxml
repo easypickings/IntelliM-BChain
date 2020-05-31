@@ -8,13 +8,9 @@
 
   <view class="page__bd">
     <mp-cells ext-class="my-cells" title="检查单照片">
-      <scroll-view class="image-selector" scroll-x enable-flex>
-        <view wx:for="{{ images }}" class="scroll-item">
-          <image src="{{ item.path }}" mode="heightFix" class="image"></image>
-          <view class="info-sid">Hash: {{ item.sid }}</view>
-        </view>
-        <image class="button-insert" src="/assets/plus_green.png" bindtap="onInsertImage"></image>
-      </scroll-view>
+      <view class="image-list-container">
+        <image-list images="{{ images }}" bindChanged="onImagesChanged"></image-list>
+      </view>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="检查类型">

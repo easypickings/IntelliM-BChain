@@ -55,31 +55,9 @@ Page({
     });
   },
 
-  onInsertImage: async function(e) {
-    wx.chooseImage({
-      success: async (res) => {
-        try {
-          this.setData({
-            isLoading: true
-          });
-          let r = await server.uploadFiles(app.globalData.token, res.tempFilePaths);
-          this.setData({
-            images: this.data.images.concat(
-              res.tempFilePaths.map((path, i) => {
-                return { path, sid: r[i].slice(0, 10) }
-              }) || []
-            ),
-            'record.record.attachments': this.data.record.record.attachments.concat(r)
-          });
-        }
-        catch (e) {
-          console.log(e);
-          utils.showToast('文件上传失败');
-        }
-        this.setData({
-          isLoading: false
-        });
-      },
+  onImagesChanged: function(e) {
+    this.setData({
+      images: e.detail.paths
     });
   },
 
@@ -107,6 +85,8 @@ Page({
       isLoading: true
     });
     try {
+      let imageIds = await server.uploadFiles(app.globalData.token, this.data.images);
+      this.data.record.record.attachments = imageIds;
       let id = await server.uploadExaminationResult(app.globalData.token, this.data.record);
       this.data.record.id = id;
       this.data.record.sid = id.slice(0, 10);

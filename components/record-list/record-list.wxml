@@ -54,7 +54,7 @@
 				</checkbox-group>
 			</view>
 			<view class="chain-start">
-				这是您病历链的起始
+				{{ bottomMessage }}
 			</view>
 		</scroll-view>
 	</view>

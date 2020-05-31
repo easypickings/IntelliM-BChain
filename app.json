@@ -16,7 +16,8 @@
     "pages/upload-examination/upload-examination",
     "pages/view-examination/view-examination",
     "pages/view-cluster/view-cluster",
-    "pages/upload-ok/upload-ok"
+    "pages/upload-ok/upload-ok",
+    "components/image-list/image-list"
   ],
   "window": {
     "backgroundTextStyle": "light",

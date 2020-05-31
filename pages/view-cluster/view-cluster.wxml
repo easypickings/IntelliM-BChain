@@ -1,2 +1,2 @@
 <!--pages/view-cluster/view-cluster.wxml-->
-<record-list class="record-list-component" records="{{ cluster.records }}" bindNew="onNew" bindShare="onShare" bindDelete="onDelete"></record-list>
+<record-list class="record-list-component" records="{{ cluster.records }}" bindNew="onNew" bindShare="onShare" bindDelete="onDelete" bottom-message="这里是本病程的起始"></record-list>
