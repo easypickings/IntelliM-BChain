@@ -18,7 +18,7 @@
     <mp-cells ext-class="my-cells" title="就诊医生">
       <mp-cell>
         <textarea class="weui-input" bindinput="onDoctorChange" placeholder="请输入就诊医生" maxlength="20" />
-        <view class="weui-textarea-counter">{{ record.record.hospital.name.length }}/20</view>
+        <view class="weui-textarea-counter">{{ record.record.doctor.name.length }}/20</view>
       </mp-cell>
     </mp-cells>
 

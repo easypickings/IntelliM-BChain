@@ -23,8 +23,8 @@
 			<scroll-view scroll-y class="record-clusters">
 				<view wx:for="{{ clusters }}" class="cluster" data-cluster="{{ item }}" bindtap="onTapCluster">
 					<view class="brief">详情：{{ item.last.record.note || '无预览信息' }}</view>
-					<view class="first-date">初次就诊日期：{{ item.first.record.date }}</view>
 					<view class="last-date">最后更新日期：{{ item.last.record.date }}</view>
+					<view class="first-date">初次就诊日期：{{ item.first.record.date }}</view>
 				</view>
 			</scroll-view>
 		</swiper-item>
