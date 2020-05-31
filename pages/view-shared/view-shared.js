@@ -32,7 +32,7 @@ Page({
       console.log(baseinfo);
     }
     catch (e) {
-      utils.showToast('个人信息获取失败', 'none');
+      console.log(e);
     }
     try {
       let records = await server.getRecords(options.token);

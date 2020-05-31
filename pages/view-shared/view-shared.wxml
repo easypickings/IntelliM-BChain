@@ -1,6 +1,6 @@
 <!--pages/view-shared/view-shared.wxml-->
 <view class="root-container">
-  <view wx:if="{{ !isLoading }}" class="baseinfo">
+  <view wx:if="{{ !isLoading && baseinfo.personalInfo }}" class="baseinfo">
     <view class="info-name">{{ baseinfo.personalInfo.name }}</view>
     <view class="info-sex">性别：{{ baseinfo.personalInfo.sex }}</view>
     <view class="info-age">年龄：{{ baseinfo.age }}</view>
