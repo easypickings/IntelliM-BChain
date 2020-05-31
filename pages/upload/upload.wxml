@@ -11,14 +11,14 @@
     <mp-cells ext-class="my-cells" title="就诊医院">
       <mp-cell>
         <input class="weui-input" bindinput="onHospitalChange" placeholder="请输入就诊医院" maxlength="20" />
-        <view class="weui-textarea-counter">{{ record.note.length }}/20</view>
+        <view class="weui-textarea-counter">{{ record.record.hospital.name.length }}/20</view>
       </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="就诊医生">
       <mp-cell>
         <textarea class="weui-input" bindinput="onDoctorChange" placeholder="请输入就诊医生" maxlength="20" />
-        <view class="weui-textarea-counter">{{ record.note.length }}/20</view>
+        <view class="weui-textarea-counter">{{ record.record.hospital.name.length }}/20</view>
       </mp-cell>
     </mp-cells>
 
@@ -33,21 +33,21 @@
     <mp-cells ext-class="my-cells" title="病情">
       <mp-cell>
         <textarea class="weui-text-area long-text" bindinput="onSituationChange" placeholder="请输入文本" maxlength="500" />
-        <view class="weui-textarea-counter">{{ record.situation.length }}/500</view>
+        <view class="weui-textarea-counter">{{ record.record.situation.length }}/500</view>
       </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="诊断">
       <mp-cell>
         <textarea class="weui-text-area long-text" bindinput="onDiagnosisChange" placeholder="请输入文本" maxlength="500" />
-        <view class="weui-textarea-counter">{{ record.diagnosis.length }}/500</view>
+        <view class="weui-textarea-counter">{{ record.record.diagnosis.length }}/500</view>
       </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="处方">
       <mp-cell>
         <textarea class="weui-text-area long-text" bindinput="onPrescriptionChange" placeholder="请输入文本" maxlength="500" />
-        <view class="weui-textarea-counter">{{ record.prescription.length }}/500</view>
+        <view class="weui-textarea-counter">{{ record.record.prescription.length }}/500</view>
       </mp-cell>
     </mp-cells>
 
@@ -66,13 +66,6 @@
         <image class="button-insert" src="/assets/plus_green.png" bindtap="onInsertImage"></image>
       </scroll-view>
     </mp-cells>
-
-    <mp-cells ext-class="my-cells" title="附件">
-        <view wx:for="{{ files }}">
-            <text> {{ item }} </text>
-        </view>
-    </mp-cells>
-    <button bindtap="onInsertFile"> 点击添加附件 </button>
 
     <view class="weui-btn-area more-margin-bottom">
       <button class="weui-btn" type="primary" bindtap="onUpload">上传</button>

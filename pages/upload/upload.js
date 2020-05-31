@@ -3,6 +3,8 @@ var server = require('../../utils/server');
 var PR = require('../../utils/promisify');
 var app = getApp();
 
+let previous = null;
+
 Page({
   data: {
     record: { },
@@ -15,7 +17,8 @@ Page({
   /* =============== Initialization =============== */
 
   /** 初始化上传页面 */
-  onLoad: function () {
+  onLoad: function (option) {
+    previous = option.previous || null;
     this.setDefaultData();
   },
 
@@ -48,7 +51,8 @@ Page({
           situation: '',
           diagnosis: '',
           prescription: '',
-          attachments: []
+          attachments: [],
+          previous
         },
         note: '',
         signature: null
@@ -156,10 +160,13 @@ Page({
       isLoading: true
     });
     try {
-      await server.uploadExaminationResult(app.globalData.token, this.data.record);
-      utils.showToast('上传成功');
-      wx.navigateBack({
-        delta: 1
+      let id = await server.uploadExaminationResult(app.globalData.token, this.data.record);
+      this.data.record.id = id;
+      this.data.record.sid = id.slice(0, 10);
+      this.data.record.previewImagePath = this.data.images[0] || null;
+      app.globalData.records.unshift(this.data.record);
+      wx.navigateTo({
+        url: '../upload-ok/upload-ok?id=' + id,
       });
     }
     catch (e) {
