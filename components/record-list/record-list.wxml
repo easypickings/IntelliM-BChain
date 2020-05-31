@@ -1,0 +1,80 @@
+<!--components/record-list/record-list.wxml-->
+<view wx:if="{{ records.length }}" class="list-view">
+	<view wx:if="{{ selectionMode }}" class="selection-panel">
+		<button class="select-quit" bindtap="onQuitSelection">取消选择</button>
+		<button class="select-all" bindtap="onSelectAll">全选</button>
+		<button class="select-other" bindtap="onSelectOther">反选</button>
+	</view>
+
+	<view class="scroll-container">
+		<scroll-view scroll-y class="scroll">
+			<view class="record-list">
+				<checkbox-group bindchange="onSelectionChanged">
+					<view class="item" wx:for="{{ records }}" mark:index="{{ index }}" mark:record="{{ item }}">
+						<view class="dot"></view>
+						<view class="line"></view>
+						<view class="record-container">
+							<view class="item-basicinfo">
+								<view class="info-date">
+									{{ item.record.date }}
+								</view>
+								<view class="info-sid">
+									<image class="armor" src="/assets/icon_certificated.png" />已认证 {{ item.sid }}
+								</view>
+                <checkbox wx:if="{{ selectionMode }}" class="check-button" value="{{ item.id }}" checked="{{ item.checked }}" />
+                <image wx:elif="{{ canSelectSingle }}" class="more-image" src="/assets/more.svg" mode="heightFix" bindtap="onMore" />
+							</view>
+							<view class="preview-container" bindtap="onTapItem" bindlongpress="onLongPressItem">
+								<view class="preview">
+									<block wx:if="{{ item.reserved == 'examination' }}">
+										<view class="note">
+											{{ item.note }}
+										</view>
+									</block>
+									<block wx:else>
+										<view>
+											<view class="hospital">
+												<text>{{ item.record.hospital.name }}</text>
+											</view>
+											<view class="detail">
+												<text>{{ item.record.situation }}</text>
+											</view>
+										</view>
+									</block>
+									<view wx:if="{{ item.previewImagePath }}">
+										<image src="{{ item.previewImagePath }}" class="image" mode="heightFix"></image>
+									</view>
+								</view>
+								<view wx:if="{{ selectMode }}" class="check-button">
+									<checkbox value="{{ item.value }}" checked="{{ item.checked }}"></checkbox>
+								</view>
+							</view>
+						</view>
+					</view>
+				</checkbox-group>
+			</view>
+			<view class="chain-start">
+				这是您病历链的起始
+			</view>
+		</scroll-view>
+	</view>
+
+  <view wx:if="{{ selectionMode }}" class="bottom-container">
+    <view class="bottom-item" bindtap="onShare">
+      <image src="../../assets/share.png" class="bottom-icon" />
+      <text class="bottom-label">分享</text>
+    </view>
+    <view class="bottom-item" bindtap="onDelete">
+      <image src="../../assets/delete_red.png" class="bottom-icon" />
+      <text class="bottom-label-red">删除</text>
+    </view>
+  </view>
+</view>
+
+<view wx:else class="empty-view">
+	<text class="empty-title">当前暂无病历记录</text>
+	<text class="empty-content">点击添加按钮上传</text>
+</view>
+
+<mp-actionsheet bindactiontap="onSingleAction" show="{{ showMoreMenu }}" actions="{{ moreMenuItems }}" title="请选择操作">
+</mp-actionsheet>

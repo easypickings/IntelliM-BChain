@@ -1,0 +1,7 @@
+/* pages/view-cluster/view-cluster.wxss */
+
+.record-list-component {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}

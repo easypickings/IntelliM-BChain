@@ -8,7 +8,7 @@ App({
     url: null,
     userInfo: null,
     token: null,
-    records: null,
+    records: [],
     baseInfo:null,
     selectedRecords: [],
   },

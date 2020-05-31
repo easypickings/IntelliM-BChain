@@ -1,7 +1,5 @@
 var utils = require('../../utils/utils');
 var server = require('../../utils/server');
-var CONFIG = require('../../utils/config');
-var PR = require('../../utils/promisify');
 const app = getApp();
 
 Page({
@@ -9,12 +7,10 @@ Page({
     records: [], // 显示的病历列表，而非完整病历列表，添加被选中变量
     imageLoaded: [],
     previewImagePath: [],
-    userInfo: {},
-    hasUserInfo: false,
     /* 记录状态 */
     downloading: true, // 正在进行下载
-    selectMode: false, // 长按进行选择
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    clusters: [],
+    currentTab: 0
   },
 
   /**
@@ -22,13 +18,24 @@ Page({
    */
   onLoad: async function () {
     await this.getRecords();
-    // await this.getTestRecords();
+
+    // update clusters
+    this.setData({
+      clusters: this.getClusters()
+    });
+    console.log(this.data.clusters);
   },
 
   onShow: function () {
     this.setData({
       records: app.globalData.records
     });
+
+    // update clusters
+    this.setData({
+      clusters: this.getClusters()
+    });
+    console.log(this.data.clusters);
   },
 
   /** 下载用户病历数据 */
@@ -39,30 +46,24 @@ Page({
 
     try {
       let res = await server.getRecords(app.globalData.token);
+      for (let record of res) {
+        record.sid = record.id.slice(0, 10);
+      }
       console.log(res);
       app.globalData.records = res;
-      for (let i = 0; i < res.length; i++) {
-        res[i].checked = false;
-        res[i].value = res[i].id;
-        res[i].sid = res[i].id.slice(0, 10);
-        imageLoaded.push(false);
-      }
       this.setData({
-        records: res,
-        imageLoaded
+        records: res
       });
 
-      // load images preview
+      // download preview images
       for (let i = 0; i < res.length; i++) {
         let record = res[i];
         if (record.record.attachments.length > 0) {
           let p = server.downloadFiles(app.globalData.token, [record.record.attachments[0]]);
-          console.log(p);
-          p.then((r) => {
-            console.log(r);
+          p.then((path) => {
+            console.log(path);
             this.setData({
-              [`previewImagePath[${i}]`]: r[0],
-              [`imageLoaded[${i}]`]: true
+              [`records[${i}].previewImagePath`]: path
             });
           });
         }
@@ -94,7 +95,7 @@ Page({
           });
         }
       }
-    })
+    });
   },
 
   /** 点击刷新按钮：下载 */
@@ -107,200 +108,120 @@ Page({
   },
 
   /** 点击某条记录：正常-跳转；选择模式-选择 */
-  tapItem: async function (e) {
-    if (this.data.selectMode) {
-      let index = e.currentTarget.dataset.index;
-      let records = this.data.records;
-      records[index].checked = !records[index].checked;
-      this.setData({
-        records: records,
+  onTapItem: async function (e) {
+    let record = e.detail.record;
+    if (record.reserved == 'examination') {
+      console.log(record);
+      wx.navigateTo({
+        url: '../view-examination/view-examination?record=' + JSON.stringify(record),
       });
-    } else {
-      let index = e.currentTarget.dataset.index;
-      let rcd = app.globalData.records[index];
-      if (rcd.reserved == 'examination') {
-        console.log(rcd);
-        wx.navigateTo({
-          url: '../view-examination/view-examination?record=' + JSON.stringify(rcd),
-        });
+    }
+    else {
+      wx.navigateTo({
+        url: '../logs/logs?record=' + JSON.stringify(record),
+      });
+    }
+  },
+
+  onNew: function (e) {
+    wx.showActionSheet({
+      itemList: ['新建就诊记录', '新建检查报告'],
+      success: (res) => {
+        if (res.tapIndex == 0) {
+          wx.navigateTo({
+            url: '../upload/upload?previous=' + e.detail.id
+          });
+        }
+        else if (res.tapIndex == 1) {
+          wx.navigateTo({
+            url: '../upload-examination/upload-examination?previous=' + e.detail.id
+          });
+        }
       }
-      else {
-        wx.navigateTo({
-          url: '../logs/logs?record=' + JSON.stringify(rcd),
-        });
-      }
-    }
-  },
-
-  /** 长按某一记录：多选 */
-  longPressItem: async function (e) {
-    if (this.data.selectMode) return;
-    let records = this.data.records;
-    let index = e.currentTarget.dataset.index;
-    records[index].checked = !records[index].checked;
-    this.setData({
-      selectMode: true,
-      records: records,
-    });
-    wx.hideTabBar({
-      animation: true,
     });
   },
 
-  /** 取消选择按钮 */
-  tapCancelSelect: async function (e) {
-    console.log(e);
-    let records = this.data.records;
-    for (let item of records) {
-      item.checked = false;
-    }
-    this.setData({
-      selectMode: false,
-      records: records,
-    });
-    wx.showTabBar({
-      animation: true,
-    })
-  },
-
-  /** 全选按钮 */
-  tapSelectAll: async function (e) {
-    let records = this.data.records;
-    for (let item of records) {
-      item.checked = true;
-    }
-    this.setData({
-      records: records,
-    });
-  },
-
-  /** 反选按钮 */
-  tapInverse: async function (e) {
-    let records = this.data.records;
-    for (let item of records) {
-      if (item.checked) item.checked = false;
-      else item.checked = true;
-    }
-    this.setData({
-      records: records,
-    });
-  },
-
-  /** 分享按钮 */
-  tapShare: function(e) {
-    let selectedRecords = [];
-    for (let item of this.data.records) {
-      if (item.checked) selectedRecords.push(item.id);
-    }
-    app.globalData.selectedRecords = selectedRecords;
+  onShare: function (e) {
+    app.globalData.selectedRecords = e.detail.ids;
     wx.navigateTo({
       url: '../gen-qrcode/gen-qrcode',
     });
   },
 
-  getTestRecords: async function () {
-    // Example records.
-    const records = [
-      {
-        record: {
-          department: {
-            name: '外科检查'
-          },
-          date: '2019-12-12',
-          attachments: []
-        },
-        note: '心脏彩超',
-        reserved: 'examination',
-        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
-        sid: '7a3e911675'
-      },
-      {
-        record: {
-          department: {
-            name: '外科检查'
-          },
-          date: '2019-12-12',
-          attachments: []
-        },
-        note: '胸部X光片',
-        reserved: 'examination',
-        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
-        sid: '7a3e911675'
-      },
-      {
-        record: {
-          department: {
-            name: '外科检查'
-          },
-          date: '2019-12-12',
-          attachments: []
-        },
-        note: '血常规',
-        reserved: 'examination',
-        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
-        sid: '7a3e911675'
-      },
-      {
-        record: {
-          department: {
-            name: '外科检查'
-          },
-          date: '2019-12-12',
-          attachments: []
-        },
-        note: '血常规',
-        reserved: 'examination',
-        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
-        sid: '7a3e911675'
-      },
-      {
-        record: {
-          department: {
-            name: '外科检查'
-          },
-          date: '2019-12-12',
-          attachments: []
-        },
-        note: '血常规',
-        reserved: 'examination',
-        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
-        sid: '7a3e911675'
-      },
-      {
-        record: {
-          department: {
-            name: '外科检查'
-          },
-          date: '2019-12-12',
-          attachments: []
-        },
-        note: '血常规',
-        reserved: 'examination',
-        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
-        sid: '7a3e911675'
-      },
-      {
-        record: {
-          department: {
-            name: '外科检查'
-          },
-          date: '2019-12-12',
-          attachments: []
-        },
-        note: '血常规',
-        reserved: 'examination',
-        id: '7a3e911675f0ecac2075039a8aa6b48b3a93fc2b',
-        sid: '7a3e911675'
-      },
-    ];
+  onDelete: function (e) {
 
-    // Set local data.
-    this.setData({
-      records,
-      downloading: false
-    });
-    
-    // Set global data.
-    app.globalData.records = records;
   },
+
+  onTabClicked: function (e) {
+    this.setData({
+      currentTab: e.currentTarget.dataset.idx
+    });
+  },
+
+  onTabChanged: function (e) {
+    console.log(e);
+    this.setData({
+      currentTab: e.detail.current
+    });
+  },
+
+  getClusters: function () {
+    let records = this.data.records;
+    let clusters = [];
+    console.log(records);
+    for (let record of records.slice().reverse()) {
+      console.log(record);
+      let found = false;
+      for (let cluster of clusters) {
+        for (let rec of cluster.records) {
+          if (record.record.previous == rec.id) {
+            cluster.records.push(record);
+            found = true;
+            break;
+          }
+        }
+        if (found) break;
+      }
+      if (!found) {
+        clusters.push({
+          records: [record],
+          root: record
+        });
+      }
+    }
+    for (let cluster of clusters) {
+      cluster.first = cluster.records[0];
+      cluster.last = cluster.records[0];
+      for (let record of cluster.records) {
+        if (record.record.date < cluster.first.record.date) {
+          cluster.first = record;
+        }
+        if (record.record.date > cluster.last.record.date) {
+          cluster.last = record;
+        }
+      }
+      cluster.records.reverse();
+    }
+    clusters = clusters.sort((x, y) => x.last.record.date < y.last.record.date ? 1 : -1);
+    return clusters;
+  },
+
+  onTapCluster: function (e) {
+    console.log(e);
+    wx.navigateTo({
+      url: '../view-cluster/view-cluster?cluster=' + JSON.stringify(e.currentTarget.dataset.cluster)
+    });
+  },
+
+  onEnterSelectionMode: function () {
+    wx.hideTabBar({
+      animation: true,
+    });
+  },
+
+  onQuitSelectionMode: function () {
+    wx.showTabBar({
+      animation: true,
+    });
+  }
 })

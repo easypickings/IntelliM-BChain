@@ -1,0 +1,11 @@
+<!--pages/upload-ok/upload-ok.wxml-->
+<view class="container">
+  <image class="image" src="/assets/tick.svg" />
+  <view class="title">上传成功</view>
+  <view class="detail">您的病历唯一标识码为</view>
+  <view class="id">{{ id }}</view>
+  <view class="footer">
+    <button class="weui-btn" type="primary" bindtap="onBack">返回病历列表</button>
+    <view class="copyright">IntelliM 智能电子病历</view>
+  </view>
+</view>

@@ -1,6 +1,5 @@
 {
   "usingComponents": {
     "record-list": "../../components/record-list/record-list"
-  },
-  "navigationBarTitleText": "查看分享"
+  }
 }

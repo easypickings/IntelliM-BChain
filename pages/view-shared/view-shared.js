@@ -27,29 +27,41 @@ Page({
       baseinfo.age = utils.getAge(new Date(baseinfo.personalInfo.birthDate));
 
       this.setData({
-        baseinfo: baseinfo
+        baseinfo
       });
-
-      let records = await server.getRecords(options.token);
-      this.setData({
-        records: records
-      });
+      console.log(baseinfo);
     }
     catch (e) {
-      wx.showToast({
-        title: '获取信息失败',
+      utils.showToast('个人信息获取失败', 'none');
+    }
+    try {
+      let records = await server.getRecords(options.token);
+      this.setData({
+        records
       });
+      console.log(records);
+    }
+    catch (e) {
+      utils.showToast('病历获取失败', 'none');
+      console.log(e);
     }
     this.setData({
       isLoading: false
     });
   },
 
-  tapItem: function(e) {
-    let index = e.currentTarget.dataset.index;
-    let rcd = this.data.records[index];
-    wx.navigateTo({
-      url: '../logs/logs?record=' + JSON.stringify(rcd),
-    })
+  onTapItem: function (e) {
+    let record = e.detail.record;
+    if (record.reserved == 'examination') {
+      console.log(record);
+      wx.navigateTo({
+        url: '../view-examination/view-examination?record=' + JSON.stringify(record),
+      });
+    }
+    else {
+      wx.navigateTo({
+        url: '../logs/logs?record=' + JSON.stringify(record),
+      });
+    }
   }
 })

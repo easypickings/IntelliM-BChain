@@ -22,7 +22,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    console.log(options.previous);
     // Initialize record
     let d = new Date();
     this.setData({
@@ -46,7 +46,8 @@ Page({
           situation: '',
           diagnosis: '',
           prescription: '',
-          attachments: []
+          attachments: [],
+          previous: options.previous || null
         },
         note: '',
         signature: null
@@ -106,15 +107,18 @@ Page({
       isLoading: true
     });
     try {
-      await server.uploadExaminationResult(app.globalData.token, this.data.record);
-      utils.showToast('上传成功');
-      wx.navigateBack({
-        delta: 2
+      let id = await server.uploadExaminationResult(app.globalData.token, this.data.record);
+      this.data.record.id = id;
+      this.data.record.sid = id.slice(0, 10);
+      this.data.record.previewImagePath = this.data.images[0] || null;
+      app.globalData.records.unshift(this.data.record);
+      wx.navigateTo({
+        url: '../upload-ok/upload-ok?id=' + id,
       });
     }
     catch (e) {
       console.error(e);
-      utils.showToast('上传失败');
+      utils.showToast('上传失败，请重试');
     }
     this.setData({
       isLoading: false
