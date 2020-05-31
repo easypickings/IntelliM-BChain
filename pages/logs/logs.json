@@ -4,5 +4,8 @@
     "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells",
     "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell",
     "mp-badge": "../../miniprogram_npm/weui-miniprogram/badge/badge"
-  }
+  },
+  "navigationBarBackgroundColor": "#37A849",
+  "navigationBarTitleText": "查看就诊记录",
+  "navigationBarTextStyle": "white"
 }
