@@ -16,15 +16,15 @@ Page({
         birthDate: "",
         contact: "",
         emergencyContact: "",
-        avatar: "",
       },
       height: "",
       weight: "",
       chronicInfo: [],
       allergicInfo: [],
-      notes: ""
+      note: ""
     },
-    sexArray: ['男', '女', '其他'],
+    loading:true,
+    sexArray: ["男", "女", "其他"],
     bloodArray: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', '不详'],
   },
 
@@ -40,10 +40,15 @@ Page({
     } else {
       console.log('baseInfo downLoad fail:No globalData');
     }
+
+    this.setData({
+      loading:false
+    })
   },
 
   onShow: async function () {
     console.log("onShow:")
+    
     if (app.globalData.baseInfo) {
       this.setData({
         baseInfo: app.globalData.baseInfo
@@ -62,6 +67,11 @@ Page({
         console.log('profile onShow fail:No token');
       }
     }
+    
+    console.log(this.data.baseInfo);
+    this.setData({
+      loading:false
+    })
   },
 
 

@@ -90,9 +90,9 @@ module.exports = {
 
       let data = res.data;
       if (data.state == 'success') {
-        console.log("[Server] download success");
+        console.log("[Server] baseinfo download success");
         utils.dbgPrint(data.base);
-        return data.base.baseInfo;
+        return data.base;
       } else {
         console.log(data.reason);
         throw data.message;
@@ -104,10 +104,10 @@ module.exports = {
   },
 
 
-  uploadBaseInfo: async function (token, upload_data_json) {
+  uploadBaseInfo: async function (token, upload_data) {
     console.log(token);
     console.log('[Server] begin to upload baseInfo');
-    let upload_data = JSON.stringify(upload_data_json);
+    console.log(upload_data);
     try {
       let res = await PR.request({
         url: utils.getUrl('baseinfo'),

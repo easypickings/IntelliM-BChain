@@ -1,3 +1,5 @@
+<loading wx:if="{{ loading }}">加载中</loading>
+<block wx:else>
 <view class="weui-cells">
 	<view class="weui-cell">
 		<view class="weui-cell__bd">姓名</view>
@@ -9,11 +11,11 @@
 	</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd">性别</view>
-		<view class="weui-cell__ft">{{sexArray[baseInfo.personalInfo.sex]}}</view>
+		<view class="weui-cell__ft">{{baseInfo.personalInfo.sex}}</view>
 	</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd">血型</view>
-		<view class="weui-cell__ft">{{bloodArray[baseInfo.personalInfo.bloodType]}}</view>
+		<view class="weui-cell__ft">{{baseInfo.personalInfo.bloodType}}</view>
 	</view>
 	<view class="weui-cell">
 		<view class="weui-cell__bd">身高</view>
@@ -64,3 +66,4 @@
 		<button class="weui-btn" type="primary">修改个人信息</button>
 	</navigator>
 </view>
+</block>

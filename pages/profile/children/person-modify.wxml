@@ -27,7 +27,7 @@
     </view> -->
 		<view class="weui-cell__bd">
 			<picker bindchange="onInput" value="{{sexArray[baseInfo.personalInfo.sex]}}" data-label="personalInfo.sex" range="{{sexArray}}">
-				<view class="weui-select weui-select_in-select-after">{{sexArray[baseInfo.personalInfo.sex]}}</view>
+				<view class="weui-select weui-select_in-select-after">{{baseInfo.personalInfo.sex}}</view>
 			</picker>
 		</view>
 	</view>
@@ -40,7 +40,7 @@
     </view> -->
 		<view class="weui-cell__bd">
 			<picker bindchange="onInput" value="{{bloodArray[baseInfo.personalInfo.bloodType]}}" data-label="personalInfo.bloodType" range="{{bloodArray}}">
-				<view class="weui-select weui-select_in-select-after">{{bloodArray[baseInfo.personalInfo.bloodType]}}</view>
+				<view class="weui-select weui-select_in-select-after">{{baseInfo.personalInfo.bloodType}}</view>
 			</picker>
 		</view>
 	</view>

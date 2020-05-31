@@ -19,15 +19,14 @@ Page({
           birthDate: "",
           contact: "",
           emergencyContact: "",
-          avatar: "",
       },
     height: "",
     weight: "",
     chronicInfo:[],
     allergicInfo:[],
-    notes:""
+    note:""
     },
-    sexArray: ['男', '女', '其他'],
+    sexArray: ["男", "女", "其他"],
     bloodArray: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', '不详'],
   },
 
@@ -45,11 +44,20 @@ Page({
 
   //binding函数
   onInput: function (e) {
-    var params = {}
+    let params = {}
     let label = e.currentTarget.dataset.label
+    if(label=="personalInfo.sex"){
+      params['baseInfo.' + label] = this.data.sexArray[e.detail.value];
+    }
+    else if(label=="personalInfo.bloodType"){
+      params['baseInfo.' + label] = this.data.bloodArray[e.detail.value];
+    }
+    else{
     params['baseInfo.' + label] = e.detail.value
+    }
+    
     this.setData(params);
-    // console.log(params);
+    console.log(this.data.baseInfo);
   },
 
   //提交baseinfo
@@ -60,7 +68,7 @@ Page({
     console.log(this.data.baseInfo);
 
     try {
-      await server.uploadBaseInfo(app.globalData.token, this.data.baseInfo);
+      await server.uploadBaseInfo(app.globalData.token, this.dataToJson());
       app.globalData.baseInfo = JSON.parse(JSON.stringify(this.data.baseInfo));
       wx.navigateBack({
         delta: 1,
@@ -75,7 +83,7 @@ Page({
   /** 获得上传所需字符串，标准符合api.md */
   dataToJson: function () {
     return JSON.stringify({
-      'baseInfo': {
+     
         'personalInfo':{
             'name': this.data.baseInfo.personalInfo.name,
             'sex': this.data.baseInfo.personalInfo.sex,
@@ -83,14 +91,14 @@ Page({
             'birthDate': this.data.baseInfo.personalInfo.birthDate,
             'contact': this.data.baseInfo.personalInfo.contact,
             'emergencyContact': this.data.baseInfo.personalInfo.emergencyContact,
-            'avatar': "",
+            
         },
-      'height': this.data.baseInfo.height,
-      'weight': this.data.baseInfo.weight,
+      'height': Number(this.data.baseInfo.height),
+      'weight': Number(this.data.baseInfo.weight),
       'chronicInfo':this.data.baseInfo.chronicInfo,
       'allergicInfo':this.data.baseInfo.allergicInfo,
-      'notes':this.data.baseInfo.notes,
-      }
+      'note':this.data.baseInfo.note,
+      
     })
   },
 
