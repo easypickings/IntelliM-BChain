@@ -45,6 +45,22 @@ Page({
     });
   },
 
+  /** 点击某条记录：正常-跳转；选择模式-选择 */
+  onTapItem: async function (e) {
+    let record = e.detail.record;
+    if (record.reserved == 'examination') {
+      console.log(record);
+      wx.navigateTo({
+        url: '../view-examination/view-examination?record=' + JSON.stringify(record),
+      });
+    }
+    else {
+      wx.navigateTo({
+        url: '../logs/logs?record=' + JSON.stringify(record),
+      });
+    }
+  },
+
   onNew: function (e) {
     wx.showActionSheet({
       itemList: ['新建就诊记录', '新建检查报告'],
