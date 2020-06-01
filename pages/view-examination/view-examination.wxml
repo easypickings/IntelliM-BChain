@@ -43,7 +43,7 @@
 
     <mp-cells ext-class="my-cells" title="备注">
       <mp-cell>
-        <textarea disabled class="weui-text-area long-text" maxlength="500" value="{{ record.note }}" />
+        <textarea disabled class="weui-text-area long-text" maxlength="100" placeholder="无备注" value="{{ record.note }}" />
       </mp-cell>
     </mp-cells>
   </view>

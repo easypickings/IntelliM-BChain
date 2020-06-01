@@ -34,7 +34,7 @@
 
     <mp-cells ext-class="my-cells" title="备注">
       <mp-cell>
-        <textarea class="weui-text-area long-text" bindinput="onNoteChanged" placeholder="请输入文本" maxlength="500" />
+        <textarea class="weui-text-area long-text" bindinput="onNoteChanged" placeholder="建议您输入备注信息，备注会作为标题显示在您的病程列表中" maxlength="100" />
         <view class="weui-textarea-counter">{{ record.note.length }}/100</view>
       </mp-cell>
     </mp-cells>

@@ -34,8 +34,9 @@ Component({
     selectionMode: false,
     showMoreMenu: false,
     moreMenuItems: [
-      { text: '新建后续记录', value: 0 },
-      { text: '删除记录', type: 'warn', value: 1 }
+      { text: '多选', value: 0 },
+      { text: '新建后续记录', value: 1 },
+      { text: '删除记录', type: 'warn', value: 2 }
     ],
     currentItem: null
   },
@@ -134,11 +135,22 @@ Component({
 
     onSingleAction: function (e) {
       if (e.detail.index == 0) {
+        // cannot select multiple, quit
+        if (!this.properties.canSelectMultiple) return;
+
+        // emit EnterSelectionMode event
+        this.triggerEvent('EnterSelectionMode');
+
+        this.setData({
+          selectionMode: true,
+        });
+      }
+      else if (e.detail.index == 1) {
         this.triggerEvent('New', {
           id: this.data.currentItem.id
         });
       }
-      else if (e.detail.index == 1) {
+      else if (e.detail.index == 2) {
         this.triggerEvent('Delete', {
           ids: [ this.data.currentItem.id ]
         });

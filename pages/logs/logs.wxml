@@ -10,13 +10,13 @@
 
     <mp-cells ext-class="my-cells" title="就诊医院">
       <mp-cell>
-        <textarea disabled class="weui-input" value="{{ record.record.hospital.name }}" placeholder="请输入就诊医院" maxlength="20" />
+        <textarea disabled class="weui-input" value="{{ record.record.hospital.name }}" placeholder="无医院信息" maxlength="20" />
       </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="就诊医生">
       <mp-cell>
-        <textarea disabled class="weui-input" value=" {{ record.record.doctor.name }}" placeholder="请输入就诊医生" maxlength="20" />
+        <textarea disabled class="weui-input" value=" {{ record.record.doctor.name }}" placeholder="无医生信息" maxlength="20" />
       </mp-cell>
     </mp-cells>
 
@@ -30,25 +30,25 @@
 
     <mp-cells ext-class="my-cells" title="病情">
       <mp-cell>
-        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.record.situation }}"/>
+        <textarea disabled class="weui-text-area long-text" placeholder="无病情信息" maxlength="500" value="{{ record.record.situation }}"/>
       </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="诊断">
       <mp-cell>
-        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.record.diagnosis }}"/>
+        <textarea disabled class="weui-text-area long-text" placeholder="无诊断信息" maxlength="500" value="{{ record.record.diagnosis }}"/>
       </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="处方">
       <mp-cell>
-        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.record.prescription }}"/>
+        <textarea disabled class="weui-text-area long-text" placeholder="无处方信息" maxlength="500" value="{{ record.record.prescription }}"/>
       </mp-cell>
     </mp-cells>
 
     <mp-cells ext-class="my-cells" title="备注">
       <mp-cell>
-        <textarea disabled class="weui-text-area long-text" placeholder="请输入文本" maxlength="500" value="{{ record.note }}"/>
+        <textarea disabled class="weui-text-area long-text" placeholder="无备注" maxlength="500" value="{{ record.note }}"/>
       </mp-cell>
     </mp-cells>
 

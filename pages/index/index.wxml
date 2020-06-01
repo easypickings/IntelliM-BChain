@@ -3,22 +3,15 @@
 <view wx:else class="root-container">
 	<view class='tabs'>
 		<view class="{{0 == currentTab ? 'tab-sel-selected' : 'tab-sel'}}" bindtap='onTabClicked' data-idx='0'>
-			<text>按时间浏览</text>
+			<text>按病程浏览</text>
 			<hr class="tab-line"/>
 		</view>
 		<view class="{{1 == currentTab ? 'tab-sel-selected' : 'tab-sel'}}" bindtap='onTabClicked' data-idx='1'>
-			<text>按病程浏览</text>
+			<text>病历链</text>
 			<hr class="tab-line"/>
 		</view>
 	</view>
 	<swiper class="swiper" current="{{ currentTab }}" duration="300" easing-function="easeInOutCubic" bindchange="onTabChanged">
-		<swiper-item class="swiper-item">
-			<record-list class="record-list-component" records="{{ records }}" bindTapItem="onTapItem" bindNew="onNew" bindShare="onShare" bindDelete="onDelete" bindEnterSelectionMode="onEnterSelectionMode" bindQuitSelectionMode="onQuitSelectionMode" bottom-message="这是您病历链的起始"></record-list>
-			<block wx:if="{{ !selectionMode }}">
-				<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
-				<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
-			</block>
-		</swiper-item>
 		<swiper-item class="swiper-item">
 			<scroll-view scroll-y class="record-clusters">
 				<view wx:for="{{ clusters }}" class="cluster" data-cluster="{{ item }}" bindtap="onTapCluster">
@@ -28,5 +21,12 @@
 				</view>
 			</scroll-view>
 		</swiper-item>
+		<swiper-item class="swiper-item">
+			<record-list class="record-list-component" records="{{ records }}" bindTapItem="onTapItem" bindNew="onNew" bindShare="onShare" bindDelete="onDelete" bindEnterSelectionMode="onEnterSelectionMode" bindQuitSelectionMode="onQuitSelectionMode" bottom-message="这是您病历链的起始"></record-list>
+		</swiper-item>
 	</swiper>
+	<block wx:if="{{ !selectionMode }}">
+		<image src="../../assets/refresh_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:30%; bottom:5% " bindtap="tapRefresh"></image>
+		<image src="../../assets/plus_green.png" style="width: 100rpx; height: 100rpx; position:fixed; right:10%; bottom:5% " bindtap="tapUpload"></image>
+	</block>
 </view>
