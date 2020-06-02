@@ -1,5 +1,8 @@
 // pages/view-cluster/view-cluster.js
 
+var utils = require('../../utils/utils');
+var server = require('../../utils/server');
+
 const app = getApp();
 
 Page({
@@ -103,11 +106,10 @@ Page({
       utils.showToast(`${fail}个病历删除失败，请重试`);
     }
 
+    app.globalData.records = app.globalData.records.filter((record) => !success.includes(record.id));
+    this.data.cluster.records = this.data.cluster.records.filter((record) => !success.includes(record.id));
     this.setData({
-      records: app.globalData.records.filter((record) => !success.includes(record.id))
-    });
-    this.setData({
-      clusters: this.getClusters()
+      cluster: this.data.cluster
     });
   },
 })
