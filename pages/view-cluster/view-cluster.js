@@ -86,7 +86,28 @@ Page({
     });
   },
 
-  onDelete: function (e) {
+  onDelete: async function (e) {
+    let fail = 0;
+    let success = [];
+    console.log(e.detail.ids);
+    for (let id of e.detail.ids) {
+      try {
+        await server.deleteRecord(app.globalData.token, id);
+        success.push(id);
+      }
+      catch (e) {
+        fail++;
+      }
+    }
+    if (fail > 0) {
+      utils.showToast(`${fail}个病历删除失败，请重试`);
+    }
 
+    this.setData({
+      records: app.globalData.records.filter((record) => !success.includes(record.id))
+    });
+    this.setData({
+      clusters: this.getClusters()
+    });
   },
 })

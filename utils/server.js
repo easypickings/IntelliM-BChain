@@ -352,7 +352,7 @@ module.exports = {
       });
       let data = res.data;
       if (data.state == 'success') {
-        console.log('[Server] examination upload succeed');
+        console.log('[Server] examination upload succeeded');
         console.log(data);
         return data.id;
       } else {
@@ -360,6 +360,34 @@ module.exports = {
       }
     } catch (e) {
       throw e;
+    }
+  },
+
+  /** 上传检查结果（此函数需要修改，请勿使用此函数） */
+  deleteRecord: async function (token, record) {
+    try {
+      let res = await PR.request({
+        url: utils.getUrl(`record/${record}`),
+        header: {
+          'content-type': 'application/json',
+          'token': token,
+        },
+        method: 'DELETE'
+      });
+      let data = res.data;
+      if (data.state == 'success') {
+        console.log('[Server] delete operation succeeded');
+        console.log(data);
+      } else {
+        throw data.message;
+      }
+    } catch (e) {
+      if (typeof(e) == 'string') {
+        throw e;
+      }
+      else {
+        throw '网络请求错误';
+      }
     }
   },
 }
