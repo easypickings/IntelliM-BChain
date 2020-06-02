@@ -49,7 +49,7 @@
 			<view class="weui-label">身高</view>
 		</view>
 		<view class="weui-cell__bd">
-			<input class="weui-input" placeholder="请填写身高,单位:米" type="digit" bindinput="onInput" data-label="height" value="{{baseInfo.height}}" />
+			<input class="weui-input" placeholder="请填写身高,单位厘米" type="digit" bindinput="onInput" data-label="height" value="{{baseInfo.height}}" />
 		</view>
 	</view>
 
@@ -58,7 +58,7 @@
 			<view class="weui-label">体重</view>
 		</view>
 		<view class="weui-cell__bd">
-			<input class="weui-input" placeholder="请填写体重,单位:千克" type="digit" bindinput="onInput" data-label="weight" value="{{baseInfo.weight}}" />
+			<input class="weui-input" placeholder="请填写体重，单位千克" type="digit" bindinput="onInput" data-label="weight" value="{{baseInfo.weight}}" />
 		</view>
 	</view>
 
