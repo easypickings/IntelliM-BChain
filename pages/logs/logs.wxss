@@ -59,7 +59,7 @@
 }
 
 .long-text {
-  height: 150rpx;
+  height: 120px;
 }
 
 .more-margin-bottom {

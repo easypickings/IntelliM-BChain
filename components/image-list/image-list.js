@@ -38,7 +38,7 @@ Component({
             });
             console.log(this.data.lastImage);
             this.triggerEvent('Changed', {
-              paths: res.tempFilePaths
+              paths: this.data.images
             });
           }
         },

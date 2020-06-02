@@ -36,6 +36,19 @@ Page({
     }
     try {
       let records = await server.getRecords(options.token);
+      for (let i = 0; i < records.length; i++) {
+        let record = records[i];
+        record.sid = record.id.slice(0, 10);
+        if (record.record.attachments.length > 0) {
+          let p = server.downloadFiles(app.globalData.token, [record.record.attachments[0]]);
+          p.then((path) => {
+            console.log(path);
+            this.setData({
+              [`records[${i}].previewImagePath`]: path
+            });
+          });
+        }
+      }
       this.setData({
         records
       });

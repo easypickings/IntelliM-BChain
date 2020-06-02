@@ -19,6 +19,10 @@
 					<view class="last-date">最后更新日期：{{ item.last.record.date }}</view>
 					<view class="first-date">初次就诊日期：{{ item.first.record.date }}</view>
 				</view>
+				<view wx:if="{{ clusters.length == 0 }}" class="empty-view">
+					<text class="empty-title">当前暂无病历记录</text>
+					<text class="empty-content">点击添加按钮上传</text>
+				</view>
 			</scroll-view>
 		</swiper-item>
 		<swiper-item class="swiper-item">
