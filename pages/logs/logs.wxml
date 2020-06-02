@@ -52,7 +52,7 @@
       </mp-cell>
     </mp-cells>
 
-    <mp-cells ext-class="my-cells" title="检查单照片">
+    <mp-cells ext-class="my-cells" title="照片">
       <mp-cell wx:if="{{ imagesLoading }}">
         <mp-loading type="circle" class="images-loading" tips="图片加载中"></mp-loading>
       </mp-cell>
