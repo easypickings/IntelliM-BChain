@@ -12,7 +12,7 @@
         <mp-loading type="circle" class="images-loading" tips="图片加载中"></mp-loading>
       </mp-cell>
       <scroll-view wx:if="{{ !imagesLoading && images.length > 0 }}" class="image-selector" scroll-x enable-flex>
-        <view wx:for="{{ images }}" class="scroll-item">
+        <view wx:for="{{ images }}" class="scroll-item" mark:image="{{ item.path }}" bindtap="onTapImage">
           <image src="{{ item.path }}" mode="heightFix" class="image"></image>
           <view class="info-sid">Hash: {{ item.sid }}</view>
         </view>

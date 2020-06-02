@@ -43,6 +43,12 @@ Component({
           }
         },
       });
+    },
+
+    onTapImage: function (e) {
+      wx.previewImage({
+        urls: [e.mark.image],
+      });
     }
   }
 })

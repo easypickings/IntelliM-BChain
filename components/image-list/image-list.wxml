@@ -1,6 +1,6 @@
 <!--components/image-list/image-list.wxml-->
 <scroll-view class="image-selector" scroll-x scroll-into-view="{{ lastImage }}" scroll-with-animation="{{ true }}">
-  <view wx:for="{{ images }}" class="scroll-item" id="i{{ index }}">
+  <view wx:for="{{ images }}" class="scroll-item" id="i{{ index }}" mark:image="{{ item }}" bindtap="onTapImage">
     <image src="{{ item }}" mode="heightFix" class="image"></image>
   </view>
   <image class="button-insert" src="/assets/plus_green.png" bindtap="onInsertImage"></image>
