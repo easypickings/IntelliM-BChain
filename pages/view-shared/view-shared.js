@@ -40,7 +40,7 @@ Page({
         let record = records[i];
         record.sid = record.id.slice(0, 10);
         if (record.record.attachments.length > 0) {
-          let p = server.downloadFiles(app.globalData.token, [record.record.attachments[0]]);
+          let p = server.downloadFiles(options.token, [record.record.attachments[0]]);
           p.then((path) => {
             console.log(path);
             this.setData({
