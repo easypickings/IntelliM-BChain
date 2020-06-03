@@ -1,69 +1,44 @@
 <loading wx:if="{{ loading }}">加载中</loading>
 <block wx:else>
-<view class="weui-cells">
-	<view class="weui-cell">
-		<view class="weui-cell__bd">姓名</view>
-		<view class="weui-cell__ft">{{baseInfo.personalInfo.name}}</view>
-	</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd">出生日期</view>
-		<view class="weui-cell__ft">{{baseInfo.personalInfo.birthDate}}</view>
-	</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd">性别</view>
-		<view class="weui-cell__ft">{{baseInfo.personalInfo.sex}}</view>
-	</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd">血型</view>
-		<view class="weui-cell__ft">{{baseInfo.personalInfo.bloodType}}</view>
-	</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd">身高</view>
-		<view class="weui-cell__ft">{{baseInfo.height}}米</view>
-	</view>
+	<view class="weui-cells">
+		<view class="weui-cell">
+			<view class="weui-cell__bd">姓名</view>
+			<view class="weui-cell__ft">{{baseInfo.personalInfo.name}}</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">出生日期</view>
+			<view class="weui-cell__ft">{{baseInfo.personalInfo.birthDate}}</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">性别</view>
+			<view class="weui-cell__ft">{{baseInfo.personalInfo.sex}}</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">血型</view>
+			<view class="weui-cell__ft">{{baseInfo.personalInfo.bloodType}}</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">身高</view>
+			<view class="weui-cell__ft">{{baseInfo.height}}厘米</view>
+		</view>
 
-	<view class="weui-cell">
-		<view class="weui-cell__bd">体重</view>
-		<view class="weui-cell__ft">{{baseInfo.weight}}千克</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">体重</view>
+			<view class="weui-cell__ft">{{baseInfo.weight}}千克</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">联系方式</view>
+			<view class="weui-cell__ft">{{baseInfo.personalInfo.contact}}</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">紧急联系方式</view>
+			<view class="weui-cell__ft">{{baseInfo.personalInfo.emergencyContact}}</view>
+		</view>
 	</view>
-	<!--
-  <view wx:if="{{!userInfo.id_card_img.front && !userInfo.id_card_img.back}}" class="weui-cell">
-    <view class="weui-cell__bd">身份证照片</view>
-    <view class="weui-cell__ft">尚未上传</view>
-  </view>
-  <view wx:else class="weui-cell">
-    <view class="weui-cell__bd">
-      <view class="weui-uploader">
-        <view class="weui-uploader__hd">
-          <view class="weui-uploader__title">身份证照片</view>
-        </view>
-        <view class="weui-uploader__bd">
-          <view class="weui-uploader__files">
-            <view wx:if="{{userInfo.id_card_img.front}}" class="weui-uploader__file">
-              <image class="weui-uploader__img" src="{{userInfo.id_card_img.front}}" mode="aspectFill" catchtap="onPreview" data-type="front" />
-            </view>
-            <view wx:if="{{userInfo.id_card_img.back}}" class="weui-uploader__file">
-              <image class="weui-uploader__img" src="{{userInfo.id_card_img.back}}" mode="aspectFill" catchtap="onPreview" data-type="back" />
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-  -->
-	<view class="weui-cell">
-		<view class="weui-cell__bd">联系方式</view>
-		<view class="weui-cell__ft">{{baseInfo.personalInfo.contact}}</view>
+	<view class="weui-cells__tips">{{tips}}</view>
+	<view class="weui-btn-area">
+		<navigator url="./person-modify">
+			<button class="weui-btn" type="primary">修改个人信息</button>
+		</navigator>
 	</view>
-	<view class="weui-cell">
-		<view class="weui-cell__bd">紧急联系方式</view>
-		<view class="weui-cell__ft">{{baseInfo.personalInfo.emergencyContact}}</view>
-	</view>
-</view>
-<view class="weui-cells__tips">{{tips}}</view>
-<view class="weui-btn-area">
-	<navigator url="./person-modify">
-		<button class="weui-btn" type="primary">修改个人信息</button>
-	</navigator>
-</view>
 </block>
